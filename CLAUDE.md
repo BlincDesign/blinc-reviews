@@ -31,6 +31,8 @@ React Router 7 app, Polaris web components (`s-*`), Prisma + Postgres (Railway),
 - `npm run typecheck`, `npm run lint`, `npm run build`, `npm run widget:build`
 - ESLint uses `--cache`; after fixing a parse error, delete `node_modules/.cache/eslint` if stale errors remain.
 - Direct scripts: `npx tsx --env-file=.env script.ts`.
+- Editing tools decode `\uXXXX` escapes into real characters (NBSP, control chars break lint). For escapes in source, build them in a script with `String.fromCharCode(92)`, or check with `npm run lint` before committing.
+- Customer-facing text: storefront strings in `extensions/blinc-reviews-theme/locales/*.json` (18 languages); emails and app-proxy pages in `app/features/i18n/`. Keep languages in sync when adding strings.
 
 ## Dev environment (Windows)
 

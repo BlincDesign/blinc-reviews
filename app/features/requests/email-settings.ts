@@ -208,7 +208,8 @@ export function fillVariables(
   values: Record<string, string | null | undefined>,
   friend = "there",
 ) {
-  const GAP = "\u0000";
+  // Placeholder for an empty value (private-use character, never in real text).
+  const GAP = "\uE000";
   let text = template;
   const unnamed = "first_name" in values && !values.first_name;
   const leading = /^\{first_name\}\s*[,，、]\s*/;
@@ -221,8 +222,8 @@ export function fillVariables(
         : match,
     )
     // An empty value before punctuation takes its space and a comma with it.
-    .replace(/[,，]?[  ]*\u0000(?=[.,!?:])/g, "")
-    .replace(/ ?\u0000 ?/g, " ")
+    .replace(/[,\uFF0C]?[ \u00A0]*\uE000(?=[.,!?:])/g, "")
+    .replace(/ ?\uE000 ?/g, " ")
     .replace(/ {2,}/g, " ");
   // "¿qué tal…" → "¿Qué tal…": capitalize the first letter, after any opening mark.
   return dropLeading ? text.replace(/\p{L}/u, (c) => c.toUpperCase()) : text;
