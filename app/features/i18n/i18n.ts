@@ -62,3 +62,10 @@ export function localizeSettings(
     confirm: pick(settings.confirm, en.confirm, target.confirm),
   };
 }
+
+/** The primary locale from a shopLocales(published: true) query result. */
+export function primaryLocale(
+  locales: { locale: string; primary: boolean }[] | null | undefined,
+) {
+  return locales?.find((l) => l.primary)?.locale ?? null;
+}

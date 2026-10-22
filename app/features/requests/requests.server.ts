@@ -9,6 +9,11 @@ import { applyBrandingAccess, normalizeEmailSettings } from "./email-settings";
 import { sendEmail } from "./mailer.server";
 import { fireRequestDue } from "../flow/flow.server";
 import {
+  emailLanguage,
+  normalizeLanguageSettings,
+} from "../i18n/language-settings";
+import { primaryLocale } from "../i18n/i18n";
+import {
   featuresForShop,
   planForShop,
   requestsSentThisMonth,
@@ -158,7 +163,8 @@ async function recoverStaleSends() {
 const EMAIL_CONTEXT = `#graphql
   query RequestEmailContext($ids: [ID!]!) {
     shop { name contactEmail primaryDomain { url } }
-    currentAppInstallation { metafield(namespace: "blinc", key: "email") { jsonValue } }
+    currentAppInstallation { metafield(namespace: "blinc", key: "email") { jsonValue } language: metafield(namespace: "blinc", key: "language") { jsonValue } }
+    shopLocales(published: true) { locale primary }
     nodes(ids: $ids) {
       ... on Product { id title featuredMedia { preview { image { url(transform: { maxWidth: 176, maxHeight: 176 }) } } } }
     }
@@ -210,7 +216,13 @@ export async function buildRequestEmail(
     kind,
     shopName,
     customerName: request.customerName,
-    lang: request.locale,
+    lang: emailLanguage(
+      normalizeLanguageSettings(
+        data?.currentAppInstallation?.language?.jsonValue,
+      ),
+      request.locale,
+      primaryLocale(data?.shopLocales),
+    ),
     orderName: request.orderName,
     products,
     design,

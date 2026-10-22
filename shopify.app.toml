@@ -7,7 +7,7 @@ name = "Blinc Reviews"
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "read_customers,read_orders,read_themes,write_metaobject_definitions,write_metaobjects,write_products"
+scopes = "read_customers,read_locales,read_orders,read_themes,write_metaobject_definitions,write_metaobjects,write_products"
 
 [webhooks]
 api_version = "2026-10"

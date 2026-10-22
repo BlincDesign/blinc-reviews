@@ -66,6 +66,18 @@
   assign show_date = true
   # Per-language numeric date format, so month names never stay in English.
   assign date_format = 'blinc.reviews.date_format' | t
+  # Settings > Language > Date format overrides the language's default.
+  assign language_settings = app.metafields.blinc.language.value
+  case language_settings.dateFormat
+    when 'mdy'
+      assign date_format = '%m/%d/%Y'
+    when 'dmy'
+      assign date_format = '%d/%m/%Y'
+    when 'ymd'
+      assign date_format = '%Y-%m-%d'
+    when 'long'
+      assign date_format = '%b %-d, %Y'
+  endcase
   if w.showDate == false
     assign show_date = false
   endif
@@ -115,6 +127,7 @@
   data-per-page="{{ per_page }}"
   data-name-format="{{ w.nameFormat | default: 'first_initial' }}"
   data-show-date="{{ show_date }}"
+  data-date-format="{{ date_format }}"
   data-show-source="{{ show_source }}"
   data-total="{{ blinc_count }}"
   data-sort="{{ default_sort }}"

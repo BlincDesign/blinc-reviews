@@ -43,6 +43,7 @@ const GROUPS: {
     heading: "General",
     items: [
       { label: "Plan", href: "/app/settings/plan", icon: "credit-card" },
+      { label: "Language", href: "/app/settings/language", icon: "language" },
       {
         label: "Admin notifications",
         href: "/app/settings/notifications",

@@ -17,6 +17,11 @@ import {
   renderReplyEmail,
 } from "./email-template";
 import { sendEmail } from "./mailer.server";
+import {
+  emailLanguage,
+  normalizeLanguageSettings,
+} from "../i18n/language-settings";
+import { primaryLocale } from "../i18n/i18n";
 import { signToken, unsubscribeToken } from "./requests.server";
 
 // Post-review notifications: emails to a reviewer about their own review
@@ -25,7 +30,8 @@ import { signToken, unsubscribeToken } from "./requests.server";
 const REVIEW_CONTEXT = `#graphql
   query ReviewEmailContext($id: ID!) {
     shop { name contactEmail }
-    currentAppInstallation { metafield(namespace: "blinc", key: "email") { jsonValue } }
+    currentAppInstallation { metafield(namespace: "blinc", key: "email") { jsonValue } language: metafield(namespace: "blinc", key: "language") { jsonValue } }
+    shopLocales(published: true) { locale primary }
     product(id: $id) { title }
   }`;
 
@@ -92,7 +98,13 @@ async function sendAboutReview(
       settings,
       contactEmail: target.replyToEmail || data?.shop?.contactEmail || null,
       unsubscribeUrl,
-      lang: target.lang,
+      lang: emailLanguage(
+        normalizeLanguageSettings(
+          data?.currentAppInstallation?.language?.jsonValue,
+        ),
+        target.lang,
+        primaryLocale(data?.shopLocales),
+      ),
     },
   });
   if (!email) return false;
@@ -325,7 +337,8 @@ export async function notifyMerchant(reviewId: string) {
 const QUESTION_CONTEXT = `#graphql
   query QuestionEmailContext($id: ID!) {
     shop { name email contactEmail primaryDomain { url } }
-    currentAppInstallation { metafield(namespace: "blinc", key: "email") { jsonValue } }
+    currentAppInstallation { metafield(namespace: "blinc", key: "email") { jsonValue } language: metafield(namespace: "blinc", key: "language") { jsonValue } }
+    shopLocales(published: true) { locale primary }
     product(id: $id) { title handle onlineStoreUrl }
   }`;
 
@@ -403,7 +416,13 @@ export async function notifyAnswer(questionId: string) {
     contactEmail:
       question.shop.settings?.replyToEmail || data?.shop?.contactEmail || null,
     unsubscribeUrl,
-    lang: question.language,
+    lang: emailLanguage(
+      normalizeLanguageSettings(
+        data?.currentAppInstallation?.language?.jsonValue,
+      ),
+      question.language,
+      primaryLocale(data?.shopLocales),
+    ),
     askerName: question.askerName,
     productTitle: data?.product?.title ?? "your product",
     productUrl,

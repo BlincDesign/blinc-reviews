@@ -107,7 +107,8 @@ const sv: EmailStrings = {
     body: "Hej {first_name},\n\nTack för din recension av {product_title}. För att våra recensioner ska vara äkta och användbara för andra kunder ber vi dig bekräfta att det var du som skrev den.\n\nDin recension:",
     button: "Bekräfta min recension",
   },
-  footerAsked: "Du får detta mejl eftersom du har ställt en fråga hos {shop_name}.",
+  footerAsked:
+    "Du får detta mejl eftersom du har ställt en fråga hos {shop_name}.",
   answer: {
     subject: "{first_name}, din fråga har besvarats",
     preheader: "{shop_name} har besvarat din fråga om {product_title}.",
@@ -170,7 +171,8 @@ const da: EmailStrings = {
     body: "Hej {first_name},\n\nTak for din anmeldelse af {product_title}. For at holde vores anmeldelser ægte og brugbare for andre kunder beder vi dig bekræfte, at det var dig, der skrev den.\n\nDin anmeldelse:",
     button: "Bekræft min anmeldelse",
   },
-  footerAsked: "Du modtager denne e-mail, fordi du har stillet et spørgsmål hos {shop_name}.",
+  footerAsked:
+    "Du modtager denne e-mail, fordi du har stillet et spørgsmål hos {shop_name}.",
   answer: {
     subject: "{first_name}, dit spørgsmål er blevet besvaret",
     preheader: "{shop_name} har besvaret dit spørgsmål om {product_title}.",
@@ -234,7 +236,8 @@ const nb: EmailStrings = {
     body: "Hei {first_name},\n\nTakk for omtalen din av {product_title}. For at omtalene våre skal være ekte og nyttige for andre kunder, ber vi deg bekrefte at det var du som skrev den.\n\nOmtalen din:",
     button: "Bekreft omtalen min",
   },
-  footerAsked: "Du mottar denne e-posten fordi du har stilt et spørsmål hos {shop_name}.",
+  footerAsked:
+    "Du mottar denne e-posten fordi du har stilt et spørsmål hos {shop_name}.",
   answer: {
     subject: "{first_name}, spørsmålet ditt er besvart",
     preheader: "{shop_name} har svart på spørsmålet ditt om {product_title}.",
@@ -297,7 +300,8 @@ const fi: EmailStrings = {
     body: "Hei {first_name},\n\nKiitos arvostelustasi tuotteesta {product_title}. Jotta arvostelumme pysyvät aitoina ja hyödyllisinä muille ostajille, vahvista, että kirjoitit sen itse.\n\nArvostelusi:",
     button: "Vahvista arvosteluni",
   },
-  footerAsked: "Saat tämän viestin, koska esitit kysymyksen kaupassa {shop_name}.",
+  footerAsked:
+    "Saat tämän viestin, koska esitit kysymyksen kaupassa {shop_name}.",
   answer: {
     subject: "{first_name}, kysymykseesi on vastattu",
     preheader: "{shop_name} vastasi kysymykseesi tuotteesta {product_title}.",
@@ -360,7 +364,8 @@ const pl: EmailStrings = {
     body: "Cześć {first_name},\n\nDziękujemy za opinię o produkcie {product_title}. Aby nasze opinie były autentyczne i pomocne dla innych kupujących, potwierdź, że to Ty ją napisałeś(-aś).\n\nTwoja opinia:",
     button: "Potwierdź moją opinię",
   },
-  footerAsked: "Otrzymujesz tę wiadomość, ponieważ zadano pytanie w {shop_name}.",
+  footerAsked:
+    "Otrzymujesz tę wiadomość, ponieważ zadano pytanie w {shop_name}.",
   answer: {
     subject: "{first_name}, Twoje pytanie otrzymało odpowiedź",
     preheader: "{shop_name} odpowiedział na Twoje pytanie o {product_title}.",
@@ -423,10 +428,12 @@ const cs: EmailStrings = {
     body: "Dobrý den {first_name},\n\nděkujeme za recenzi produktu {product_title}. Aby naše recenze zůstaly pravé a užitečné pro ostatní zákazníky, potvrďte prosím, že jste ji napsali vy.\n\nVaše recenze:",
     button: "Potvrdit recenzi",
   },
-  footerAsked: "Tento e-mail dostáváte, protože jste položili otázku v obchodě {shop_name}.",
+  footerAsked:
+    "Tento e-mail dostáváte, protože jste položili otázku v obchodě {shop_name}.",
   answer: {
     subject: "{first_name}, na vaši otázku přišla odpověď",
-    preheader: "{shop_name} odpověděl na vaši otázku k produktu {product_title}.",
+    preheader:
+      "{shop_name} odpověděl na vaši otázku k produktu {product_title}.",
     heading: "Na vaši otázku přišla odpověď",
     body: "Dobrý den {first_name},\n\nděkujeme za otázku k produktu {product_title}. Zde je vaše otázka a naše odpověď.",
     questionLabel: "Vaše otázka:",
@@ -487,7 +494,8 @@ const tr: EmailStrings = {
     body: "Merhaba {first_name},\n\n{product_title} için değerlendirme gönderdiğin için teşekkürler. Değerlendirmelerimizin gerçek ve diğer alışverişçiler için faydalı kalması için lütfen onu senin yazdığını onayla.\n\nDeğerlendirmen:",
     button: "Değerlendirmemi onayla",
   },
-  footerAsked: "Bu e-postayı {shop_name} mağazasında bir soru sorduğun için aldın.",
+  footerAsked:
+    "Bu e-postayı {shop_name} mağazasında bir soru sorduğun için aldın.",
   answer: {
     subject: "{first_name}, soruna yanıt verildi",
     preheader: "{shop_name}, {product_title} hakkındaki sorunu yanıtladı.",
@@ -549,7 +557,8 @@ const ja: EmailStrings = {
     body: "{first_name}様\n\n{product_title}のレビューをお送りいただきありがとうございます。レビューの信頼性を保つため、ご本人が書いたレビューであることをご確認ください。\n\nお客様のレビュー：",
     button: "レビューを確認する",
   },
-  footerAsked: "このメールは、{shop_name}で質問をいただいたお客様にお送りしています。",
+  footerAsked:
+    "このメールは、{shop_name}で質問をいただいたお客様にお送りしています。",
   answer: {
     subject: "{first_name}様、ご質問に回答がありました",
     preheader: "{shop_name}が{product_title}についてのご質問に回答しました。",

@@ -7,7 +7,9 @@ import {
   findRequestByToken,
   markClicked,
 } from "../features/requests/requests.server";
-import { emailStrings, resolveLang } from "../features/i18n/i18n";
+import { emailStrings } from "../features/i18n/i18n";
+import { emailLanguage } from "../features/i18n/language-settings";
+import { getLanguageSettings } from "../features/i18n/language-settings.server";
 import { storefrontStrings } from "../features/i18n/storefront.server";
 
 // /apps/blinc-reviews/write?t=<token>&p=<product id>&r=<rating>
@@ -57,7 +59,13 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
       <p>${safe(page.invalidText)}</p></div>`);
   }
   await markClicked(token);
-  const lang = resolveLang(reviewRequest.locale);
+  // Same rule as the request email, so the page matches the email it came from.
+  const languages = await getLanguageSettings(admin);
+  const lang = emailLanguage(
+    languages.settings,
+    reviewRequest.locale,
+    languages.primaryLocale,
+  );
   const page = emailStrings(lang).page;
   const form = storefrontStrings(lang).form;
   const outOf5 = emailStrings(lang).outOf5;

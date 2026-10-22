@@ -153,7 +153,8 @@ const fr: EmailStrings = {
     body: "Bonjour {first_name},\n\nMerci d’avoir publié votre avis sur {product_title}. Pour que nos avis restent authentiques et utiles aux autres clients, veuillez confirmer que c’est bien vous qui l’avez écrit.\n\nVotre avis :",
     button: "Confirmer mon avis",
   },
-  footerAsked: "Vous recevez cet e-mail car vous avez posé une question sur {shop_name}.",
+  footerAsked:
+    "Vous recevez cet e-mail car vous avez posé une question sur {shop_name}.",
   answer: {
     subject: "{first_name}, votre question a reçu une réponse",
     preheader: "{shop_name} a répondu à votre question sur {product_title}.",
@@ -216,7 +217,8 @@ const de: EmailStrings = {
     body: "Hallo {first_name},\n\ndanke für deine Bewertung zu {product_title}. Damit unsere Bewertungen echt und hilfreich für andere Kund:innen bleiben, bestätige bitte, dass du sie geschrieben hast.\n\nDeine Bewertung:",
     button: "Bewertung bestätigen",
   },
-  footerAsked: "Du erhältst diese E-Mail, weil du bei {shop_name} eine Frage gestellt hast.",
+  footerAsked:
+    "Du erhältst diese E-Mail, weil du bei {shop_name} eine Frage gestellt hast.",
   answer: {
     subject: "{first_name}, deine Frage wurde beantwortet",
     preheader: "{shop_name} hat deine Frage zu {product_title} beantwortet.",
@@ -278,7 +280,8 @@ const es: EmailStrings = {
     body: "Hola {first_name}:\n\nGracias por enviar tu reseña de {product_title}. Para que nuestras reseñas sigan siendo auténticas y útiles para otros compradores, confirma que fuiste tú quien la escribió.\n\nTu reseña:",
     button: "Confirmar mi reseña",
   },
-  footerAsked: "Recibes este correo porque hiciste una pregunta en {shop_name}.",
+  footerAsked:
+    "Recibes este correo porque hiciste una pregunta en {shop_name}.",
   answer: {
     subject: "{first_name}, tu pregunta tiene respuesta",
     preheader: "{shop_name} respondió tu pregunta sobre {product_title}.",
@@ -341,7 +344,8 @@ const it: EmailStrings = {
     body: "Ciao {first_name},\n\ngrazie per aver inviato la tua recensione su {product_title}. Per mantenere le nostre recensioni autentiche e utili per gli altri clienti, conferma di essere stato tu a scriverla.\n\nLa tua recensione:",
     button: "Conferma la mia recensione",
   },
-  footerAsked: "Ricevi questa email perché hai fatto una domanda su {shop_name}.",
+  footerAsked:
+    "Ricevi questa email perché hai fatto una domanda su {shop_name}.",
   answer: {
     subject: "{first_name}, la tua domanda ha ricevuto una risposta",
     preheader: "{shop_name} ha risposto alla tua domanda su {product_title}.",
@@ -404,7 +408,8 @@ const nl: EmailStrings = {
     body: "Hoi {first_name},\n\nBedankt voor je review van {product_title}. Om onze reviews echt en nuttig te houden voor andere klanten, vragen we je te bevestigen dat jij de review hebt geschreven.\n\nJe review:",
     button: "Mijn review bevestigen",
   },
-  footerAsked: "Je ontvangt deze e-mail omdat je een vraag hebt gesteld bij {shop_name}.",
+  footerAsked:
+    "Je ontvangt deze e-mail omdat je een vraag hebt gesteld bij {shop_name}.",
   answer: {
     subject: "{first_name}, je vraag is beantwoord",
     preheader: "{shop_name} heeft je vraag over {product_title} beantwoord.",
@@ -467,7 +472,8 @@ const ptBR: EmailStrings = {
     body: "Olá, {first_name}!\n\nObrigado por enviar sua avaliação de {product_title}. Para manter nossas avaliações autênticas e úteis para outros compradores, confirme que foi você quem a escreveu.\n\nSua avaliação:",
     button: "Confirmar minha avaliação",
   },
-  footerAsked: "Você recebeu este e-mail porque fez uma pergunta em {shop_name}.",
+  footerAsked:
+    "Você recebeu este e-mail porque fez uma pergunta em {shop_name}.",
   answer: {
     subject: "{first_name}, sua pergunta foi respondida",
     preheader: "{shop_name} respondeu sua pergunta sobre {product_title}.",
