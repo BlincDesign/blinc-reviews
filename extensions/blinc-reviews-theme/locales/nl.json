@@ -115,7 +115,23 @@
       "too_long": "Een van je antwoorden is te lang.",
       "already_reviewed": "Je hebt dit product al beoordeeld.",
       "rate_limited": "Je hebt onlangs meerdere reviews geplaatst. Probeer het later opnieuw.",
-      "generic": "Er is iets misgegaan. Probeer het zo opnieuw."
+      "generic": "Er is iets misgegaan. Probeer het zo opnieuw.",
+      "question_required": "Schrijf je vraag."
+    },
+    "qa": {
+      "heading": "Vragen en antwoorden",
+      "count": {
+        "one": "{{ count }} vraag",
+        "other": "{{ count }} vragen"
+      },
+      "ask": "Stel een vraag",
+      "empty": "Nog geen vragen. Stel de eerste!",
+      "question": "Je vraag",
+      "placeholder": "Wat wil je weten over dit product?",
+      "submit": "Vraag versturen",
+      "thanks": "Bedankt! We mailen je zodra je vraag is beantwoord.",
+      "asked_by": "Gevraagd door {{ name }}",
+      "answer_from": "Antwoord van {{ shop }}"
     }
   }
 }

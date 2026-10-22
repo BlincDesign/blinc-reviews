@@ -2,6 +2,7 @@ import db from "../../db.server";
 import { deleteReviewFiles, deleteShopFiles } from "../media/photos.server";
 import { isStorageConfigured } from "../media/storage.server";
 import { syncProductRating } from "../reviews/ratings.server";
+import { syncProductQuestions } from "../questions/questions.server";
 import { unauthenticated } from "../../shopify.server";
 
 type CustomerPayload = {
@@ -42,11 +43,17 @@ export async function handleCustomerDataRequest(
   const { reviews } = customerFilters(payload);
   if (reviews.length === 0) return;
 
-  const reviewCount = await db.review.count({
-    where: { shop: { domain }, OR: reviews },
-  });
+  const email = payload.customer?.email;
+  const [reviewCount, questionCount] = await Promise.all([
+    db.review.count({ where: { shop: { domain }, OR: reviews } }),
+    email
+      ? db.question.count({
+          where: { shop: { domain }, askerEmail: insensitive(email) },
+        })
+      : 0,
+  ]);
   console.info(
-    `[privacy] data request for ${domain}: ${reviewCount} review(s) on file`,
+    `[privacy] data request for ${domain}: ${reviewCount} review(s), ${questionCount} question(s) on file`,
   );
 }
 
@@ -54,6 +61,7 @@ export async function handleCustomerDataRequest(
 export async function redactCustomer(domain: string, payload: CustomerPayload) {
   const { reviews, requests } = customerFilters(payload);
   if (reviews.length === 0) return;
+  await redactQuestions(domain, payload.customer?.email);
 
   // Photos can show the customer, so they're removed along with name and email.
   const theirReviews = await db.review.findMany({
@@ -101,4 +109,30 @@ export async function redactShop(domain: string) {
     db.shop.deleteMany({ where: { domain } }),
     db.session.deleteMany({ where: { shop: domain } }),
   ]);
+}
+
+/** Q&A: keep the public question and answer, drop who asked. */
+async function redactQuestions(
+  domain: string,
+  email: string | null | undefined,
+) {
+  if (!email) return;
+  const where = { shop: { domain }, askerEmail: insensitive(email) };
+  const theirs = await db.question.findMany({
+    where,
+    select: { shopId: true, productId: true, status: true },
+  });
+  if (theirs.length === 0) return;
+  await db.question.updateMany({
+    where,
+    data: { askerName: "Anonymous", askerEmail: "" },
+  });
+  const published = theirs.filter((q) => q.status === "PUBLISHED");
+  if (published.length === 0) return;
+  const { admin } = await unauthenticated.admin(domain);
+  for (const productId of new Set(published.map((q) => q.productId))) {
+    await syncProductQuestions(admin, published[0].shopId, productId).catch(
+      (error) => console.error("[privacy] questions refresh failed", error),
+    );
+  }
 }

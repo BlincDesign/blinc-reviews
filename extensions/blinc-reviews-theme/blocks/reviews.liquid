@@ -309,6 +309,85 @@
     {{- 'blinc.reviews.more' | t -}}
   </button>
   </div>
+
+  {%- comment -%}
+    Q&A: answered questions from the blinc.questions metafield (rendered here, no JS),
+    and an "Ask a question" form that also works without JS (blinc-questions.js
+    submits it in place).
+  {%- endcomment -%}
+  {%- unless w.showQuestions == false -%}
+    {%- assign qa = product.metafields.blinc.questions.value -%}
+    {%- assign qa_endpoint = blinc_endpoint | replace: '/reviews', '/questions' -%}
+    <section class="blinc-qa" aria-labelledby="{{ blinc_form_id }}-qa-title">
+      <h3 class="blinc-qa__title" id="{{ blinc_form_id }}-qa-title">
+        {{- 'blinc.qa.heading' | t -}}
+        {%- if qa.c > 0 %} <span class="blinc-qa__count">({{ qa.c }})</span>{% endif -%}
+      </h3>
+      {%- if qa.q.size > 0 -%}
+        <ul class="blinc-qa__list">
+          {%- for item in qa.q -%}
+            <li class="blinc-qa__item">
+              <p class="blinc-qa__q"><span class="blinc-qa__mark" aria-hidden="true">Q</span><span>{{ item.q | escape | newline_to_br }}</span></p>
+              <p class="blinc-qa__meta">
+                {{- 'blinc.qa.asked_by' | t: name: item.n[name_index] -}}
+                {%- if show_date %} · <time datetime="{{ item.d }}">{{ item.d | date: date_format }}</time>{% endif -%}
+              </p>
+              <div class="blinc-qa__a">
+                <span class="blinc-qa__mark blinc-qa__mark--a" aria-hidden="true">A</span>
+                <div>
+                  <p class="blinc-qa__from">{{ 'blinc.qa.answer_from' | t: shop: shop.name }}</p>
+                  <p>{{ item.a | escape | newline_to_br }}</p>
+                </div>
+              </div>
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- else -%}
+        <p class="blinc-qa__empty">{{ 'blinc.qa.empty' | t }}</p>
+      {%- endif -%}
+      <details class="blinc-qa__ask">
+        <summary class="blinc-btn blinc-btn--secondary">{{ 'blinc.qa.ask' | t }}</summary>
+        <form
+          class="blinc-qa__form"
+          method="post"
+          action="{{ qa_endpoint }}"
+          data-blinc-qa-form
+          data-msg-thanks="{{ 'blinc.qa.thanks' | t | escape }}"
+          data-msg-generic="{{ 'blinc.errors.generic' | t | escape }}"
+          data-msg-name="{{ 'blinc.errors.name_required' | t | escape }}"
+          data-msg-email="{{ 'blinc.errors.email_invalid' | t | escape }}"
+          data-msg-question="{{ 'blinc.errors.question_required' | t | escape }}"
+          data-msg-too-long="{{ 'blinc.errors.too_long' | t | escape }}"
+          data-msg-rate="{{ 'blinc.errors.rate_limited' | t | escape }}"
+        >
+          <input type="hidden" name="_format" value="html">
+          <input type="hidden" name="product_id" value="{{ product.id }}">
+          <input type="hidden" name="language" value="{{ request.locale.iso_code }}">
+          {%- comment -%} Page render time; the script resets it when the form opens. {%- endcomment -%}
+          <input type="hidden" name="started_at" value="{{ 'now' | date: '%s' }}000">
+          <div class="blinc-hp" aria-hidden="true">
+            <label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+          </div>
+          <label class="blinc-field">
+            <span>{{ 'blinc.form.name' | t }}</span>
+            <input type="text" name="name" maxlength="60" autocomplete="name" required>
+          </label>
+          <label class="blinc-field">
+            <span>{{ 'blinc.form.email' | t }}</span>
+            <input type="email" name="email" maxlength="254" autocomplete="email" required>
+            <small class="blinc-field__hint">{{ 'blinc.form.email_hint' | t }}</small>
+          </label>
+          <label class="blinc-field">
+            <span>{{ 'blinc.qa.question' | t }}</span>
+            <textarea name="question" rows="3" maxlength="1000" required placeholder="{{ 'blinc.qa.placeholder' | t | escape }}"></textarea>
+          </label>
+          <p class="blinc-qa__status" role="status" data-blinc-qa-status hidden></p>
+          <button type="submit" class="blinc-btn">{{ 'blinc.qa.submit' | t }}</button>
+        </form>
+      </details>
+    </section>
+    <script src="{{ 'blinc-questions.js' | asset_url }}" type="module" defer></script>
+  {%- endunless -%}
 </div>
 
   {%- comment -%}

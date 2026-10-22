@@ -115,7 +115,23 @@
       "too_long": "One of your answers is too long.",
       "already_reviewed": "You’ve already reviewed this product.",
       "rate_limited": "You’ve submitted several reviews recently. Try again later.",
-      "generic": "Something went wrong. Try again in a moment."
+      "generic": "Something went wrong. Try again in a moment.",
+      "question_required": "Write your question."
+    },
+    "qa": {
+      "heading": "Questions & answers",
+      "count": {
+        "one": "{{ count }} question",
+        "other": "{{ count }} questions"
+      },
+      "ask": "Ask a question",
+      "empty": "No questions yet. Ask the first one!",
+      "question": "Your question",
+      "placeholder": "What would you like to know about this product?",
+      "submit": "Submit question",
+      "thanks": "Thanks! We'll email you when your question is answered.",
+      "asked_by": "Asked by {{ name }}",
+      "answer_from": "Answer from {{ shop }}"
     }
   }
 }

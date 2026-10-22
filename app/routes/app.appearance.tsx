@@ -58,6 +58,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 const CHECKBOXES = [
   "widget.showTitle",
   "widget.showDate",
+  "widget.showQuestions",
   "widget.showBreakdown",
   "widget.showAvatar",
   "widget.showMedia",
@@ -720,6 +721,13 @@ export default function Appearance() {
                       name="widget.showDate"
                       label="Show review date"
                       defaultChecked={w.showDate}
+                    />
+                    <s-checkbox
+                      {...live}
+                      name="widget.showQuestions"
+                      label="Show questions & answers"
+                      details="Customers can ask about the product; answer them in Questions."
+                      defaultChecked={w.showQuestions}
                     />
                     <s-checkbox
                       {...live}

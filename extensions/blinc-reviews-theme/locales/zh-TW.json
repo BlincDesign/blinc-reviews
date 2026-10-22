@@ -115,7 +115,23 @@
       "too_long": "你的其中一個回答太長了。",
       "already_reviewed": "你已經評論過這項產品。",
       "rate_limited": "你最近送出了多則評論，請稍後再試。",
-      "generic": "發生問題，請稍後再試。"
+      "generic": "發生問題，請稍後再試。",
+      "question_required": "請輸入你的問題。"
+    },
+    "qa": {
+      "heading": "問與答",
+      "count": {
+        "one": "{{ count }} 個問題",
+        "other": "{{ count }} 個問題"
+      },
+      "ask": "提出問題",
+      "empty": "尚無問題。來提出第一個問題吧！",
+      "question": "你的問題",
+      "placeholder": "你想了解這項產品的哪些資訊？",
+      "submit": "送出問題",
+      "thanks": "謝謝！問題獲得回答後我們會寄電子郵件通知你。",
+      "asked_by": "{{ name }} 提問",
+      "answer_from": "{{ shop }} 的回答"
     }
   }
 }

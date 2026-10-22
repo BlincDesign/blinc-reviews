@@ -11,7 +11,9 @@ import {
 import { featuresForShop } from "../billing/billing.server";
 import {
   renderAlertEmail,
+  renderAnswerEmail,
   renderConfirmEmail,
+  renderQuestionAlertEmail,
   renderReplyEmail,
 } from "./email-template";
 import { sendEmail } from "./mailer.server";
@@ -315,5 +317,106 @@ export async function notifyMerchant(reviewId: string) {
     html: email.html,
     text: email.text,
     // No unsubscribe link: merchants switch alerts off in Settings.
+  });
+}
+
+// ---- Q&A ----
+
+const QUESTION_CONTEXT = `#graphql
+  query QuestionEmailContext($id: ID!) {
+    shop { name email contactEmail primaryDomain { url } }
+    currentAppInstallation { metafield(namespace: "blinc", key: "email") { jsonValue } }
+    product(id: $id) { title handle onlineStoreUrl }
+  }`;
+
+async function loadQuestion(questionId: string) {
+  const question = await db.question.findUnique({
+    where: { id: questionId },
+    include: { shop: { include: { settings: true } } },
+  });
+  if (!question) return null;
+  const { admin } = await unauthenticated.admin(question.shop.domain);
+  const response = await admin.graphql(QUESTION_CONTEXT, {
+    variables: { id: question.productId },
+  });
+  const { data } = await response.json();
+  return { question, admin, data };
+}
+
+/** Emails the merchant about a new question (unless alerts are off in Settings). */
+export async function notifyMerchantQuestion(questionId: string) {
+  const loaded = await loadQuestion(questionId);
+  if (!loaded) return;
+  const { question, data } = loaded;
+  if (question.shop.settings?.alertMode === "OFF") return;
+  const to = question.shop.settings?.alertEmail || data?.shop?.email;
+  if (!to) return;
+
+  const store = question.shop.domain.replace(".myshopify.com", "");
+  const email = renderQuestionAlertEmail({
+    shopName: data?.shop?.name ?? question.shop.domain,
+    productTitle: data?.product?.title ?? "A product",
+    askerName: question.askerName,
+    askerEmail: question.askerEmail,
+    question: question.body,
+    adminUrl: `https://admin.shopify.com/store/${store}/apps/${process.env.SHOPIFY_API_KEY}/app/questions`,
+  });
+  await sendEmail({
+    to,
+    fromName: "Blinc Reviews",
+    subject: email.subject,
+    html: email.html,
+    text: email.text,
+  });
+}
+
+/** Emails the customer their question's answer, in their language. */
+export async function notifyAnswer(questionId: string) {
+  const loaded = await loadQuestion(questionId);
+  const question = loaded?.question;
+  if (!loaded || !question?.answer) return;
+  const { admin, data } = loaded;
+  const to = question.askerEmail.toLowerCase();
+  const suppressed = await db.emailSuppression.count({
+    where: { shopId: question.shopId, email: to },
+  });
+  if (suppressed > 0) return;
+
+  const settings = applyBrandingAccess(
+    normalizeEmailSettings(data?.currentAppInstallation?.metafield?.jsonValue),
+    (await featuresForShop(question.shopId)).emailBranding,
+  );
+  const shopName: string = data?.shop?.name ?? question.shop.domain;
+  const storeUrl: string | undefined = data?.shop?.primaryDomain?.url;
+  const productUrl: string | null =
+    data?.product?.onlineStoreUrl ??
+    (storeUrl && data?.product?.handle
+      ? `${storeUrl}/products/${data.product.handle}`
+      : null);
+  const unsubscribeUrl = appUrl(
+    `/e/u/${unsubscribeToken(question.shopId, to)}`,
+  );
+  const email = renderAnswerEmail({
+    shopName,
+    design: await getDesign(admin),
+    settings,
+    contactEmail:
+      question.shop.settings?.replyToEmail || data?.shop?.contactEmail || null,
+    unsubscribeUrl,
+    lang: question.language,
+    askerName: question.askerName,
+    productTitle: data?.product?.title ?? "your product",
+    productUrl,
+    question: question.body,
+    answer: question.answer,
+  });
+  await sendEmail({
+    to,
+    fromName: question.shop.settings?.senderName || shopName,
+    replyTo: question.shop.settings?.replyToEmail,
+    subject: email.subject,
+    html: email.html,
+    text: email.text,
+    unsubscribeUrl,
   });
 }

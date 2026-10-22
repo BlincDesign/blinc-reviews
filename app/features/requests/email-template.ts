@@ -410,3 +410,106 @@ export function renderAlertEmail(input: AlertEmailInput) {
   ].join("\n");
   return { subject, html, text };
 }
+
+export type AnswerEmailInput = Common & {
+  askerName: string | null;
+  productTitle: string;
+  productUrl: string | null;
+  question: string;
+  answer: string;
+};
+
+/** Q&A: tells the customer their question was answered. In their language. */
+export function renderAnswerEmail(input: AnswerEmailInput) {
+  const { s, settings } = localized(input);
+  const t = theme({ ...input, settings });
+  const fill = (template: string) =>
+    fillVariables(
+      template,
+      {
+        first_name: firstName(input.askerName),
+        shop_name: input.shopName,
+        product_title: input.productTitle,
+      },
+      s.friend,
+    );
+  const copy = s.answer;
+  const subject = fill(copy.subject);
+  const heading = fill(copy.heading);
+  const body = fill(copy.body);
+  const link = input.productUrl
+    ? `<tr><td align="center" style="padding-top:16px;"><a href="${escapeHtml(input.productUrl)}" style="display:inline-block;background:${t.accent};color:${t.buttonText};text-decoration:none;padding:12px 28px;border-radius:${t.radius};font-size:15px;font-weight:600;">${escapeHtml(input.productTitle)}</a></td></tr>`
+    : "";
+
+  const html = layout({
+    ...input,
+    settings,
+    strings: s,
+    subject,
+    preheader: fill(copy.preheader),
+    heading,
+    fill,
+    rows: `<tr><td align="center" style="font-size:15px;line-height:1.6;color:#374151;padding-bottom:16px;">${paragraphs(body)}</td></tr>
+      <tr><td align="center" style="font-size:15px;color:#374151;">${escapeHtml(fill(copy.questionLabel))}</td></tr>
+      ${quote(paragraphs(input.question))}
+      <tr><td align="center" style="font-size:15px;color:#374151;padding-top:8px;">${escapeHtml(fill(copy.answerLabel))}</td></tr>
+      ${quote(paragraphs(input.answer))}
+      ${link}`,
+    footerNote: fill(s.footerAsked),
+    unsubscribeLabel: s.unsubscribeOther,
+  });
+
+  const text = [
+    heading,
+    "",
+    body,
+    "",
+    fill(copy.questionLabel),
+    input.question,
+    "",
+    fill(copy.answerLabel),
+    input.answer,
+    "",
+    ...(input.productUrl ? [input.productUrl, ""] : []),
+    `${s.unsubscribeOther}: ${input.unsubscribeUrl}`,
+  ].join("\n");
+
+  return { subject, html, text };
+}
+
+/** Internal alert to the merchant about a new customer question. */
+export function renderQuestionAlertEmail(input: {
+  shopName: string;
+  productTitle: string;
+  askerName: string;
+  askerEmail: string;
+  question: string;
+  adminUrl: string;
+}) {
+  const subject = `New question about ${input.productTitle}`;
+  const html = `<!doctype html>
+<html><head><meta charset="utf-8"><title>${escapeHtml(subject)}</title></head>
+<body style="margin:0;padding:24px 12px;background:#f4f4f5;font-family:${FONT};">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px;background:#ffffff;border-radius:12px;padding:24px;font-size:15px;line-height:1.5;color:#111827;">
+      <tr><td>
+        <p style="margin:0 0 4px;color:#6b7280;font-size:13px;">${escapeHtml(input.shopName)} · New question</p>
+        <p style="margin:0 0 12px;font-size:18px;font-weight:700;">${escapeHtml(input.productTitle)}</p>
+        <p style="margin:0 0 12px;">${paragraphs(input.question)}</p>
+        <p style="margin:0 0 20px;color:#6b7280;font-size:13px;">${escapeHtml(input.askerName)} · ${escapeHtml(input.askerEmail)}</p>
+        <a href="${escapeHtml(input.adminUrl)}" style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 18px;border-radius:8px;font-weight:600;">Answer question</a>
+        <p style="margin:20px 0 0;color:#9ca3af;font-size:12px;">Change these alerts in Blinc Reviews &gt; Settings.</p>
+      </td></tr>
+    </table>
+  </td></tr></table>
+</body></html>`;
+  const text = [
+    subject,
+    "",
+    input.question,
+    `${input.askerName} (${input.askerEmail})`,
+    "",
+    input.adminUrl,
+  ].join("\n");
+  return { subject, html, text };
+}

@@ -34,6 +34,7 @@ export default function App() {
       <s-app-nav>
         <s-link href="/app">Home</s-link>
         <s-link href="/app/reviews">Reviews</s-link>
+        <s-link href="/app/questions">Questions</s-link>
         <s-link href="/app/requests">Requests</s-link>
         <s-link href="/app/appearance">Appearance</s-link>
         <s-link href="/app/settings">Settings</s-link>

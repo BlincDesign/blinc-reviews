@@ -115,7 +115,23 @@
       "too_long": "您的某个回答过长。",
       "already_reviewed": "您已经评价过这款产品。",
       "rate_limited": "您最近提交了多条评价，请稍后再试。",
-      "generic": "出现问题，请稍后再试。"
+      "generic": "出现问题，请稍后再试。",
+      "question_required": "请输入您的问题。"
+    },
+    "qa": {
+      "heading": "问答",
+      "count": {
+        "one": "{{ count }} 个问题",
+        "other": "{{ count }} 个问题"
+      },
+      "ask": "提问",
+      "empty": "暂无问题。来提第一个问题吧！",
+      "question": "您的问题",
+      "placeholder": "您想了解这款产品的哪些信息？",
+      "submit": "提交问题",
+      "thanks": "谢谢！问题得到回答后我们会发邮件通知您。",
+      "asked_by": "{{ name }} 提问",
+      "answer_from": "{{ shop }} 的回答"
     }
   }
 }

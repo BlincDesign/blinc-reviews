@@ -121,7 +121,25 @@
       "too_long": "Jedna z Twoich odpowiedzi jest za długa.",
       "already_reviewed": "Ten produkt został już przez Ciebie oceniony.",
       "rate_limited": "Wysłano ostatnio kilka opinii. Spróbuj ponownie później.",
-      "generic": "Coś poszło nie tak. Spróbuj ponownie za chwilę."
+      "generic": "Coś poszło nie tak. Spróbuj ponownie za chwilę.",
+      "question_required": "Wpisz swoje pytanie."
+    },
+    "qa": {
+      "heading": "Pytania i odpowiedzi",
+      "count": {
+        "one": "{{ count }} pytanie",
+        "few": "{{ count }} pytania",
+        "many": "{{ count }} pytań",
+        "other": "{{ count }} pytania"
+      },
+      "ask": "Zadaj pytanie",
+      "empty": "Brak pytań. Zadaj pierwsze!",
+      "question": "Twoje pytanie",
+      "placeholder": "Co chcesz wiedzieć o tym produkcie?",
+      "submit": "Wyślij pytanie",
+      "thanks": "Dziękujemy! Wyślemy e-mail, gdy odpowiemy na Twoje pytanie.",
+      "asked_by": "Pytanie od {{ name }}",
+      "answer_from": "Odpowiedź od {{ shop }}"
     }
   }
 }

@@ -115,7 +115,23 @@
       "too_long": "Ett av svarene dine er for langt.",
       "already_reviewed": "Du har allerede gitt en omtale av dette produktet.",
       "rate_limited": "Du har sendt flere omtaler nylig. Prøv igjen senere.",
-      "generic": "Noe gikk galt. Prøv igjen om et øyeblikk."
+      "generic": "Noe gikk galt. Prøv igjen om et øyeblikk.",
+      "question_required": "Skriv spørsmålet ditt."
+    },
+    "qa": {
+      "heading": "Spørsmål og svar",
+      "count": {
+        "one": "{{ count }} spørsmål",
+        "other": "{{ count }} spørsmål"
+      },
+      "ask": "Still et spørsmål",
+      "empty": "Ingen spørsmål ennå. Still det første!",
+      "question": "Spørsmålet ditt",
+      "placeholder": "Hva vil du vite om dette produktet?",
+      "submit": "Send spørsmål",
+      "thanks": "Takk! Vi sender deg en e-post når spørsmålet ditt er besvart.",
+      "asked_by": "Spurt av {{ name }}",
+      "answer_from": "Svar fra {{ shop }}"
     }
   }
 }

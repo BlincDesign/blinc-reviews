@@ -115,7 +115,23 @@
       "too_long": "Yanıtlarından biri çok uzun.",
       "already_reviewed": "Bu ürünü zaten değerlendirdin.",
       "rate_limited": "Son zamanlarda birkaç değerlendirme gönderdin. Daha sonra tekrar dene.",
-      "generic": "Bir sorun oluştu. Birazdan tekrar dene."
+      "generic": "Bir sorun oluştu. Birazdan tekrar dene.",
+      "question_required": "Sorunu yaz."
+    },
+    "qa": {
+      "heading": "Sorular ve yanıtlar",
+      "count": {
+        "one": "{{ count }} soru",
+        "other": "{{ count }} soru"
+      },
+      "ask": "Soru sor",
+      "empty": "Henüz soru yok. İlk soruyu sen sor!",
+      "question": "Sorun",
+      "placeholder": "Bu ürün hakkında ne öğrenmek istersin?",
+      "submit": "Soruyu gönder",
+      "thanks": "Teşekkürler! Sorun yanıtlandığında sana e-posta göndereceğiz.",
+      "asked_by": "Soran: {{ name }}",
+      "answer_from": "{{ shop }} yanıtı"
     }
   }
 }

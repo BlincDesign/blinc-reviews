@@ -9,6 +9,7 @@ const scripts = [
   ["blinc-reviews-form.js", "esm"],
   ["blinc-reviews-extras.js", "esm"],
   ["blinc-cards.js", "iife"],
+  ["blinc-questions.js", "esm"],
 ].map(([file, format]) => ({
   entryPoints: [`widget/src/${file}`],
   outfile: `${assets}/${file}`,

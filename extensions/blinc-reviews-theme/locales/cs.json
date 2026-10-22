@@ -121,7 +121,25 @@
       "too_long": "Jedna z vašich odpovědí je příliš dlouhá.",
       "already_reviewed": "Tento produkt jste už hodnotili.",
       "rate_limited": "Nedávno jste odeslali několik recenzí. Zkuste to později.",
-      "generic": "Něco se pokazilo. Zkuste to za chvíli znovu."
+      "generic": "Něco se pokazilo. Zkuste to za chvíli znovu.",
+      "question_required": "Napište svou otázku."
+    },
+    "qa": {
+      "heading": "Otázky a odpovědi",
+      "count": {
+        "one": "{{ count }} otázka",
+        "few": "{{ count }} otázky",
+        "many": "{{ count }} otázky",
+        "other": "{{ count }} otázek"
+      },
+      "ask": "Položit otázku",
+      "empty": "Zatím žádné otázky. Položte první!",
+      "question": "Vaše otázka",
+      "placeholder": "Co byste chtěli o tomto produktu vědět?",
+      "submit": "Odeslat otázku",
+      "thanks": "Děkujeme! Jakmile na vaši otázku odpovíme, pošleme vám e-mail.",
+      "asked_by": "Ptá se {{ name }}",
+      "answer_from": "Odpověď od {{ shop }}"
     }
   }
 }

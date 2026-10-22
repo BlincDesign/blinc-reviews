@@ -115,7 +115,23 @@
       "too_long": "Yksi vastauksistasi on liian pitkä.",
       "already_reviewed": "Olet jo arvostellut tämän tuotteen.",
       "rate_limited": "Olet lähettänyt useita arvosteluja hiljattain. Yritä myöhemmin uudelleen.",
-      "generic": "Jokin meni vikaan. Yritä hetken kuluttua uudelleen."
+      "generic": "Jokin meni vikaan. Yritä hetken kuluttua uudelleen.",
+      "question_required": "Kirjoita kysymyksesi."
+    },
+    "qa": {
+      "heading": "Kysymykset ja vastaukset",
+      "count": {
+        "one": "{{ count }} kysymys",
+        "other": "{{ count }} kysymystä"
+      },
+      "ask": "Esitä kysymys",
+      "empty": "Ei vielä kysymyksiä. Esitä ensimmäinen!",
+      "question": "Kysymyksesi",
+      "placeholder": "Mitä haluaisit tietää tästä tuotteesta?",
+      "submit": "Lähetä kysymys",
+      "thanks": "Kiitos! Lähetämme sähköpostia, kun kysymykseesi on vastattu.",
+      "asked_by": "Kysyjä: {{ name }}",
+      "answer_from": "Vastaus: {{ shop }}"
     }
   }
 }

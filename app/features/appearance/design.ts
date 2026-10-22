@@ -10,7 +10,13 @@ export const BADGE_MODES = ["stars_text", "stars_only"] as const;
 export const LAYOUTS = ["standard", "cards", "align", "carousel"] as const;
 export const HEADER_THEMES = ["minimal", "standard", "sidebar"] as const;
 export const RATING_STYLES = ["compact", "minimal", "bold"] as const;
-export const SORTS = ["recent", "highest", "lowest", "photos", "photos_only"] as const;
+export const SORTS = [
+  "recent",
+  "highest",
+  "lowest",
+  "photos",
+  "photos_only",
+] as const;
 export const PAGINATIONS = ["load_more", "pages"] as const;
 export const IMAGE_STYLES = ["thumbnails", "highlight"] as const;
 export const TEXT_LENGTHS = ["short", "medium", "long", "full"] as const;
@@ -74,6 +80,8 @@ export type Design = {
     customCss: string;
     nameFormat: NameFormat;
     showDate: boolean;
+    /** Q&A section (answered questions + Ask a question) under the reviews. */
+    showQuestions: boolean;
     showSource: boolean;
     showPolicy: boolean;
     policyText: string;
@@ -127,6 +135,7 @@ export const DEFAULT_DESIGN: Design = {
     customCss: "",
     nameFormat: "first_initial",
     showDate: true,
+    showQuestions: true,
     showSource: true,
     showPolicy: true,
     policyText: "",
@@ -225,12 +234,21 @@ export function normalizeDesign(input: unknown): Design {
       showSortFilter: bool(w.showSortFilter, D.widget.showSortFilter),
       defaultSort: oneOf(w.defaultSort, SORTS, D.widget.defaultSort),
       pagination: oneOf(w.pagination, PAGINATIONS, D.widget.pagination),
-      carouselSpeed: integer(w.carouselSpeed, 0, CAROUSEL_SPEED_MAX, D.widget.carouselSpeed),
+      carouselSpeed: integer(
+        w.carouselSpeed,
+        0,
+        CAROUSEL_SPEED_MAX,
+        D.widget.carouselSpeed,
+      ),
       imageStyle: oneOf(w.imageStyle, IMAGE_STYLES, D.widget.imageStyle),
       titleSize: oneOf(w.titleSize, SIZES, D.widget.titleSize),
       bodySize: oneOf(w.bodySize, SIZES, D.widget.bodySize),
       textLength: oneOf(w.textLength, TEXT_LENGTHS, D.widget.textLength),
-      verifiedStyle: oneOf(w.verifiedStyle, VERIFIED_STYLES, D.widget.verifiedStyle),
+      verifiedStyle: oneOf(
+        w.verifiedStyle,
+        VERIFIED_STYLES,
+        D.widget.verifiedStyle,
+      ),
       customCss: css(w.customCss),
       perPage:
         Number.isInteger(perPage) &&
@@ -240,6 +258,7 @@ export function normalizeDesign(input: unknown): Design {
           : D.widget.perPage,
       nameFormat: oneOf(w.nameFormat, NAME_FORMATS, D.widget.nameFormat),
       showDate: bool(w.showDate, D.widget.showDate),
+      showQuestions: bool(w.showQuestions, D.widget.showQuestions),
       showSource: bool(w.showSource, D.widget.showSource),
       showPolicy: bool(w.showPolicy, D.widget.showPolicy),
       policyText: text(w.policyText, 800),

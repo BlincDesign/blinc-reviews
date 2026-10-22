@@ -115,7 +115,23 @@
       "too_long": "답변 중 하나가 너무 깁니다.",
       "already_reviewed": "이미 이 제품의 리뷰를 작성하셨습니다.",
       "rate_limited": "최근에 여러 리뷰를 제출하셨습니다. 나중에 다시 시도하세요.",
-      "generic": "문제가 발생했습니다. 잠시 후 다시 시도하세요."
+      "generic": "문제가 발생했습니다. 잠시 후 다시 시도하세요.",
+      "question_required": "질문을 입력하세요."
+    },
+    "qa": {
+      "heading": "질문과 답변",
+      "count": {
+        "one": "질문 {{ count }}개",
+        "other": "질문 {{ count }}개"
+      },
+      "ask": "질문하기",
+      "empty": "아직 질문이 없습니다. 첫 질문을 남겨 보세요!",
+      "question": "질문",
+      "placeholder": "이 제품에 대해 무엇이 궁금하신가요?",
+      "submit": "질문 제출",
+      "thanks": "감사합니다! 질문에 답변이 달리면 이메일로 알려 드리겠습니다.",
+      "asked_by": "{{ name }}님의 질문",
+      "answer_from": "{{ shop }}의 답변"
     }
   }
 }
