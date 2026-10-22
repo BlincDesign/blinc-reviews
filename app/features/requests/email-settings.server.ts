@@ -52,6 +52,16 @@ export async function getEmailSettings(admin: AdminApiContext) {
   };
 }
 
+/** Whether the merchant has saved the email template at least once (setup guide). */
+export async function hasSavedEmailSettings(admin: AdminApiContext) {
+  const response = await admin.graphql(`#graphql
+    query EmailSaved {
+      currentAppInstallation { metafield(namespace: "blinc", key: "email") { id } }
+    }`);
+  const { data } = await response.json();
+  return Boolean(data?.currentAppInstallation?.metafield?.id);
+}
+
 export async function saveEmailSettings(
   admin: AdminApiContext,
   input: unknown,

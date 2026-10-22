@@ -15,19 +15,27 @@ import {
   themeEditorLinks,
 } from "../features/setup/theme.server";
 import { isDryRun } from "../features/requests/mailer.server";
+import { hasSavedEmailSettings } from "../features/requests/email-settings.server";
+import { resolvePlan } from "../features/billing/billing.server";
+import { PLANS } from "../features/billing/plans";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const { admin, session } = await authenticate.admin(request);
   const range = parseRange(new URL(request.url).searchParams.get("range"));
 
-  const [dashboard, theme, requestCount] = await Promise.all([
-    getDashboard(session.shop, range),
-    getThemeSetupStatus(admin).catch((error) => {
-      console.error("[home] theme status failed", error);
-      return null;
-    }),
-    db.reviewRequest.count({ where: { shop: { domain: session.shop } } }),
-  ]);
+  const shop = { domain: session.shop };
+  const [dashboard, theme, requestCount, emailSaved, imports, plan] =
+    await Promise.all([
+      getDashboard(session.shop, range),
+      getThemeSetupStatus(admin).catch((error) => {
+        console.error("[home] theme status failed", error);
+        return null;
+      }),
+      db.reviewRequest.count({ where: { shop } }),
+      hasSavedEmailSettings(admin).catch(() => false),
+      db.importJob.count({ where: { shop, status: "COMPLETE" } }),
+      resolvePlan(admin, session.shop),
+    ]);
   const products = await getProductCards(admin, [
     ...dashboard.top.map((t) => t.productId),
     ...dashboard.recent.map((r) => r.productId),
@@ -39,6 +47,9 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     products,
     theme,
     hasRequests: requestCount > 0,
+    emailSaved,
+    hasImported: imports > 0,
+    planName: PLANS[plan.plan ?? "free"].name,
     dryRun: isDryRun(),
     links: themeEditorLinks(session.shop, process.env.SHOPIFY_API_KEY || ""),
   };
@@ -353,8 +364,18 @@ function timeAgo(iso: string) {
 }
 
 export default function Index() {
-  const { range, dashboard, products, theme, hasRequests, dryRun, links } =
-    useLoaderData<typeof loader>();
+  const {
+    range,
+    dashboard,
+    products,
+    theme,
+    hasRequests,
+    emailSaved,
+    hasImported,
+    planName,
+    dryRun,
+    links,
+  } = useLoaderData<typeof loader>();
   const navigate = useNavigate();
   const revalidator = useRevalidator();
   const { metrics } = dashboard;
@@ -403,11 +424,27 @@ export default function Index() {
       },
     },
     {
+      done: emailSaved,
+      title: "Customize your review request email",
+      description:
+        "Add your logo, colors and wording. Customers see this email a few days after their order is fulfilled.",
+      action: { label: "Edit email", href: "/app/settings/email/request" },
+    },
+    {
       done: hasRequests,
       title: "Send a test review request",
       description:
         "See the email your customers get after their order is fulfilled.",
       action: { label: "Go to requests", href: "/app/requests" },
+    },
+    {
+      // Optional: done once reviews are imported or the store already has reviews.
+      done:
+        hasImported || dashboard.publishedCount + dashboard.pendingCount > 0,
+      title: "Import existing reviews (optional)",
+      description:
+        "Moving from Judge.me, Loox, Okendo, Yotpo or another app? Bring your reviews with you in a few clicks.",
+      action: { label: "Import reviews", href: "/app/settings/import" },
     },
   ];
 
@@ -430,7 +467,9 @@ export default function Index() {
           <span className="bh-header__brand">
             <Logo /> Blinc Reviews
           </span>
-          <s-badge tone="info">Free plan</s-badge>
+          <s-link href="/app/settings/plan">
+            <s-badge tone="info">{`${planName} plan`}</s-badge>
+          </s-link>
           <span className="bh-header__actions">
             <s-button
               href="mailto:hello@blinc.design?subject=Blinc%20Reviews%20feedback"
