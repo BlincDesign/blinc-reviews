@@ -29,6 +29,7 @@ React Router 7 app, Polaris web components (`s-*`), Prisma + Postgres (Railway),
 ## Commands
 
 - `npm run typecheck`, `npm run lint`, `npm run build`, `npm run widget:build`
+- `npm run build` must print `✓ built in` twice; typecheck does not catch route components importing from `*.server.ts` (constants/types used by the UI belong in a plain `.ts` file).
 - ESLint uses `--cache`; after fixing a parse error, delete `node_modules/.cache/eslint` if stale errors remain.
 - Direct scripts: `npx tsx --env-file=.env script.ts`.
 - Editing tools decode `\uXXXX` escapes into real characters (NBSP, control chars break lint). For escapes in source, build them in a script with `String.fromCharCode(92)`, or check with `npm run lint` before committing.

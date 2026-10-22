@@ -4,6 +4,11 @@ import type { QuestionStatus } from "@prisma/client";
 import db from "../../db.server";
 import { isBlockedEmail } from "../reviews/moderation";
 import {
+  QUESTION_LIMITS,
+  type QuestionFilter,
+  type QuestionIntent,
+} from "./questions";
+import {
   notifyAnswer,
   notifyMerchantQuestion,
 } from "../requests/notifications.server";
@@ -12,12 +17,6 @@ import {
 // in the admin. Answered, published questions are written to the product's
 // blinc.questions metafield so the widget renders them in Liquid (no JS).
 
-export const QUESTION_LIMITS = {
-  name: 60,
-  email: 254,
-  body: 1000,
-  answer: 2000,
-};
 const STOREFRONT_LIMIT = 20;
 const MIN_FILL_MS = 3000;
 const MAX_PER_EMAIL_PER_HOUR = 5;
@@ -117,14 +116,6 @@ export async function submitQuestion({
 
 // ---- Admin ----
 
-export const QUESTION_FILTERS = [
-  "PENDING",
-  "PUBLISHED",
-  "HIDDEN",
-  "ALL",
-] as const;
-export type QuestionFilter = (typeof QUESTION_FILTERS)[number];
-
 export async function listQuestions(domain: string, filter: QuestionFilter) {
   const where = {
     shop: { domain },
@@ -175,8 +166,6 @@ export async function answerQuestion(
   }
   return { ok: true as const, message: "Answer published" };
 }
-
-export type QuestionIntent = "publish" | "hide" | "delete";
 
 export async function moderateQuestions(
   admin: AdminApiContext,

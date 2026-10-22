@@ -10,14 +10,16 @@ import { boundary } from "@shopify/shopify-app-react-router/server";
 
 import { authenticate } from "../shopify.server";
 import {
-  QUESTION_FILTERS,
-  QUESTION_LIMITS,
   answerQuestion,
   listQuestions,
   moderateQuestions,
+} from "../features/questions/questions.server";
+import {
+  QUESTION_FILTERS,
+  QUESTION_LIMITS,
   type QuestionFilter,
   type QuestionIntent,
-} from "../features/questions/questions.server";
+} from "../features/questions/questions";
 import { getProductTitles } from "../features/reviews/reviews.server";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
