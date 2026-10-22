@@ -1,0 +1,120 @@
+{
+  "blinc": {
+    "stars": {
+      "aria": "Rated {{ rating }} out of 5",
+      "option": {
+        "one": "{{ count }} star",
+        "other": "{{ count }} stars"
+      }
+    },
+    "rating": {
+      "count": {
+        "one": "({{ count }} review)",
+        "other": "({{ count }} reviews)"
+      },
+      "based_on": {
+        "one": "Based on {{ count }} review",
+        "other": "Based on {{ count }} reviews"
+      },
+      "none": "No reviews yet",
+      "breakdown": "Rating breakdown",
+      "see_all": "See all reviews"
+    },
+    "reviews": {
+      "title": "Customer reviews",
+      "empty": "No reviews yet. Be the first to share your thoughts.",
+      "more": "Show more reviews",
+      "verified": "Verified buyer",
+      "reply": "Reply from {{ shop }}",
+      "load_error": "Reviews couldn’t load. Refresh the page to try again.",
+      "read_more": "More",
+      "read_less": "Less",
+      "full": "Full review",
+      "open_review": "Review by {{ name }}, {{ rating }} out of 5 stars. Open review."
+    },
+    "modal": {
+      "close": "Close"
+    },
+    "source": {
+      "email": "Via store invitation",
+      "web": "Via store visitor",
+      "import": "Imported from another app"
+    },
+    "policy": {
+      "link": "How reviews are collected",
+      "text": "Reviews come from customers we invite by email after their order (marked Verified buyer) and from visitors who use the review form on this page. Some reviews may have been imported from another review app. Reviews may be checked before they are published."
+    },
+    "filter": {
+      "label": "Filter by rating",
+      "all": "All ratings",
+      "row": "Show {{ stars }}-star reviews ({{ count }})",
+      "none": "No reviews match this filter."
+    },
+    "sort": {
+      "label": "Sort reviews",
+      "recent": "Most recent",
+      "highest": "Highest rating",
+      "lowest": "Lowest rating",
+      "photos": "With photos first",
+      "photos_only": "Only with photos"
+    },
+    "pages": {
+      "label": "Review pages",
+      "page": "Page {{ number }}",
+      "prev": "Previous page",
+      "next": "Next page"
+    },
+    "carousel": {
+      "prev": "Previous reviews",
+      "next": "Next reviews"
+    },
+    "photos": {
+      "heading": "Customer photos",
+      "open": "Open photo",
+      "close": "Close photo",
+      "prev": "Previous photo",
+      "next": "Next photo"
+    },
+    "form": {
+      "open": "Write a review",
+      "rating": "Your rating",
+      "name": "Name",
+      "email": "Email",
+      "email_hint": "Never shown publicly.",
+      "title": "Review title (optional)",
+      "body": "Your review",
+      "photos": "Photos (optional, up to 5)",
+      "add_photo": "Add photo",
+      "remove_photo": "Remove photo",
+      "submit": "Submit review",
+      "next": "Next",
+      "back": "Back",
+      "step_rating": "How would you rate this product?",
+      "step_rating_lead": "We’d love to hear about your experience.",
+      "scale_low": "Poor",
+      "scale_high": "Great",
+      "step_review": "Tell us more",
+      "title_placeholder": "Sum up your experience",
+      "body_placeholder": "What did you like or dislike? How did you use it?",
+      "step_about": "About you",
+      "step_about_lead": "Your email is never shown publicly.",
+      "anonymous": "Post review as anonymous",
+      "anonymous_name": "Anonymous",
+      "step_media": "Share a picture",
+      "step_media_lead": "Photos help other shoppers. This step is optional.",
+      "thanks": "Thanks for your review!",
+      "published": "Thanks! Your review is now live.",
+      "pending": "Thanks! Your review will appear once it’s approved."
+    },
+    "errors": {
+      "rating_required": "Choose a star rating.",
+      "name_required": "Enter your name.",
+      "email_invalid": "Enter a valid email address.",
+      "body_required": "Write a few words about the product.",
+      "too_long": "One of your answers is too long.",
+      "already_reviewed": "You’ve already reviewed this product.",
+      "rate_limited": "You’ve submitted several reviews recently. Try again later.",
+      "generic": "Something went wrong. Try again in a moment."
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{%- comment -%}
+  App embed (Theme settings > App embeds > Blinc Reviews): store-wide features.
+  Star ratings on product cards: ratings for the products Liquid can see on this page
+  (collection, search) ship with the page; blinc-cards.js adds the badges and asks the
+  app for cards loaded later (filters, "load more", recommendations).
+{%- endcomment -%}
+{%- if block.settings.card_stars -%}
+  {%- liquid
+    assign design = app.metafields.blinc.design.value
+    assign g = design.badge
+    assign mode = g.mode | default: 'stars_text'
+    assign hide_empty = true
+    if g.hideWhenEmpty == false
+      assign hide_empty = false
+    endif
+    if routes.root_url == '/'
+      assign endpoint = '/apps/blinc-reviews/ratings'
+    else
+      assign endpoint = routes.root_url | append: '/apps/blinc-reviews/ratings'
+    endif
+
+    assign page_products = blank
+    if template.name == 'collection' and collection
+      assign page_products = collection.products
+    elsif template.name == 'search' and search.performed
+      assign page_products = search.results | where: 'object_type', 'product'
+    endif
+  -%}
+  <template id="blinc-card-badge">
+    <div class="blinc-card-rating">
+      {%- render 'blinc-root-open',
+        tag: 'div',
+        attrs: '',
+        design: design,
+        star_color: g.starColor,
+        star_size: g.starSize,
+        extra_class: 'blinc-rating'
+      -%}
+        {%- render 'blinc-stars', rating: 0 -%}
+        {%- if mode == 'stars_text' %}<span class="blinc-rating__count"></span>{% endif -%}
+      {%- echo '</div>' -%}
+    </div>
+  </template>
+  <script type="application/json" id="blinc-card-data">
+    {
+      "endpoint": {{ endpoint | json }},
+      "hideEmpty": {{ hide_empty | json }},
+      "selector": {{ block.settings.card_selector | json }},
+      "text": {{ g.textTemplate | json }},
+      "one": {{ 'blinc.rating.count' | t: count: 1 | json }},
+      "other": {{ 'blinc.rating.count' | t: count: 1234567 | replace: '1234567', '%n' | json }},
+      "none": {{ 'blinc.rating.none' | t | json }},
+      "aria": {{ 'blinc.stars.aria' | t: rating: '%r' | json }},
+      "ratings": {
+        {%- for p in page_products -%}
+          {%- assign card_rating = p.metafields.reviews.rating.value.rating | default: 0 -%}
+          {%- assign card_count = p.metafields.reviews.rating_count.value | default: 0 -%}
+          {{ p.handle | json }}: [{{ card_rating | round: 1 | json }}, {{ card_count | json }}]{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      }
+    }
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Blinc Reviews",
+  "target": "body",
+  "javascript": "blinc-cards.js",
+  "stylesheet": "blinc-stars.css",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "card_stars",
+      "label": "Show star ratings on product cards",
+      "default": true,
+      "info": "On collections, search results and product recommendations. Cards that already show a rating are left as they are. On Horizon themes you can instead add the Star rating block inside the product card."
+    },
+    {
+      "type": "text",
+      "id": "card_selector",
+      "label": "Product card selector (advanced)",
+      "info": "Only if stars don't appear on your theme's product cards, e.g. .product-card"
+    }
+  ]
+}
+{% endschema %}

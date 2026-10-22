@@ -1,0 +1,12 @@
+/* Star rating badge (blocks/star-rating.liquid) and stars on product cards
+   (blocks/app-embed.liquid). Small on purpose: it loads on every page. */
+@import "./base.css";
+
+.blinc-card-rating {
+  display: flex;
+  margin-block: 0.3em;
+  font-size: 0.9em;
+}
+.blinc-card-rating[hidden] {
+  display: none;
+}

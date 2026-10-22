@@ -1,0 +1,558 @@
+{%- liquid
+  assign design = app.metafields.blinc.design.value
+  assign w = design.widget
+  assign blinc_rating = product.metafields.reviews.rating.value
+  assign blinc_count = product.metafields.reviews.rating_count.value | default: 0
+  assign breakdown = product.metafields.blinc.breakdown.value
+  assign photos = product.metafields.blinc.photos.value
+  assign first_page = product.metafields.blinc.reviews.value
+
+  assign per_page = w.perPage | default: 10
+  assign layout = w.layout | default: 'standard'
+  assign header_theme = w.headerTheme | default: 'standard'
+  assign default_sort = w.defaultSort | default: 'recent'
+  assign pagination = w.pagination | default: 'load_more'
+  if layout == 'carousel'
+    assign pagination = 'load_more'
+  endif
+  assign carousel_speed = w.carouselSpeed | default: 5
+
+  # Every visual option is a class on the root; the stylesheet does the rest.
+  assign rating_style = w.ratingStyle | default: 'compact'
+  assign heading_size = w.headerSize | default: 'medium'
+  assign image_style = w.imageStyle | default: 'thumbnails'
+  assign title_size = w.titleSize | default: 'medium'
+  assign body_size = w.bodySize | default: 'medium'
+  assign text_length = w.textLength | default: 'medium'
+  assign verified_style = w.verifiedStyle | default: 'badge'
+  capture root_class
+    echo 'blinc-reviews blinc-layout-' | append: layout
+    echo ' blinc-header-' | append: header_theme
+    echo ' blinc-rating-style-' | append: rating_style
+    echo ' blinc-heading-' | append: heading_size
+    echo ' blinc-images-' | append: image_style
+    echo ' blinc-title-' | append: title_size
+    echo ' blinc-body-' | append: body_size
+    echo ' blinc-clamp-' | append: text_length
+    echo ' blinc-verified-' | append: verified_style
+    if w.showAvatar == false
+      echo ' blinc-no-avatar'
+    endif
+  endcapture
+  assign sorts = 'recent,highest,lowest,photos,photos_only' | split: ','
+  # Theme editor width: centered and capped, like most review widgets.
+  assign max_width = block.settings.max_width | default: 1200
+  assign widget_width = 'max-width: ' | append: max_width | append: 'px; margin-inline: auto;'
+
+  case w.nameFormat
+    when 'full'
+      assign name_index = 0
+    when 'initials'
+      assign name_index = 2
+    else
+      assign name_index = 1
+  endcase
+  # Continue after the server-rendered page; null when it holds every review.
+  assign next_cursor = ''
+  if first_page != blank and blinc_count > per_page and first_page.size >= per_page
+    assign last_index = per_page | minus: 1
+    assign next_cursor = first_page[last_index].i
+  endif
+
+  assign show_title = true
+  if w.showTitle == false
+    assign show_title = false
+  endif
+  assign show_date = true
+  if w.showDate == false
+    assign show_date = false
+  endif
+  # Transparency (EU consumer rules): how each review was collected, and how in general.
+  assign show_source = true
+  if w.showSource == false
+    assign show_source = false
+  endif
+  assign show_policy = true
+  if w.showPolicy == false
+    assign show_policy = false
+  endif
+  assign show_breakdown = true
+  if w.showBreakdown == false or header_theme == 'minimal'
+    assign show_breakdown = false
+  endif
+  assign show_media = true
+  if w.showMedia == false
+    assign show_media = false
+  endif
+  assign show_toolbar = true
+  if w.showSortFilter == false or blinc_count < 2
+    assign show_toolbar = false
+  endif
+  assign hide_empty = false
+  if w.hideWhenEmpty == true
+    assign hide_empty = true
+  endif
+
+  if routes.root_url == '/'
+    assign blinc_endpoint = '/apps/blinc-reviews/reviews'
+  else
+    assign blinc_endpoint = routes.root_url | append: '/apps/blinc-reviews/reviews'
+  endif
+  assign blinc_media = blinc_endpoint | remove_last: '/reviews' | append: '/m'
+  assign blinc_form_id = 'blinc-form-' | append: block.id
+-%}
+{%- unless blinc_count == 0 and hide_empty -%}
+{%- capture reply_label -%}
+  {%- if w.replyAuthor != blank -%}{{ 'blinc.reviews.reply' | t: shop: w.replyAuthor }}{%- else -%}{{ 'blinc.reviews.reply' | t: shop: shop.name }}{%- endif -%}
+{%- endcapture -%}
+{%- capture blinc_attrs -%}
+  id="blinc-reviews-{{ block.id }}"
+  data-endpoint="{{ blinc_endpoint }}"
+  data-form-script="{{ 'blinc-reviews-form.js' | asset_url }}"
+  data-product-id="{{ product.id }}"
+  data-per-page="{{ per_page }}"
+  data-name-format="{{ w.nameFormat | default: 'first_initial' }}"
+  data-show-date="{{ show_date }}"
+  data-show-source="{{ show_source }}"
+  data-total="{{ blinc_count }}"
+  data-sort="{{ default_sort }}"
+  data-pagination="{{ pagination }}"
+  {%- if layout == 'carousel' %} data-carousel="{{ carousel_speed }}"{% endif %}
+  {%- if layout == 'carousel' or pagination == 'pages' %} data-extras-script="{{ 'blinc-reviews-extras.js' | asset_url }}"{% endif %}
+  {%- if first_page != blank %} data-ssr data-cursor="{{ next_cursor }}"{% endif %}
+  {{ block.shopify_attributes }}
+{%- endcapture -%}
+{%- render 'blinc-root-open',
+  tag: 'blinc-reviews',
+  attrs: blinc_attrs,
+  design: design,
+  star_size: w.starSize,
+  extra_class: root_class,
+  extra_style: widget_width
+-%}
+{%- if w.customCss != blank -%}
+  <style>{{ w.customCss }}</style>
+{%- endif -%}
+<div class="blinc-body">
+  <div class="blinc-reviews__top" data-blinc-count="{{ blinc_count }}">
+    {%- if show_title -%}
+      <h2 class="blinc-reviews__heading">
+        {%- if w.title != blank -%}{{ w.title | escape }}{%- else -%}{{ 'blinc.reviews.title' | t }}{%- endif -%}
+      </h2>
+    {%- endif -%}
+
+    <div class="blinc-reviews__summary">
+      {%- if blinc_count > 0 -%}
+        <div class="blinc-reviews__score">
+          <span class="blinc-reviews__avg">{{ blinc_rating.rating | round: 1 }}</span>
+          {%- render 'blinc-stars', rating: blinc_rating.rating -%}
+        </div>
+        <p class="blinc-reviews__based">{{ 'blinc.rating.based_on' | t: count: blinc_count }}</p>
+      {%- else -%}
+        <p class="blinc-reviews__empty">
+          {%- if w.noReviewsText != blank -%}{{ w.noReviewsText | escape }}{%- else -%}{{ 'blinc.reviews.empty' | t }}{%- endif -%}
+        </p>
+      {%- endif -%}
+      {%- if show_policy -%}
+        <details class="blinc-policy">
+          <summary>{{ 'blinc.policy.link' | t }}</summary>
+          <p>
+            {%- if w.policyText != blank -%}
+              {{- w.policyText | escape | newline_to_br -}}
+            {%- else -%}
+              {{- 'blinc.policy.text' | t -}}
+            {%- endif -%}
+          </p>
+        </details>
+      {%- endif -%}
+    </div>
+
+    {%- if show_breakdown and blinc_count > 0 and breakdown -%}
+      <ul class="blinc-breakdown" aria-label="{{ 'blinc.rating.breakdown' | t }}">
+        {%- for stars in (1..5) reversed -%}
+          {%- assign index = stars | minus: 1 -%}
+          {%- assign stars_count = breakdown[index] | default: 0 -%}
+          {%- assign percent = stars_count | times: 100 | divided_by: blinc_count -%}
+          <li>
+            <button
+              type="button"
+              class="blinc-breakdown__row"
+              data-blinc-rating="{{ stars }}"
+              {% if stars_count == 0 %}disabled{% endif %}
+              aria-label="{{ 'blinc.filter.row' | t: stars: stars, count: stars_count }}"
+            >
+              <span>{{ stars }}</span>
+              <span class="blinc-stars blinc-stars--one" aria-hidden="true"></span>
+              <span class="blinc-breakdown__bar"><span style="width: {{ percent }}%"></span></span>
+              <span class="blinc-breakdown__count">{{ stars_count }}</span>
+            </button>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {%- if show_media and photos != blank -%}
+      <div class="blinc-photo-strip" role="group" aria-label="{{ 'blinc.photos.heading' | t }}">
+        {%- for p in photos -%}
+          <button
+            type="button"
+            class="blinc-photo"
+            data-blinc-photo="{{ blinc_media }}/{{ p.f }}"
+            data-blinc-review="{{ p.r }}"
+            aria-label="{{ 'blinc.photos.open' | t }}"
+          >
+            <img src="{{ blinc_media }}/{{ p.t }}" alt="" width="96" height="96" loading="lazy">
+          </button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <div class="blinc-reviews__actions">
+      <button
+        type="button"
+        class="blinc-btn"
+        data-blinc-toggle
+        aria-haspopup="dialog"
+        aria-controls="{{ blinc_form_id }}"
+      >
+        {%- if w.writeButtonText != blank -%}{{ w.writeButtonText | escape }}{%- else -%}{{ 'blinc.form.open' | t }}{%- endif -%}
+      </button>
+    </div>
+  </div>
+
+  <div class="blinc-main">
+
+  <p class="blinc-reviews__notice" data-blinc-notice role="status" hidden></p>
+
+  {%- if show_toolbar -%}
+    <div class="blinc-toolbar">
+      <label class="blinc-select">
+        <span class="blinc-visually-hidden">{{ 'blinc.filter.label' | t }}</span>
+        <select data-blinc-filter>
+          <option value="">{{ 'blinc.filter.all' | t }}</option>
+          {%- for stars in (1..5) reversed -%}
+            <option value="{{ stars }}">{{ 'blinc.stars.option' | t: count: stars }}</option>
+          {%- endfor -%}
+        </select>
+      </label>
+      <label class="blinc-select">
+        <span class="blinc-visually-hidden">{{ 'blinc.sort.label' | t }}</span>
+        <select data-blinc-sort>
+          {%- for sort in sorts -%}
+            {%- assign sort_key = 'blinc.sort.' | append: sort -%}
+            <option value="{{ sort }}"{% if sort == default_sort %} selected{% endif %}>{{ sort_key | t }}</option>
+          {%- endfor -%}
+        </select>
+      </label>
+    </div>
+  {%- endif -%}
+
+  {%- comment -%}
+    First page rendered here (from the blinc.reviews metafield) so crawlers and AI
+    assistants read the reviews and shoppers see them without a fetch. The script
+    loads further pages after data-cursor. Markup matches renderReview() in the JS.
+  {%- endcomment -%}
+  <div class="blinc-track">
+    <ol class="blinc-reviews__list" data-blinc-list aria-live="polite">
+      {%- for r in first_page limit: per_page -%}
+        <li class="blinc-review" data-review-id="{{ r.i }}">
+          {%- assign reviewer = r.n[name_index] -%}
+          <div class="blinc-review__author">
+            <span class="blinc-avatar" aria-hidden="true">{{ reviewer | slice: 0 | upcase | escape }}</span>
+            <div class="blinc-review__who">
+              <span class="blinc-review__name-row">
+                <strong class="blinc-review__name">{{ reviewer | escape }}</strong>
+                {%- if r.v %}<span class="blinc-review__verified">{{ 'blinc.reviews.verified' | t }}</span>{% endif -%}
+              </span>
+              {%- if show_date %}<time class="blinc-review__date" datetime="{{ r.d }}">{{ r.d | date: '%b %-d, %Y' }}</time>{% endif -%}
+              {%- if show_source and r.s != blank -%}
+                {%- assign source_key = 'blinc.source.' | append: r.s | downcase -%}
+                <span class="blinc-review__source">{{ source_key | t }}</span>
+              {%- endif -%}
+            </div>
+          </div>
+          <div class="blinc-review__content">
+          {%- render 'blinc-stars', rating: r.r -%}
+          {%- if r.t != blank %}<h3 class="blinc-review__title">{{ r.t | escape }}</h3>{% endif -%}
+          {%- if r.b != blank %}<p class="blinc-review__body">{{ r.b | escape }}</p>{% endif -%}
+          {%- if r.p.size > 0 -%}
+            <div class="blinc-review__photos">
+              {%- for p in r.p -%}
+                <button type="button" class="blinc-photo" data-blinc-photo="{{ blinc_media }}/{{ p.f }}" aria-label="{{ 'blinc.photos.open' | t }}">
+                  <img src="{{ blinc_media }}/{{ p.t }}" alt="" width="72" height="72" loading="lazy">
+                </button>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+          {%- if r.rp != blank -%}
+            <div class="blinc-review__reply">
+              <strong>{{ reply_label }}</strong>
+              <p class="blinc-review__body">{{ r.rp | escape }}</p>
+            </div>
+          {%- endif -%}
+          </div>
+        </li>
+      {%- endfor -%}
+    </ol>
+    {%- if layout == 'carousel' -%}
+      <button type="button" class="blinc-track__nav blinc-track__nav--prev" data-blinc-slide="-1" aria-label="{{ 'blinc.carousel.prev' | t }}" hidden>‹</button>
+      <button type="button" class="blinc-track__nav blinc-track__nav--next" data-blinc-slide="1" aria-label="{{ 'blinc.carousel.next' | t }}" hidden>›</button>
+    {%- endif -%}
+  </div>
+
+  {%- if pagination == 'pages' -%}
+    <nav class="blinc-pages" data-blinc-pages aria-label="{{ 'blinc.pages.label' | t }}"></nav>
+  {%- endif -%}
+  <button type="button" class="blinc-btn blinc-btn--secondary" data-blinc-more{% if next_cursor == blank or pagination == 'pages' %} hidden{% endif %}>
+    {{- 'blinc.reviews.more' | t -}}
+  </button>
+  </div>
+</div>
+
+  {%- comment -%}
+    Write-a-review: one native dialog, four steps (rating, review, about you, photos),
+    then a thank-you panel. Step logic lives in blinc-reviews-form.js.
+  {%- endcomment -%}
+  <dialog
+    id="{{ blinc_form_id }}"
+    class="blinc-modal blinc-modal--form"
+    data-blinc-form-dialog
+    aria-labelledby="{{ blinc_form_id }}-title"
+  >
+    <button type="button" class="blinc-modal__close" data-blinc-dismiss aria-label="{{ 'blinc.modal.close' | t }}">×</button>
+    <form class="blinc-form" data-blinc-form novalidate>
+      <input type="hidden" name="product_id" value="{{ product.id }}">
+      <input type="hidden" name="language" value="{{ request.locale.iso_code }}">
+      <input type="hidden" name="started_at" value="">
+      <div class="blinc-hp" aria-hidden="true">
+        <label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+      </div>
+
+      <section class="blinc-step" data-step="1">
+        <h2 class="blinc-step__title" id="{{ blinc_form_id }}-title">{{ 'blinc.form.step_rating' | t }}</h2>
+        <p class="blinc-step__lead">{{ 'blinc.form.step_rating_lead' | t }}</p>
+        {%- if product.featured_image -%}
+          {{ product.featured_image | image_url: width: 320 | image_tag: class: 'blinc-step__product', alt: '', loading: 'lazy', width: 160, height: 160 }}
+        {%- endif -%}
+        <p class="blinc-step__name">{{ product.title | escape }}</p>
+        <fieldset class="blinc-form__stars">
+          <legend class="blinc-visually-hidden">{{ 'blinc.form.rating' | t }}</legend>
+          <div class="blinc-form__star-row">
+            {%- for i in (1..5) reversed -%}
+              <input type="radio" id="{{ blinc_form_id }}-r{{ i }}" name="rating" value="{{ i }}" required>
+              <label for="{{ blinc_form_id }}-r{{ i }}">
+                <span class="blinc-stars blinc-stars--one" aria-hidden="true"></span>
+                <span class="blinc-visually-hidden">{{ 'blinc.stars.option' | t: count: i }}</span>
+              </label>
+            {%- endfor -%}
+          </div>
+          <div class="blinc-form__scale" aria-hidden="true">
+            <span>{{ 'blinc.form.scale_low' | t }}</span>
+            <span>{{ 'blinc.form.scale_high' | t }}</span>
+          </div>
+        </fieldset>
+        <p class="blinc-form__error" data-blinc-step-error role="alert" hidden></p>
+        <div class="blinc-step__nav blinc-step__nav--end">
+          <button type="button" class="blinc-btn" data-blinc-step="1">{{ 'blinc.form.next' | t }}</button>
+        </div>
+      </section>
+
+      <section class="blinc-step" data-step="2" hidden>
+        <h2 class="blinc-step__title">{{ 'blinc.form.step_review' | t }}</h2>
+        <p class="blinc-step__lead">{{ product.title | escape }}</p>
+        <label class="blinc-field">
+          <span>{{ 'blinc.form.title' | t }}</span>
+          <input type="text" name="title" maxlength="120" placeholder="{{ 'blinc.form.title_placeholder' | t }}">
+        </label>
+        <label class="blinc-field">
+          <span>{{ 'blinc.form.body' | t }} <span aria-hidden="true">*</span></span>
+          <textarea name="body" rows="6" maxlength="5000" required placeholder="{{ 'blinc.form.body_placeholder' | t }}"></textarea>
+        </label>
+        <p class="blinc-form__error" data-blinc-step-error role="alert" hidden></p>
+        <div class="blinc-step__nav">
+          <button type="button" class="blinc-step__back" data-blinc-step="-1"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><path d="M12.5 4.5L7 10l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>{{ 'blinc.form.back' | t }}</button>
+          <button type="button" class="blinc-btn" data-blinc-step="1">{{ 'blinc.form.next' | t }}</button>
+        </div>
+      </section>
+
+      <section class="blinc-step" data-step="3" hidden>
+        <h2 class="blinc-step__title">{{ 'blinc.form.step_about' | t }}</h2>
+        <p class="blinc-step__lead">{{ 'blinc.form.step_about_lead' | t }}</p>
+        <label class="blinc-field">
+          <span>{{ 'blinc.form.email' | t }} <span aria-hidden="true">*</span></span>
+          <input type="email" name="email" maxlength="254" required autocomplete="email"
+            aria-describedby="{{ blinc_form_id }}-email-hint"
+            value="{% if customer %}{{ customer.email | escape }}{% endif %}">
+          <small id="{{ blinc_form_id }}-email-hint" class="blinc-field__hint">{{ 'blinc.form.email_hint' | t }}</small>
+        </label>
+        <label class="blinc-field">
+          <span>{{ 'blinc.form.name' | t }} <span aria-hidden="true">*</span></span>
+          <input type="text" name="name" maxlength="60" required autocomplete="name"
+            value="{% if customer %}{{ customer.name | escape }}{% endif %}">
+        </label>
+        <label class="blinc-check">
+          <input type="checkbox" name="anonymous" value="1">
+          <span>{{ 'blinc.form.anonymous' | t }}</span>
+        </label>
+        <p class="blinc-form__error" data-blinc-step-error role="alert" hidden></p>
+        <div class="blinc-step__nav">
+          <button type="button" class="blinc-step__back" data-blinc-step="-1"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><path d="M12.5 4.5L7 10l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>{{ 'blinc.form.back' | t }}</button>
+          <button type="button" class="blinc-btn" data-blinc-step="1">{{ 'blinc.form.next' | t }}</button>
+        </div>
+      </section>
+
+      <section class="blinc-step" data-step="4" hidden>
+        <h2 class="blinc-step__title">{{ 'blinc.form.step_media' | t }}</h2>
+        <p class="blinc-step__lead">{{ 'blinc.form.step_media_lead' | t }}</p>
+        <div class="blinc-picker">
+          <div class="blinc-previews" data-blinc-previews></div>
+          <label class="blinc-picker__add">
+            <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
+              <path d="M12 16V4m0 0L7 9m5-5l5 5M4 15v4a1 1 0 001 1h14a1 1 0 001-1v-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+            <span>{{ 'blinc.form.add_photo' | t }}</span>
+            <input type="file" class="blinc-visually-hidden" accept="image/*" multiple data-blinc-photo-input>
+          </label>
+        </div>
+        <p class="blinc-form__error" data-blinc-error role="alert" hidden></p>
+        <div class="blinc-step__nav">
+          <button type="button" class="blinc-step__back" data-blinc-step="-1"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><path d="M12.5 4.5L7 10l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>{{ 'blinc.form.back' | t }}</button>
+          <button type="submit" class="blinc-btn">{{ 'blinc.form.submit' | t }}</button>
+        </div>
+      </section>
+    </form>
+
+    <section class="blinc-step blinc-thanks" data-blinc-thanks hidden tabindex="-1">
+      <h2 class="blinc-step__title">{{ 'blinc.form.thanks' | t }}</h2>
+      <p class="blinc-step__lead" data-blinc-thanks-text></p>
+      <div class="blinc-step__nav blinc-step__nav--center">
+        <button type="button" class="blinc-btn" data-blinc-dismiss>{{ 'blinc.modal.close' | t }}</button>
+      </div>
+    </section>
+  </dialog>
+
+  <dialog class="blinc-modal blinc-modal--review" data-blinc-review-dialog aria-label="{{ 'blinc.reviews.full' | t }}">
+    <button type="button" class="blinc-modal__close" data-blinc-dismiss aria-label="{{ 'blinc.modal.close' | t }}">×</button>
+    <div data-blinc-review-body></div>
+  </dialog>
+
+  <dialog class="blinc-lightbox" data-blinc-lightbox aria-label="{{ 'blinc.photos.heading' | t }}">
+    <button type="button" class="blinc-lightbox__close" data-blinc-dismiss aria-label="{{ 'blinc.photos.close' | t }}">×</button>
+  </dialog>
+
+  <script type="application/json" data-blinc-i18n>
+    {
+      "verified": {{ 'blinc.reviews.verified' | t | json }},
+      "reply": {{ reply_label | json }},
+      "starsAria": {{ 'blinc.stars.aria' | t: rating: '%r' | json }},
+      "published": {{ 'blinc.form.published' | t | json }},
+      "pending": {{ 'blinc.form.pending' | t | json }},
+      "anonymous": {{ 'blinc.form.anonymous_name' | t | json }},
+      "loadError": {{ 'blinc.reviews.load_error' | t | json }},
+      "seeAll": {{ 'blinc.rating.see_all' | t | json }},
+      "openReview": {{ 'blinc.reviews.open_review' | t: name: '%n', rating: '%r' | json }},
+      "noMatch": {{ 'blinc.filter.none' | t | json }},
+      "readMore": {{ 'blinc.reviews.read_more' | t | json }},
+      "readLess": {{ 'blinc.reviews.read_less' | t | json }},
+      "page": {{ 'blinc.pages.page' | t: number: '%n' | json }},
+      "prev": {{ 'blinc.pages.prev' | t | json }},
+      "next": {{ 'blinc.pages.next' | t | json }},
+      "openPhoto": {{ 'blinc.photos.open' | t | json }},
+      "photoPrev": {{ 'blinc.photos.prev' | t | json }},
+      "sources": {
+        "EMAIL": {{ 'blinc.source.email' | t | json }},
+        "WEB": {{ 'blinc.source.web' | t | json }},
+        "IMPORT": {{ 'blinc.source.import' | t | json }}
+      },
+      "photoNext": {{ 'blinc.photos.next' | t | json }},
+      "removePhoto": {{ 'blinc.form.remove_photo' | t | json }},
+      "errors": {
+        "rating_required": {{ 'blinc.errors.rating_required' | t | json }},
+        "name_required": {{ 'blinc.errors.name_required' | t | json }},
+        "email_invalid": {{ 'blinc.errors.email_invalid' | t | json }},
+        "body_required": {{ 'blinc.errors.body_required' | t | json }},
+        "too_long": {{ 'blinc.errors.too_long' | t | json }},
+        "already_reviewed": {{ 'blinc.errors.already_reviewed' | t | json }},
+        "rate_limited": {{ 'blinc.errors.rate_limited' | t | json }},
+        "unavailable": {{ 'blinc.errors.generic' | t | json }}
+      }
+    }
+  </script>
+{%- if block.settings.rich_snippets and blinc_count > 0 and blinc_rating -%}
+  {%- comment -%}
+    Review rich results. Same @id and @type as Shopify's `product | structured_data`
+    (Product without variants, ProductGroup with), so Google merges the rating into
+    the theme's product; on themes without structured data it stands alone.
+  {%- endcomment -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": {% if product.has_only_default_variant %}"Product"{% else %}"ProductGroup"{% endif %},
+      "@id": {{ product.url | append: '#product' | json }},
+      "name": {{ product.title | json }},
+      "url": {{ request.origin | append: product.url | json }},
+      {%- if product.featured_image %}
+      "image": {{ product.featured_image | image_url: width: 1200 | prepend: 'https:' | json }},
+      {%- endif %}
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": {{ blinc_rating.rating | round: 1 | json }},
+        "reviewCount": {{ blinc_count | json }},
+        "bestRating": 5,
+        "worstRating": 1
+      }
+      {%- if first_page != blank -%},
+      "review": [
+        {%- for r in first_page limit: 10 %}
+        {
+          "@type": "Review",
+          "author": { "@type": "Person", "name": {{ r.n[name_index] | json }} },
+          "datePublished": {{ r.d | slice: 0, 10 | json }},
+          {%- if r.t != blank %}
+          "name": {{ r.t | json }},
+          {%- endif %}
+          "reviewBody": {{ r.b | json }},
+          "reviewRating": { "@type": "Rating", "ratingValue": {{ r.r | json }}, "bestRating": 5, "worstRating": 1 }
+        }{% unless forloop.last %},{% endunless %}
+        {%- endfor %}
+      ]
+      {%- endif %}
+    }
+  </script>
+{%- endif -%}
+{%- echo '</blinc-reviews>' -%}
+{%- endunless -%}
+
+{% schema %}
+{
+  "name": "Product reviews",
+  "target": "section",
+  "javascript": "blinc-reviews.js",
+  "stylesheet": "blinc-reviews.css",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Change colors, text, layout and star shape in the Blinc Reviews app under Appearance."
+    },
+    {
+      "type": "checkbox",
+      "id": "rich_snippets",
+      "label": "Show star ratings in Google results",
+      "default": true,
+      "info": "Adds review structured data to the product page. Turn off if your theme or an SEO app already adds review ratings."
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Maximum width",
+      "min": 600,
+      "max": 1600,
+      "step": 50,
+      "unit": "px",
+      "default": 1200,
+      "info": "The widget is centered and never wider than this."
+    }
+  ]
+}
+{% endschema %}

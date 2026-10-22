@@ -1,0 +1,32 @@
+{%- comment -%}
+  Opening tag of a widget root, with the merchant's design as class and style.
+  Renders the whole tag: Shopify wraps app snippets in HTML comments, so a snippet
+  rendered inside a tag would close it early.
+  Params: tag, attrs (extra attributes), extra_style (more CSS declarations),
+          design (app.metafields.blinc.design.value,
+          may be blank), star_color (override or blank), star_size, extra_class.
+{%- endcomment -%}
+{%- liquid
+  assign b = design.branding
+  assign w = design.widget
+  assign primary = b.primaryColor | default: '#111827'
+  assign star = star_color | default: b.starColor | default: '#f59e0b'
+  assign shape = b.starShape | default: 'star'
+  assign corners = b.corners | default: 'soft'
+  assign button = w.buttonColor | default: primary
+  assign button_text = w.buttonTextColor | default: '#ffffff'
+  assign text_size = w.textSize | default: 'medium'
+-%}
+{%- capture classes -%}
+  blinc-root blinc-shape-{{ shape | handle }} blinc-corners-{{ corners | handle }} blinc-star-{{ star_size | default: 'medium' | handle }} blinc-text-{{ text_size | handle }} {{ extra_class }}
+{%- endcapture -%}
+{%- capture styles -%}
+  --blinc-primary: {{ primary }}; --blinc-star: {{ star }}; --blinc-button: {{ button }}; --blinc-button-text: {{ button_text }};
+  {%- if w.textColor != blank %} --blinc-text: {{ w.textColor }};{% endif -%}
+  {%- if w.mutedTextColor != blank %} --blinc-muted: {{ w.mutedTextColor }};{% endif -%}
+  {%- if extra_style != blank %} {{ extra_style }}{% endif -%}
+{%- endcapture -%}
+{%- comment -%} Echoed so the HTML parser doesn't see an unclosed element. {%- endcomment -%}
+{%- liquid
+  echo '<' | append: tag | append: ' class="' | append: classes | append: '" style="' | append: styles | append: '" ' | append: attrs | append: '>'
+-%}

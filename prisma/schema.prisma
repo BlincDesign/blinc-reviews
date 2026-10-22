@@ -1,0 +1,255 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Managed by @shopify/shopify-app-session-storage-prisma. Do not rename fields.
+model Session {
+  id                  String    @id
+  shop                String
+  state               String
+  isOnline            Boolean   @default(false)
+  scope               String?
+  expires             DateTime?
+  accessToken         String
+  userId              BigInt?
+  firstName           String?
+  lastName            String?
+  email               String?
+  accountOwner        Boolean   @default(false)
+  locale              String?
+  collaborator        Boolean?  @default(false)
+  emailVerified       Boolean?  @default(false)
+  refreshToken        String?
+  refreshTokenExpires DateTime?
+}
+
+model Shop {
+  id                String             @id @default(cuid())
+  domain            String             @unique
+  installedAt       DateTime           @default(now())
+  uninstalledAt     DateTime?
+  // Last confirmed Shopify App Pricing plan (free | pro | business), for the worker.
+  plan              String             @default("free")
+  planCheckedAt     DateTime?
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  settings          ShopSettings?
+  reviews           Review[]
+  reviewRequests    ReviewRequest[]
+  emailSuppressions EmailSuppression[]
+  importJobs        ImportJob[]
+}
+
+model ShopSettings {
+  shopId               String         @id
+  shop                 Shop           @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  // Reviews at or above this rating publish without moderation. 0 = moderate everything.
+  autoPublishMinRating Int            @default(4)
+  requestDelayDays     Int            @default(7)
+  requestChannel       RequestChannel @default(APP)
+  senderName           String?
+  replyToEmail         String?
+  reminderEnabled      Boolean        @default(true)
+  reminderDelayDays    Int            @default(7)
+  // Hold for moderation (never auto-publish): profanity (built-in list plus
+  // blockedWords) and links, emails or phone numbers in the text.
+  holdProfanity        Boolean        @default(true)
+  holdContactInfo      Boolean        @default(true)
+  blockedWords         String[]       @default([])
+  // Emails or "@domain.com" entries; their reviews are saved hidden.
+  blockedEmails        String[]       @default([])
+  // Merchant alert emails; null alertEmail = the store email.
+  alertMode            AlertMode      @default(PENDING)
+  alertEmail           String?
+  // Integrations. Flow: review triggers fire only when on (requests use the channel).
+  flowEnabled          Boolean        @default(true)
+  updatedAt            DateTime       @updatedAt
+}
+
+enum AlertMode {
+  OFF
+  PENDING
+  NEGATIVE
+  ALL
+}
+
+enum RequestChannel {
+  APP
+  KLAVIYO
+  FLOW
+}
+
+enum ReviewStatus {
+  PENDING
+  PUBLISHED
+  HIDDEN
+  REJECTED
+  ARCHIVED
+}
+
+enum ReviewSource {
+  WEB
+  EMAIL
+  IMPORT
+}
+
+// Mirrors app_verification_status on Shopify's standard product_review metaobject.
+enum VerificationStatus {
+  VERIFIED_BUYER
+  VERIFIED_REVIEWER
+  UNVERIFIED
+}
+
+model Review {
+  id                String             @id @default(cuid())
+  shopId            String
+  shop              Shop               @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  // Shopify GIDs
+  productId         String
+  variantId         String?
+  customerId        String?
+  orderId           String?
+  authorName        String
+  authorEmail       String?
+  rating            Int
+  title             String?
+  body              String?
+  language          String?
+  status            ReviewStatus       @default(PENDING)
+  verification      VerificationStatus @default(UNVERIFIED)
+  source            ReviewSource       @default(WEB)
+  pinned            Boolean            @default(false)
+  favorite          Boolean            @default(false)
+  // Merchant labels, e.g. "shipping issue". Lowercase, deduplicated.
+  tags              String[]           @default([])
+  // Set when the merchant edits the text; shown as "Edited" (never the rating).
+  editedAt          DateTime?
+  merchantReply     String?
+  merchantRepliedAt DateTime?
+  // Standard product_review metaobject this review is synced to
+  metaobjectId      String?            @unique
+  submittedAt       DateTime           @default(now())
+  publishedAt       DateTime?
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  media             ReviewMedia[]
+
+  @@index([shopId, productId, status, submittedAt])
+  @@index([shopId, status, submittedAt])
+  @@index([shopId, customerId])
+  @@index([shopId, authorEmail])
+}
+
+enum MediaKind {
+  IMAGE
+  VIDEO
+}
+
+model ReviewMedia {
+  id         String    @id @default(cuid())
+  reviewId   String
+  review     Review    @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+  kind       MediaKind @default(IMAGE)
+  url        String
+  storageKey String
+  width      Int?
+  height     Int?
+  position   Int       @default(0)
+  createdAt  DateTime  @default(now())
+
+  @@index([reviewId, position])
+}
+
+enum ReviewRequestStatus {
+  SCHEDULED
+  SENDING
+  SENT
+  FAILED
+  CANCELLED
+}
+
+model ReviewRequest {
+  id             String              @id @default(cuid())
+  shopId         String
+  shop           Shop                @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  orderId        String
+  orderName      String?
+  customerId     String?
+  customerEmail  String
+  customerName   String?
+  // [{ productId, variantId, title }] - products to ask about, deduplicated
+  items          Json
+  // Secret for the review link, open pixel and unsubscribe link
+  token          String              @unique
+  channel        RequestChannel
+  status         ReviewRequestStatus @default(SCHEDULED)
+  scheduledAt    DateTime
+  sentAt         DateTime?
+  reminderAt     DateTime?
+  reminderSentAt DateTime?
+  openedAt       DateTime?
+  clickedAt      DateTime?
+  reviewedAt     DateTime?
+  error          String?
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+
+  @@unique([shopId, orderId])
+  @@index([status, scheduledAt])
+  @@index([reminderAt])
+  @@index([shopId, customerEmail])
+  @@index([shopId, createdAt])
+}
+
+// Customers who unsubscribed from review requests for a shop.
+model EmailSuppression {
+  id        String   @id @default(cuid())
+  shopId    String
+  shop      Shop     @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  email     String
+  createdAt DateTime @default(now())
+
+  @@unique([shopId, email])
+}
+
+enum ImportStatus {
+  PREVIEW
+  QUEUED
+  RUNNING
+  COMPLETE
+  FAILED
+}
+
+// A CSV import. The file is kept until the import finishes so the worker can
+// process it in the background, then cleared.
+model ImportJob {
+  id         String       @id @default(cuid())
+  shopId     String
+  shop       Shop         @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  filename   String
+  source     String
+  status     ImportStatus @default(PREVIEW)
+  // "file" = use the file's status column (Published when absent), "publish", "pending"
+  statusMode String       @default("file")
+  csv        String?
+  // Detected column for each field, shown in the preview
+  mapping    Json
+  // { rows, matched, unmatchedProducts, duplicates, invalid, sample }
+  summary    Json
+  totalRows  Int          @default(0)
+  imported   Int          @default(0)
+  skipped    Int          @default(0)
+  failed     Int          @default(0)
+  errors     Json         @default("[]")
+  createdAt  DateTime     @default(now())
+  startedAt  DateTime?
+  finishedAt DateTime?
+
+  @@index([shopId, createdAt])
+  @@index([status])
+}

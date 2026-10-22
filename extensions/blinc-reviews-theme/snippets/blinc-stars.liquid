@@ -1,0 +1,12 @@
+{%- comment -%}
+  Rating shapes filled to `rating` (0-5, decimals allowed). Pure CSS, no JavaScript.
+  Shape, size and color come from the surrounding .blinc-root.
+  Usage: {% render 'blinc-stars', rating: 4.5 %}
+{%- endcomment -%}
+{%- assign blinc_fill = rating | default: 0 | times: 20 -%}
+<span
+  class="blinc-stars"
+  style="--blinc-fill: {{ blinc_fill }}%"
+  role="img"
+  aria-label="{{ 'blinc.stars.aria' | t: rating: rating }}"
+></span>

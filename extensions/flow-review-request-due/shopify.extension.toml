@@ -1,0 +1,32 @@
+[[extensions]]
+name = "Review request due"
+type = "flow_trigger"
+handle = "review-request-due"
+uid = "65663576-8fb4-3bfe-262b-c7a381913dcdf0db9bd3"
+description = "A review request is due for a fulfilled order. Send it with any app when review requests are set to Shopify Flow."
+
+[settings]
+[[settings.fields]]
+type = "order_reference"
+
+[[settings.fields]]
+type = "url"
+key = "Review link"
+description = "Page where the customer reviews the products in this order"
+
+[[settings.fields]]
+type = "email"
+key = "Customer email"
+
+[[settings.fields]]
+type = "single_line_text_field"
+key = "Customer name"
+
+[[settings.fields]]
+type = "single_line_text_field"
+key = "Product titles"
+
+[[settings.fields]]
+type = "boolean"
+key = "Reminder"
+description = "True for the reminder, false for the first request"

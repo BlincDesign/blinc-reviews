@@ -1,0 +1,55 @@
+[[extensions]]
+name = "Review submitted"
+type = "flow_trigger"
+handle = "review-submitted"
+uid = "a2162ded-65a7-8c14-1b31-4ebae46673e1d57f1e52"
+description = "A customer submitted a product review in Blinc Reviews. Use Rating and Review status to act on negative or pending reviews."
+
+[settings]
+
+[[settings.fields]]
+type = "product_reference"
+
+[[settings.fields]]
+type = "single_line_text_field"
+key = "Review ID"
+
+[[settings.fields]]
+type = "number_decimal"
+key = "Rating"
+description = "1 to 5"
+
+[[settings.fields]]
+type = "single_line_text_field"
+key = "Review title"
+
+[[settings.fields]]
+type = "single_line_text_field"
+key = "Review body"
+
+[[settings.fields]]
+type = "single_line_text_field"
+key = "Reviewer name"
+
+[[settings.fields]]
+type = "email"
+key = "Reviewer email"
+
+[[settings.fields]]
+type = "single_line_text_field"
+key = "Review status"
+description = "published, pending or hidden"
+
+[[settings.fields]]
+type = "boolean"
+key = "Verified buyer"
+
+[[settings.fields]]
+type = "single_line_text_field"
+key = "Review source"
+description = "website or email request"
+
+[[settings.fields]]
+type = "url"
+key = "Admin link"
+description = "Opens the review in Blinc Reviews"

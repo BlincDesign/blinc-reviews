@@ -1,0 +1,70 @@
+/* Blinc Reviews storefront styles. Design values arrive as CSS variables and
+   modifier classes set by Liquid from the merchant's Appearance settings, so
+   nothing here depends on JavaScript. The admin preview loads this same file. */
+
+.blinc-root {
+  --blinc-star: #f59e0b;
+  --blinc-star-empty: rgb(0 0 0 / 0.14);
+  --blinc-primary: #111827;
+  --blinc-button: var(--blinc-primary);
+  --blinc-button-text: #fff;
+  --blinc-star-size: 1.2em;
+  --blinc-text-scale: 1;
+  --blinc-radius-button: 10px;
+  --blinc-radius-box: 12px;
+  --blinc-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z'/%3E%3C/svg%3E");
+  color: var(--blinc-text, inherit);
+}
+
+/* Shapes */
+.blinc-shape-heart {
+  --blinc-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 20.3l-1.3-1.2C6 14.9 3 12.2 3 8.9 3 6.2 5.1 4.1 7.8 4.1c1.5 0 3 .7 4.2 1.9 1.2-1.2 2.7-1.9 4.2-1.9 2.7 0 4.8 2.1 4.8 4.8 0 3.3-3 6-7.7 10.2z'/%3E%3C/svg%3E");
+}
+.blinc-shape-circle {
+  --blinc-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='8.5'/%3E%3C/svg%3E");
+}
+.blinc-shape-diamond {
+  --blinc-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2.5l8.5 9.5-8.5 9.5L3.5 12z'/%3E%3C/svg%3E");
+}
+
+/* Sizes and corners */
+.blinc-star-small { --blinc-star-size: 1em; }
+.blinc-star-large { --blinc-star-size: 1.5em; }
+.blinc-text-small { --blinc-text-scale: 0.92; }
+.blinc-text-large { --blinc-text-scale: 1.1; }
+.blinc-corners-sharp { --blinc-radius-button: 0; --blinc-radius-box: 0; }
+.blinc-corners-round { --blinc-radius-button: 999px; --blinc-radius-box: 18px; }
+
+/* Rating shapes: one element, masked five times, filled to --blinc-fill */
+.blinc-stars {
+  display: inline-block;
+  flex: none;
+  vertical-align: middle;
+  width: calc(var(--blinc-star-size) * 5);
+  height: var(--blinc-star-size);
+  background: linear-gradient(
+    90deg,
+    var(--blinc-star) var(--blinc-fill, 0%),
+    var(--blinc-star-empty) var(--blinc-fill, 0%)
+  );
+  -webkit-mask: var(--blinc-shape) left center / var(--blinc-star-size) 100% repeat-x;
+  mask: var(--blinc-shape) left center / var(--blinc-star-size) 100% repeat-x;
+}
+.blinc-stars--one {
+  width: var(--blinc-star-size);
+  --blinc-fill: 100%;
+}
+
+/* Star rating badge */
+.blinc-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  color: inherit;
+  text-decoration: none;
+  font-size: calc(0.95em * var(--blinc-text-scale));
+}
+.blinc-rating__count {
+  color: var(--blinc-muted, inherit);
+  opacity: 0.8;
+}

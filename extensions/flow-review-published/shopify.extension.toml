@@ -1,0 +1,55 @@
+[[extensions]]
+name = "Review published"
+type = "flow_trigger"
+handle = "review-published"
+uid = "8a14ee33-2d0b-6986-0564-f669843b9eb28287ea6f"
+description = "A product review became visible on the store, automatically or when you approved it."
+
+[settings]
+
+[[settings.fields]]
+type = "product_reference"
+
+[[settings.fields]]
+type = "single_line_text_field"
+key = "Review ID"
+
+[[settings.fields]]
+type = "number_decimal"
+key = "Rating"
+description = "1 to 5"
+
+[[settings.fields]]
+type = "single_line_text_field"
+key = "Review title"
+
+[[settings.fields]]
+type = "single_line_text_field"
+key = "Review body"
+
+[[settings.fields]]
+type = "single_line_text_field"
+key = "Reviewer name"
+
+[[settings.fields]]
+type = "email"
+key = "Reviewer email"
+
+[[settings.fields]]
+type = "single_line_text_field"
+key = "Review status"
+description = "published, pending or hidden"
+
+[[settings.fields]]
+type = "boolean"
+key = "Verified buyer"
+
+[[settings.fields]]
+type = "single_line_text_field"
+key = "Review source"
+description = "website or email request"
+
+[[settings.fields]]
+type = "url"
+key = "Admin link"
+description = "Opens the review in Blinc Reviews"

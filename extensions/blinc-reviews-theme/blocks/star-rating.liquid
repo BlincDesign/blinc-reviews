@@ -1,0 +1,67 @@
+{%- liquid
+  assign design = app.metafields.blinc.design.value
+  assign g = design.badge
+  # The product card's product (autofill), a picked product, or the product page's.
+  assign rated_product = block.settings.product | default: product
+  assign blinc_rating = rated_product.metafields.reviews.rating.value
+  assign blinc_count = rated_product.metafields.reviews.rating_count.value | default: 0
+  assign mode = g.mode | default: 'stars_text'
+  assign hide_empty = true
+  if g.hideWhenEmpty == false
+    assign hide_empty = false
+  endif
+-%}
+{%- if rated_product != blank and blinc_count > 0 or rated_product != blank and hide_empty == false -%}
+  {%- capture blinc_attrs -%}data-blinc-reviews-link {{ block.shopify_attributes }}{%- endcapture -%}
+  {%- render 'blinc-root-open',
+    tag: 'div',
+    attrs: blinc_attrs,
+    design: design,
+    star_color: g.starColor,
+    star_size: g.starSize,
+    extra_class: 'blinc-rating'
+  -%}
+    {%- if blinc_count > 0 -%}
+      {%- render 'blinc-stars', rating: blinc_rating.rating -%}
+      {%- if mode == 'stars_text' -%}
+        <span class="blinc-rating__count">
+          {%- if g.textTemplate != blank -%}
+            {%- comment -%} Inside a liquid tag because a closing brace in an output tag ends it early. {%- endcomment -%}
+            {%- liquid
+              assign count_text = g.textTemplate | escape | replace: '{n}', blinc_count
+              echo count_text
+            -%}
+          {%- else -%}
+            {{ 'blinc.rating.count' | t: count: blinc_count }}
+          {%- endif -%}
+        </span>
+      {%- endif -%}
+    {%- else -%}
+      {%- render 'blinc-stars', rating: 0 -%}
+      {%- if mode == 'stars_text' -%}
+        <span class="blinc-rating__count">{{ 'blinc.rating.none' | t }}</span>
+      {%- endif -%}
+    {%- endif -%}
+  {%- echo '</div>' -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Star rating",
+  "target": "section",
+  "stylesheet": "blinc-stars.css",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product",
+      "autofill": true,
+      "info": "Filled in automatically on product pages and inside product cards."
+    },
+    {
+      "type": "paragraph",
+      "content": "Change colors, star shape and text in the Blinc Reviews app under Appearance."
+    }
+  ]
+}
+{% endschema %}
