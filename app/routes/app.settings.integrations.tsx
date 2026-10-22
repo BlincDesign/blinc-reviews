@@ -37,8 +37,6 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 type Status =
   | { kind: "toggle"; enabled: boolean }
   | { kind: "upgrade"; plan: string }
-  | { kind: "builtIn" }
-  | { kind: "viaFlow" }
   | { kind: "soon" };
 
 type Integration = {
@@ -106,10 +104,6 @@ function IntegrationCard({ item }: { item: Integration }) {
             </s-badge>
           ) : status.kind === "upgrade" ? (
             <s-badge tone="info">{`${status.plan} plan`}</s-badge>
-          ) : status.kind === "builtIn" ? (
-            <s-badge tone="success">Built in</s-badge>
-          ) : status.kind === "viaFlow" ? (
-            <s-badge tone="info">Via Shopify Flow</s-badge>
           ) : (
             <s-badge>Coming soon</s-badge>
           )}
@@ -139,24 +133,6 @@ export default function IntegrationsSettings() {
       status: flowAllowed
         ? { kind: "toggle", enabled: flowEnabled }
         : { kind: "upgrade", plan: "Business" },
-    },
-    {
-      id: "theme",
-      name: "Theme star ratings",
-      category: "Review display",
-      description:
-        "Your theme's built-in star ratings (Dawn, Horizon and others) read our ratings automatically. Turn on 'Product rating' in the theme editor.",
-      logo: "/import-logos/shopify.png",
-      status: { kind: "builtIn" },
-    },
-    {
-      id: "slack",
-      name: "Slack",
-      category: "Automation and workflows",
-      description:
-        "Get a Slack message for new or negative reviews with a Shopify Flow workflow: Review submitted trigger, Send Slack message action.",
-      logo: "/import-logos/slack.png",
-      status: { kind: "viaFlow" },
     },
     {
       id: "klaviyo",
