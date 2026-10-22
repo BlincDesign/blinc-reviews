@@ -1,0 +1,121 @@
+{
+  "blinc": {
+    "stars": {
+      "aria": "Beoordeeld met {{ rating }} van 5",
+      "option": {
+        "one": "{{ count }} ster",
+        "other": "{{ count }} sterren"
+      }
+    },
+    "rating": {
+      "count": {
+        "one": "({{ count }} review)",
+        "other": "({{ count }} reviews)"
+      },
+      "based_on": {
+        "one": "Gebaseerd op {{ count }} review",
+        "other": "Gebaseerd op {{ count }} reviews"
+      },
+      "none": "Nog geen reviews",
+      "breakdown": "Verdeling van beoordelingen",
+      "see_all": "Alle reviews bekijken"
+    },
+    "reviews": {
+      "title": "Klantreviews",
+      "empty": "Nog geen reviews. Deel als eerste je mening.",
+      "more": "Meer reviews tonen",
+      "verified": "Geverifieerde koper",
+      "reply": "Reactie van {{ shop }}",
+      "load_error": "Reviews konden niet worden geladen. Vernieuw de pagina om het opnieuw te proberen.",
+      "read_more": "Meer",
+      "read_less": "Minder",
+      "full": "Volledige review",
+      "open_review": "Review van {{ name }}, {{ rating }} van 5 sterren. Review openen.",
+      "date_format": "%d-%m-%Y"
+    },
+    "modal": {
+      "close": "Sluiten"
+    },
+    "source": {
+      "email": "Via uitnodiging van de winkel",
+      "web": "Via bezoeker van de winkel",
+      "import": "Geïmporteerd uit een andere app"
+    },
+    "policy": {
+      "link": "Hoe reviews worden verzameld",
+      "text": "Reviews komen van klanten die we na hun bestelling per e-mail uitnodigen (gemarkeerd als Geverifieerde koper) en van bezoekers die het reviewformulier op deze pagina gebruiken. Sommige reviews zijn mogelijk geïmporteerd uit een andere review-app. Reviews kunnen worden gecontroleerd voordat ze worden gepubliceerd."
+    },
+    "filter": {
+      "label": "Filteren op beoordeling",
+      "all": "Alle beoordelingen",
+      "row": "Reviews met {{ stars }} sterren tonen ({{ count }})",
+      "none": "Geen reviews komen overeen met dit filter."
+    },
+    "sort": {
+      "label": "Reviews sorteren",
+      "recent": "Nieuwste",
+      "highest": "Hoogste beoordeling",
+      "lowest": "Laagste beoordeling",
+      "photos": "Eerst met foto’s",
+      "photos_only": "Alleen met foto’s"
+    },
+    "pages": {
+      "label": "Reviewpagina’s",
+      "page": "Pagina {{ number }}",
+      "prev": "Vorige pagina",
+      "next": "Volgende pagina"
+    },
+    "carousel": {
+      "prev": "Vorige reviews",
+      "next": "Volgende reviews"
+    },
+    "photos": {
+      "heading": "Foto’s van klanten",
+      "open": "Foto openen",
+      "close": "Foto sluiten",
+      "prev": "Vorige foto",
+      "next": "Volgende foto"
+    },
+    "form": {
+      "open": "Review schrijven",
+      "rating": "Jouw beoordeling",
+      "name": "Naam",
+      "email": "E-mail",
+      "email_hint": "Wordt nooit openbaar getoond.",
+      "title": "Titel van de review (optioneel)",
+      "body": "Jouw review",
+      "photos": "Foto’s (optioneel, maximaal 5)",
+      "add_photo": "Foto toevoegen",
+      "remove_photo": "Foto verwijderen",
+      "submit": "Review versturen",
+      "next": "Volgende",
+      "back": "Terug",
+      "step_rating": "Hoe zou je dit product beoordelen?",
+      "step_rating_lead": "We horen graag over je ervaring.",
+      "scale_low": "Slecht",
+      "scale_high": "Geweldig",
+      "step_review": "Vertel ons meer",
+      "title_placeholder": "Vat je ervaring samen",
+      "body_placeholder": "Wat vond je goed of minder goed? Hoe heb je het gebruikt?",
+      "step_about": "Over jou",
+      "step_about_lead": "Je e-mailadres wordt nooit openbaar getoond.",
+      "anonymous": "Review anoniem plaatsen",
+      "anonymous_name": "Anoniem",
+      "step_media": "Deel een foto",
+      "step_media_lead": "Foto’s helpen andere shoppers. Deze stap is optioneel.",
+      "thanks": "Bedankt voor je review!",
+      "published": "Bedankt! Je review staat nu online.",
+      "pending": "Bedankt! Je review verschijnt zodra deze is goedgekeurd."
+    },
+    "errors": {
+      "rating_required": "Kies een beoordeling.",
+      "name_required": "Vul je naam in.",
+      "email_invalid": "Vul een geldig e-mailadres in.",
+      "body_required": "Schrijf een paar woorden over het product.",
+      "too_long": "Een van je antwoorden is te lang.",
+      "already_reviewed": "Je hebt dit product al beoordeeld.",
+      "rate_limited": "Je hebt onlangs meerdere reviews geplaatst. Probeer het later opnieuw.",
+      "generic": "Er is iets misgegaan. Probeer het zo opnieuw."
+    }
+  }
+}

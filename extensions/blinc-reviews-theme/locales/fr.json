@@ -1,0 +1,121 @@
+{
+  "blinc": {
+    "stars": {
+      "aria": "Noté {{ rating }} sur 5",
+      "option": {
+        "one": "{{ count }} étoile",
+        "other": "{{ count }} étoiles"
+      }
+    },
+    "rating": {
+      "count": {
+        "one": "({{ count }} avis)",
+        "other": "({{ count }} avis)"
+      },
+      "based_on": {
+        "one": "Basé sur {{ count }} avis",
+        "other": "Basé sur {{ count }} avis"
+      },
+      "none": "Aucun avis pour le moment",
+      "breakdown": "Répartition des notes",
+      "see_all": "Voir tous les avis"
+    },
+    "reviews": {
+      "title": "Avis clients",
+      "empty": "Aucun avis pour le moment. Soyez le premier à donner votre avis.",
+      "more": "Afficher plus d’avis",
+      "verified": "Acheteur vérifié",
+      "reply": "Réponse de {{ shop }}",
+      "load_error": "Impossible de charger les avis. Actualisez la page pour réessayer.",
+      "read_more": "Plus",
+      "read_less": "Moins",
+      "full": "Avis complet",
+      "open_review": "Avis de {{ name }}, {{ rating }} étoiles sur 5. Ouvrir l’avis.",
+      "date_format": "%d/%m/%Y"
+    },
+    "modal": {
+      "close": "Fermer"
+    },
+    "source": {
+      "email": "Via une invitation de la boutique",
+      "web": "Via un visiteur de la boutique",
+      "import": "Importé d’une autre application"
+    },
+    "policy": {
+      "link": "Comment les avis sont collectés",
+      "text": "Les avis proviennent de clients que nous invitons par e-mail après leur commande (indiqués Acheteur vérifié) et de visiteurs qui utilisent le formulaire d’avis de cette page. Certains avis peuvent avoir été importés d’une autre application d’avis. Les avis peuvent être vérifiés avant leur publication."
+    },
+    "filter": {
+      "label": "Filtrer par note",
+      "all": "Toutes les notes",
+      "row": "Afficher les avis {{ stars }} étoiles ({{ count }})",
+      "none": "Aucun avis ne correspond à ce filtre."
+    },
+    "sort": {
+      "label": "Trier les avis",
+      "recent": "Les plus récents",
+      "highest": "Meilleure note",
+      "lowest": "Note la plus basse",
+      "photos": "Avec photos en premier",
+      "photos_only": "Uniquement avec photos"
+    },
+    "pages": {
+      "label": "Pages d’avis",
+      "page": "Page {{ number }}",
+      "prev": "Page précédente",
+      "next": "Page suivante"
+    },
+    "carousel": {
+      "prev": "Avis précédents",
+      "next": "Avis suivants"
+    },
+    "photos": {
+      "heading": "Photos des clients",
+      "open": "Ouvrir la photo",
+      "close": "Fermer la photo",
+      "prev": "Photo précédente",
+      "next": "Photo suivante"
+    },
+    "form": {
+      "open": "Écrire un avis",
+      "rating": "Votre note",
+      "name": "Nom",
+      "email": "E-mail",
+      "email_hint": "Jamais affiché publiquement.",
+      "title": "Titre de l’avis (facultatif)",
+      "body": "Votre avis",
+      "photos": "Photos (facultatif, jusqu’à 5)",
+      "add_photo": "Ajouter une photo",
+      "remove_photo": "Supprimer la photo",
+      "submit": "Envoyer l’avis",
+      "next": "Suivant",
+      "back": "Retour",
+      "step_rating": "Quelle note donneriez-vous à ce produit ?",
+      "step_rating_lead": "Nous aimerions connaître votre expérience.",
+      "scale_low": "Mauvais",
+      "scale_high": "Excellent",
+      "step_review": "Dites-nous en plus",
+      "title_placeholder": "Résumez votre expérience",
+      "body_placeholder": "Qu’avez-vous aimé ou moins aimé ? Comment l’avez-vous utilisé ?",
+      "step_about": "À propos de vous",
+      "step_about_lead": "Votre e-mail n’est jamais affiché publiquement.",
+      "anonymous": "Publier l’avis de manière anonyme",
+      "anonymous_name": "Anonyme",
+      "step_media": "Partagez une photo",
+      "step_media_lead": "Les photos aident les autres clients. Cette étape est facultative.",
+      "thanks": "Merci pour votre avis !",
+      "published": "Merci ! Votre avis est maintenant en ligne.",
+      "pending": "Merci ! Votre avis apparaîtra une fois approuvé."
+    },
+    "errors": {
+      "rating_required": "Choisissez une note.",
+      "name_required": "Saisissez votre nom.",
+      "email_invalid": "Saisissez une adresse e-mail valide.",
+      "body_required": "Écrivez quelques mots sur le produit.",
+      "too_long": "L’une de vos réponses est trop longue.",
+      "already_reviewed": "Vous avez déjà donné votre avis sur ce produit.",
+      "rate_limited": "Vous avez envoyé plusieurs avis récemment. Réessayez plus tard.",
+      "generic": "Une erreur s’est produite. Réessayez dans un instant."
+    }
+  }
+}

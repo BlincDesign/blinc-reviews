@@ -1,0 +1,121 @@
+{
+  "blinc": {
+    "stars": {
+      "aria": "5점 만점에 {{ rating }}점",
+      "option": {
+        "one": "별 {{ count }}개",
+        "other": "별 {{ count }}개"
+      }
+    },
+    "rating": {
+      "count": {
+        "one": "(리뷰 {{ count }}개)",
+        "other": "(리뷰 {{ count }}개)"
+      },
+      "based_on": {
+        "one": "리뷰 {{ count }}개 기준",
+        "other": "리뷰 {{ count }}개 기준"
+      },
+      "none": "아직 리뷰가 없습니다",
+      "breakdown": "평점 분포",
+      "see_all": "모든 리뷰 보기"
+    },
+    "reviews": {
+      "title": "고객 리뷰",
+      "empty": "아직 리뷰가 없습니다. 첫 번째 리뷰를 남겨 주세요.",
+      "more": "리뷰 더 보기",
+      "verified": "구매 확인됨",
+      "reply": "{{ shop }}의 답변",
+      "load_error": "리뷰를 불러오지 못했습니다. 페이지를 새로고침한 후 다시 시도하세요.",
+      "read_more": "더 보기",
+      "read_less": "접기",
+      "full": "리뷰 전체 보기",
+      "open_review": "{{ name }}님의 리뷰, 5점 만점에 {{ rating }}점. 리뷰 열기.",
+      "date_format": "%Y. %-m. %-d."
+    },
+    "modal": {
+      "close": "닫기"
+    },
+    "source": {
+      "email": "스토어 초대를 통해 작성",
+      "web": "스토어 방문자가 작성",
+      "import": "다른 앱에서 가져옴"
+    },
+    "policy": {
+      "link": "리뷰 수집 방법",
+      "text": "리뷰는 주문 후 이메일로 초대한 고객('구매 확인됨'으로 표시)과 이 페이지의 리뷰 양식을 사용한 방문자가 작성한 것입니다. 일부 리뷰는 다른 리뷰 앱에서 가져온 것일 수 있습니다. 리뷰는 게시 전에 검토될 수 있습니다."
+    },
+    "filter": {
+      "label": "평점으로 필터링",
+      "all": "모든 평점",
+      "row": "별 {{ stars }}개 리뷰 보기 ({{ count }})",
+      "none": "이 필터와 일치하는 리뷰가 없습니다."
+    },
+    "sort": {
+      "label": "리뷰 정렬",
+      "recent": "최신순",
+      "highest": "평점 높은순",
+      "lowest": "평점 낮은순",
+      "photos": "사진 리뷰 먼저",
+      "photos_only": "사진 리뷰만"
+    },
+    "pages": {
+      "label": "리뷰 페이지",
+      "page": "{{ number }}페이지",
+      "prev": "이전 페이지",
+      "next": "다음 페이지"
+    },
+    "carousel": {
+      "prev": "이전 리뷰",
+      "next": "다음 리뷰"
+    },
+    "photos": {
+      "heading": "고객 사진",
+      "open": "사진 열기",
+      "close": "사진 닫기",
+      "prev": "이전 사진",
+      "next": "다음 사진"
+    },
+    "form": {
+      "open": "리뷰 작성",
+      "rating": "내 평점",
+      "name": "이름",
+      "email": "이메일",
+      "email_hint": "공개되지 않습니다.",
+      "title": "리뷰 제목(선택 사항)",
+      "body": "리뷰",
+      "photos": "사진(선택 사항, 최대 5장)",
+      "add_photo": "사진 추가",
+      "remove_photo": "사진 삭제",
+      "submit": "리뷰 제출",
+      "next": "다음",
+      "back": "뒤로",
+      "step_rating": "이 제품을 어떻게 평가하시겠어요?",
+      "step_rating_lead": "여러분의 경험을 듣고 싶습니다.",
+      "scale_low": "나쁨",
+      "scale_high": "아주 좋음",
+      "step_review": "더 자세히 알려 주세요",
+      "title_placeholder": "경험을 한 줄로 요약해 주세요",
+      "body_placeholder": "어떤 점이 좋았거나 아쉬웠나요? 어떻게 사용하셨나요?",
+      "step_about": "작성자 정보",
+      "step_about_lead": "이메일은 절대 공개되지 않습니다.",
+      "anonymous": "익명으로 리뷰 게시",
+      "anonymous_name": "익명",
+      "step_media": "사진 공유",
+      "step_media_lead": "사진은 다른 고객에게 도움이 됩니다. 이 단계는 선택 사항입니다.",
+      "thanks": "리뷰를 남겨 주셔서 감사합니다!",
+      "published": "감사합니다! 리뷰가 게시되었습니다.",
+      "pending": "감사합니다! 승인 후 리뷰가 표시됩니다."
+    },
+    "errors": {
+      "rating_required": "평점을 선택하세요.",
+      "name_required": "이름을 입력하세요.",
+      "email_invalid": "올바른 이메일 주소를 입력하세요.",
+      "body_required": "제품에 대해 몇 마디 적어 주세요.",
+      "too_long": "답변 중 하나가 너무 깁니다.",
+      "already_reviewed": "이미 이 제품의 리뷰를 작성하셨습니다.",
+      "rate_limited": "최근에 여러 리뷰를 제출하셨습니다. 나중에 다시 시도하세요.",
+      "generic": "문제가 발생했습니다. 잠시 후 다시 시도하세요."
+    }
+  }
+}

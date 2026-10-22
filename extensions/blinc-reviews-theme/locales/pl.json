@@ -1,0 +1,127 @@
+{
+  "blinc": {
+    "stars": {
+      "aria": "Ocena {{ rating }} na 5",
+      "option": {
+        "one": "{{ count }} gwiazdka",
+        "other": "{{ count }} gwiazdki",
+        "few": "{{ count }} gwiazdki",
+        "many": "{{ count }} gwiazdek"
+      }
+    },
+    "rating": {
+      "count": {
+        "one": "({{ count }} opinia)",
+        "other": "({{ count }} opinii)",
+        "few": "({{ count }} opinie)",
+        "many": "({{ count }} opinii)"
+      },
+      "based_on": {
+        "one": "Na podstawie {{ count }} opinii",
+        "other": "Na podstawie {{ count }} opinii",
+        "few": "Na podstawie {{ count }} opinii",
+        "many": "Na podstawie {{ count }} opinii"
+      },
+      "none": "Brak opinii",
+      "breakdown": "Rozkład ocen",
+      "see_all": "Zobacz wszystkie opinie"
+    },
+    "reviews": {
+      "title": "Opinie klientów",
+      "empty": "Brak opinii. Podziel się swoją opinią jako pierwszy.",
+      "more": "Pokaż więcej opinii",
+      "verified": "Zweryfikowany kupujący",
+      "reply": "Odpowiedź od {{ shop }}",
+      "load_error": "Nie udało się wczytać opinii. Odśwież stronę, aby spróbować ponownie.",
+      "read_more": "Więcej",
+      "read_less": "Mniej",
+      "full": "Cała opinia",
+      "open_review": "Opinia od {{ name }}, ocena {{ rating }} na 5. Otwórz opinię.",
+      "date_format": "%d.%m.%Y"
+    },
+    "modal": {
+      "close": "Zamknij"
+    },
+    "source": {
+      "email": "Z zaproszenia sklepu",
+      "web": "Od odwiedzającego sklep",
+      "import": "Zaimportowana z innej aplikacji"
+    },
+    "policy": {
+      "link": "Jak zbieramy opinie",
+      "text": "Opinie pochodzą od klientów, których zapraszamy e-mailem po złożeniu zamówienia (oznaczonych jako Zweryfikowany kupujący), oraz od odwiedzających, którzy korzystają z formularza opinii na tej stronie. Niektóre opinie mogły zostać zaimportowane z innej aplikacji do opinii. Opinie mogą być sprawdzane przed publikacją."
+    },
+    "filter": {
+      "label": "Filtruj według oceny",
+      "all": "Wszystkie oceny",
+      "row": "Pokaż opinie z oceną {{ stars }} ({{ count }})",
+      "none": "Żadne opinie nie pasują do tego filtra."
+    },
+    "sort": {
+      "label": "Sortuj opinie",
+      "recent": "Najnowsze",
+      "highest": "Najwyższa ocena",
+      "lowest": "Najniższa ocena",
+      "photos": "Najpierw ze zdjęciami",
+      "photos_only": "Tylko ze zdjęciami"
+    },
+    "pages": {
+      "label": "Strony opinii",
+      "page": "Strona {{ number }}",
+      "prev": "Poprzednia strona",
+      "next": "Następna strona"
+    },
+    "carousel": {
+      "prev": "Poprzednie opinie",
+      "next": "Następne opinie"
+    },
+    "photos": {
+      "heading": "Zdjęcia klientów",
+      "open": "Otwórz zdjęcie",
+      "close": "Zamknij zdjęcie",
+      "prev": "Poprzednie zdjęcie",
+      "next": "Następne zdjęcie"
+    },
+    "form": {
+      "open": "Napisz opinię",
+      "rating": "Twoja ocena",
+      "name": "Imię",
+      "email": "E-mail",
+      "email_hint": "Nigdy nie jest wyświetlany publicznie.",
+      "title": "Tytuł opinii (opcjonalnie)",
+      "body": "Twoja opinia",
+      "photos": "Zdjęcia (opcjonalnie, maksymalnie 5)",
+      "add_photo": "Dodaj zdjęcie",
+      "remove_photo": "Usuń zdjęcie",
+      "submit": "Wyślij opinię",
+      "next": "Dalej",
+      "back": "Wstecz",
+      "step_rating": "Jak oceniasz ten produkt?",
+      "step_rating_lead": "Chętnie poznamy Twoje wrażenia.",
+      "scale_low": "Słabo",
+      "scale_high": "Świetnie",
+      "step_review": "Opowiedz nam więcej",
+      "title_placeholder": "Podsumuj swoje wrażenia",
+      "body_placeholder": "Co Ci się podobało, a co nie? Jak z niego korzystałeś?",
+      "step_about": "O Tobie",
+      "step_about_lead": "Twój e-mail nigdy nie jest wyświetlany publicznie.",
+      "anonymous": "Opublikuj opinię anonimowo",
+      "anonymous_name": "Anonim",
+      "step_media": "Dodaj zdjęcie",
+      "step_media_lead": "Zdjęcia pomagają innym kupującym. Ten krok jest opcjonalny.",
+      "thanks": "Dziękujemy za opinię!",
+      "published": "Dziękujemy! Twoja opinia jest już opublikowana.",
+      "pending": "Dziękujemy! Twoja opinia pojawi się po zatwierdzeniu."
+    },
+    "errors": {
+      "rating_required": "Wybierz ocenę.",
+      "name_required": "Wpisz swoje imię.",
+      "email_invalid": "Wpisz prawidłowy adres e-mail.",
+      "body_required": "Napisz kilka słów o produkcie.",
+      "too_long": "Jedna z Twoich odpowiedzi jest za długa.",
+      "already_reviewed": "Ten produkt został już przez Ciebie oceniony.",
+      "rate_limited": "Wysłano ostatnio kilka opinii. Spróbuj ponownie później.",
+      "generic": "Coś poszło nie tak. Spróbuj ponownie za chwilę."
+    }
+  }
+}

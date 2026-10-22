@@ -1,0 +1,121 @@
+{
+  "blinc": {
+    "stars": {
+      "aria": "Valorado con {{ rating }} de 5",
+      "option": {
+        "one": "{{ count }} estrella",
+        "other": "{{ count }} estrellas"
+      }
+    },
+    "rating": {
+      "count": {
+        "one": "({{ count }} reseña)",
+        "other": "({{ count }} reseñas)"
+      },
+      "based_on": {
+        "one": "Basado en {{ count }} reseña",
+        "other": "Basado en {{ count }} reseñas"
+      },
+      "none": "Aún no hay reseñas",
+      "breakdown": "Desglose de valoraciones",
+      "see_all": "Ver todas las reseñas"
+    },
+    "reviews": {
+      "title": "Reseñas de clientes",
+      "empty": "Aún no hay reseñas. Sé el primero en compartir tu opinión.",
+      "more": "Mostrar más reseñas",
+      "verified": "Comprador verificado",
+      "reply": "Respuesta de {{ shop }}",
+      "load_error": "No se pudieron cargar las reseñas. Actualiza la página para volver a intentarlo.",
+      "read_more": "Más",
+      "read_less": "Menos",
+      "full": "Reseña completa",
+      "open_review": "Reseña de {{ name }}, {{ rating }} de 5 estrellas. Abrir reseña.",
+      "date_format": "%d/%m/%Y"
+    },
+    "modal": {
+      "close": "Cerrar"
+    },
+    "source": {
+      "email": "Mediante invitación de la tienda",
+      "web": "Mediante visitante de la tienda",
+      "import": "Importada desde otra aplicación"
+    },
+    "policy": {
+      "link": "Cómo se recopilan las reseñas",
+      "text": "Las reseñas provienen de clientes a los que invitamos por correo electrónico después de su pedido (marcados como Comprador verificado) y de visitantes que usan el formulario de reseñas de esta página. Algunas reseñas pueden haberse importado desde otra aplicación de reseñas. Las reseñas pueden revisarse antes de publicarse."
+    },
+    "filter": {
+      "label": "Filtrar por valoración",
+      "all": "Todas las valoraciones",
+      "row": "Mostrar reseñas de {{ stars }} estrellas ({{ count }})",
+      "none": "Ninguna reseña coincide con este filtro."
+    },
+    "sort": {
+      "label": "Ordenar reseñas",
+      "recent": "Más recientes",
+      "highest": "Mejor valoración",
+      "lowest": "Peor valoración",
+      "photos": "Con fotos primero",
+      "photos_only": "Solo con fotos"
+    },
+    "pages": {
+      "label": "Páginas de reseñas",
+      "page": "Página {{ number }}",
+      "prev": "Página anterior",
+      "next": "Página siguiente"
+    },
+    "carousel": {
+      "prev": "Reseñas anteriores",
+      "next": "Reseñas siguientes"
+    },
+    "photos": {
+      "heading": "Fotos de clientes",
+      "open": "Abrir foto",
+      "close": "Cerrar foto",
+      "prev": "Foto anterior",
+      "next": "Foto siguiente"
+    },
+    "form": {
+      "open": "Escribir una reseña",
+      "rating": "Tu valoración",
+      "name": "Nombre",
+      "email": "Correo electrónico",
+      "email_hint": "Nunca se muestra públicamente.",
+      "title": "Título de la reseña (opcional)",
+      "body": "Tu reseña",
+      "photos": "Fotos (opcional, hasta 5)",
+      "add_photo": "Añadir foto",
+      "remove_photo": "Eliminar foto",
+      "submit": "Enviar reseña",
+      "next": "Siguiente",
+      "back": "Atrás",
+      "step_rating": "¿Cómo valorarías este producto?",
+      "step_rating_lead": "Nos encantaría conocer tu experiencia.",
+      "scale_low": "Malo",
+      "scale_high": "Excelente",
+      "step_review": "Cuéntanos más",
+      "title_placeholder": "Resume tu experiencia",
+      "body_placeholder": "¿Qué te gustó o no te gustó? ¿Cómo lo usaste?",
+      "step_about": "Sobre ti",
+      "step_about_lead": "Tu correo electrónico nunca se muestra públicamente.",
+      "anonymous": "Publicar la reseña de forma anónima",
+      "anonymous_name": "Anónimo",
+      "step_media": "Comparte una foto",
+      "step_media_lead": "Las fotos ayudan a otros compradores. Este paso es opcional.",
+      "thanks": "¡Gracias por tu reseña!",
+      "published": "¡Gracias! Tu reseña ya está publicada.",
+      "pending": "¡Gracias! Tu reseña aparecerá cuando se apruebe."
+    },
+    "errors": {
+      "rating_required": "Elige una valoración.",
+      "name_required": "Introduce tu nombre.",
+      "email_invalid": "Introduce un correo electrónico válido.",
+      "body_required": "Escribe unas palabras sobre el producto.",
+      "too_long": "Una de tus respuestas es demasiado larga.",
+      "already_reviewed": "Ya has escrito una reseña de este producto.",
+      "rate_limited": "Has enviado varias reseñas recientemente. Inténtalo más tarde.",
+      "generic": "Algo salió mal. Inténtalo de nuevo en un momento."
+    }
+  }
+}

@@ -64,6 +64,8 @@
     assign show_title = false
   endif
   assign show_date = true
+  # Per-language numeric date format, so month names never stay in English.
+  assign date_format = 'blinc.reviews.date_format' | t
   if w.showDate == false
     assign show_date = false
   endif
@@ -264,7 +266,7 @@
                 <strong class="blinc-review__name">{{ reviewer | escape }}</strong>
                 {%- if r.v %}<span class="blinc-review__verified">{{ 'blinc.reviews.verified' | t }}</span>{% endif -%}
               </span>
-              {%- if show_date %}<time class="blinc-review__date" datetime="{{ r.d }}">{{ r.d | date: '%b %-d, %Y' }}</time>{% endif -%}
+              {%- if show_date %}<time class="blinc-review__date" datetime="{{ r.d }}">{{ r.d | date: date_format }}</time>{% endif -%}
               {%- if show_source and r.s != blank -%}
                 {%- assign source_key = 'blinc.source.' | append: r.s | downcase -%}
                 <span class="blinc-review__source">{{ source_key | t }}</span>

@@ -1,0 +1,121 @@
+{
+  "blinc": {
+    "stars": {
+      "aria": "Avaliado com {{ rating }} de 5",
+      "option": {
+        "one": "{{ count }} estrela",
+        "other": "{{ count }} estrelas"
+      }
+    },
+    "rating": {
+      "count": {
+        "one": "({{ count }} avaliação)",
+        "other": "({{ count }} avaliações)"
+      },
+      "based_on": {
+        "one": "Com base em {{ count }} avaliação",
+        "other": "Com base em {{ count }} avaliações"
+      },
+      "none": "Ainda não há avaliações",
+      "breakdown": "Distribuição das notas",
+      "see_all": "Ver todas as avaliações"
+    },
+    "reviews": {
+      "title": "Avaliações de clientes",
+      "empty": "Ainda não há avaliações. Seja o primeiro a compartilhar sua opinião.",
+      "more": "Mostrar mais avaliações",
+      "verified": "Comprador verificado",
+      "reply": "Resposta de {{ shop }}",
+      "load_error": "Não foi possível carregar as avaliações. Atualize a página para tentar novamente.",
+      "read_more": "Mais",
+      "read_less": "Menos",
+      "full": "Avaliação completa",
+      "open_review": "Avaliação de {{ name }}, {{ rating }} de 5 estrelas. Abrir avaliação.",
+      "date_format": "%d/%m/%Y"
+    },
+    "modal": {
+      "close": "Fechar"
+    },
+    "source": {
+      "email": "Por convite da loja",
+      "web": "Por visitante da loja",
+      "import": "Importada de outro app"
+    },
+    "policy": {
+      "link": "Como as avaliações são coletadas",
+      "text": "As avaliações vêm de clientes que convidamos por e-mail após o pedido (marcados como Comprador verificado) e de visitantes que usam o formulário de avaliação desta página. Algumas avaliações podem ter sido importadas de outro app de avaliações. As avaliações podem ser verificadas antes da publicação."
+    },
+    "filter": {
+      "label": "Filtrar por nota",
+      "all": "Todas as notas",
+      "row": "Mostrar avaliações de {{ stars }} estrelas ({{ count }})",
+      "none": "Nenhuma avaliação corresponde a este filtro."
+    },
+    "sort": {
+      "label": "Ordenar avaliações",
+      "recent": "Mais recentes",
+      "highest": "Maior nota",
+      "lowest": "Menor nota",
+      "photos": "Com fotos primeiro",
+      "photos_only": "Somente com fotos"
+    },
+    "pages": {
+      "label": "Páginas de avaliações",
+      "page": "Página {{ number }}",
+      "prev": "Página anterior",
+      "next": "Próxima página"
+    },
+    "carousel": {
+      "prev": "Avaliações anteriores",
+      "next": "Próximas avaliações"
+    },
+    "photos": {
+      "heading": "Fotos de clientes",
+      "open": "Abrir foto",
+      "close": "Fechar foto",
+      "prev": "Foto anterior",
+      "next": "Próxima foto"
+    },
+    "form": {
+      "open": "Escrever uma avaliação",
+      "rating": "Sua nota",
+      "name": "Nome",
+      "email": "E-mail",
+      "email_hint": "Nunca exibido publicamente.",
+      "title": "Título da avaliação (opcional)",
+      "body": "Sua avaliação",
+      "photos": "Fotos (opcional, até 5)",
+      "add_photo": "Adicionar foto",
+      "remove_photo": "Remover foto",
+      "submit": "Enviar avaliação",
+      "next": "Próximo",
+      "back": "Voltar",
+      "step_rating": "Como você avaliaria este produto?",
+      "step_rating_lead": "Adoraríamos saber sobre sua experiência.",
+      "scale_low": "Ruim",
+      "scale_high": "Ótimo",
+      "step_review": "Conte-nos mais",
+      "title_placeholder": "Resuma sua experiência",
+      "body_placeholder": "Do que você gostou ou não gostou? Como você o usou?",
+      "step_about": "Sobre você",
+      "step_about_lead": "Seu e-mail nunca é exibido publicamente.",
+      "anonymous": "Publicar avaliação como anônimo",
+      "anonymous_name": "Anônimo",
+      "step_media": "Compartilhe uma foto",
+      "step_media_lead": "Fotos ajudam outros compradores. Esta etapa é opcional.",
+      "thanks": "Obrigado pela sua avaliação!",
+      "published": "Obrigado! Sua avaliação já está publicada.",
+      "pending": "Obrigado! Sua avaliação aparecerá depois de aprovada."
+    },
+    "errors": {
+      "rating_required": "Escolha uma nota.",
+      "name_required": "Digite seu nome.",
+      "email_invalid": "Digite um e-mail válido.",
+      "body_required": "Escreva algumas palavras sobre o produto.",
+      "too_long": "Uma das suas respostas é muito longa.",
+      "already_reviewed": "Você já avaliou este produto.",
+      "rate_limited": "Você enviou várias avaliações recentemente. Tente novamente mais tarde.",
+      "generic": "Algo deu errado. Tente novamente em instantes."
+    }
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "blinc": {
+    "stars": {
+      "aria": "Vurdert til {{ rating }} av 5",
+      "option": {
+        "one": "{{ count }} stjerne",
+        "other": "{{ count }} stjerner"
+      }
+    },
+    "rating": {
+      "count": {
+        "one": "({{ count }} omtale)",
+        "other": "({{ count }} omtaler)"
+      },
+      "based_on": {
+        "one": "Basert på {{ count }} omtale",
+        "other": "Basert på {{ count }} omtaler"
+      },
+      "none": "Ingen omtaler ennå",
+      "breakdown": "Fordeling av vurderinger",
+      "see_all": "Se alle omtaler"
+    },
+    "reviews": {
+      "title": "Kundeomtaler",
+      "empty": "Ingen omtaler ennå. Bli den første til å dele din mening.",
+      "more": "Vis flere omtaler",
+      "verified": "Verifisert kjøper",
+      "reply": "Svar fra {{ shop }}",
+      "load_error": "Omtalene kunne ikke lastes inn. Oppdater siden for å prøve igjen.",
+      "read_more": "Mer",
+      "read_less": "Mindre",
+      "full": "Hele omtalen",
+      "open_review": "Omtale fra {{ name }}, {{ rating }} av 5 stjerner. Åpne omtalen.",
+      "date_format": "%d.%m.%Y"
+    },
+    "modal": {
+      "close": "Lukk"
+    },
+    "source": {
+      "email": "Via invitasjon fra butikken",
+      "web": "Via besøkende i butikken",
+      "import": "Importert fra en annen app"
+    },
+    "policy": {
+      "link": "Slik samles omtaler inn",
+      "text": "Omtalene kommer fra kunder vi inviterer på e-post etter bestillingen (merket Verifisert kjøper) og fra besøkende som bruker omtaleskjemaet på denne siden. Noen omtaler kan være importert fra en annen omtaleapp. Omtaler kan bli kontrollert før de publiseres."
+    },
+    "filter": {
+      "label": "Filtrer etter vurdering",
+      "all": "Alle vurderinger",
+      "row": "Vis omtaler med {{ stars }} stjerner ({{ count }})",
+      "none": "Ingen omtaler samsvarer med dette filteret."
+    },
+    "sort": {
+      "label": "Sorter omtaler",
+      "recent": "Nyeste",
+      "highest": "Høyeste vurdering",
+      "lowest": "Laveste vurdering",
+      "photos": "Med bilder først",
+      "photos_only": "Bare med bilder"
+    },
+    "pages": {
+      "label": "Omtalesider",
+      "page": "Side {{ number }}",
+      "prev": "Forrige side",
+      "next": "Neste side"
+    },
+    "carousel": {
+      "prev": "Forrige omtaler",
+      "next": "Neste omtaler"
+    },
+    "photos": {
+      "heading": "Kundebilder",
+      "open": "Åpne bilde",
+      "close": "Lukk bilde",
+      "prev": "Forrige bilde",
+      "next": "Neste bilde"
+    },
+    "form": {
+      "open": "Skriv en omtale",
+      "rating": "Din vurdering",
+      "name": "Navn",
+      "email": "E-post",
+      "email_hint": "Vises aldri offentlig.",
+      "title": "Tittel (valgfritt)",
+      "body": "Din omtale",
+      "photos": "Bilder (valgfritt, opptil 5)",
+      "add_photo": "Legg til bilde",
+      "remove_photo": "Fjern bilde",
+      "submit": "Send omtale",
+      "next": "Neste",
+      "back": "Tilbake",
+      "step_rating": "Hvordan vil du vurdere dette produktet?",
+      "step_rating_lead": "Vi vil gjerne høre om opplevelsen din.",
+      "scale_low": "Dårlig",
+      "scale_high": "Fantastisk",
+      "step_review": "Fortell oss mer",
+      "title_placeholder": "Oppsummer opplevelsen din",
+      "body_placeholder": "Hva likte du eller likte du ikke? Hvordan brukte du det?",
+      "step_about": "Om deg",
+      "step_about_lead": "E-postadressen din vises aldri offentlig.",
+      "anonymous": "Publiser omtalen anonymt",
+      "anonymous_name": "Anonym",
+      "step_media": "Del et bilde",
+      "step_media_lead": "Bilder hjelper andre kunder. Dette trinnet er valgfritt.",
+      "thanks": "Takk for omtalen din!",
+      "published": "Takk! Omtalen din er nå publisert.",
+      "pending": "Takk! Omtalen din vises når den er godkjent."
+    },
+    "errors": {
+      "rating_required": "Velg en vurdering.",
+      "name_required": "Skriv inn navnet ditt.",
+      "email_invalid": "Skriv inn en gyldig e-postadresse.",
+      "body_required": "Skriv noen ord om produktet.",
+      "too_long": "Ett av svarene dine er for langt.",
+      "already_reviewed": "Du har allerede gitt en omtale av dette produktet.",
+      "rate_limited": "Du har sendt flere omtaler nylig. Prøv igjen senere.",
+      "generic": "Noe gikk galt. Prøv igjen om et øyeblikk."
+    }
+  }
+}

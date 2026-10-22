@@ -1,0 +1,121 @@
+{
+  "blinc": {
+    "stars": {
+      "aria": "Valutato {{ rating }} su 5",
+      "option": {
+        "one": "{{ count }} stella",
+        "other": "{{ count }} stelle"
+      }
+    },
+    "rating": {
+      "count": {
+        "one": "({{ count }} recensione)",
+        "other": "({{ count }} recensioni)"
+      },
+      "based_on": {
+        "one": "Basato su {{ count }} recensione",
+        "other": "Basato su {{ count }} recensioni"
+      },
+      "none": "Ancora nessuna recensione",
+      "breakdown": "Distribuzione delle valutazioni",
+      "see_all": "Vedi tutte le recensioni"
+    },
+    "reviews": {
+      "title": "Recensioni dei clienti",
+      "empty": "Ancora nessuna recensione. Sii il primo a condividere la tua opinione.",
+      "more": "Mostra altre recensioni",
+      "verified": "Acquirente verificato",
+      "reply": "Risposta di {{ shop }}",
+      "load_error": "Impossibile caricare le recensioni. Aggiorna la pagina per riprovare.",
+      "read_more": "Altro",
+      "read_less": "Meno",
+      "full": "Recensione completa",
+      "open_review": "Recensione di {{ name }}, {{ rating }} stelle su 5. Apri la recensione.",
+      "date_format": "%d/%m/%Y"
+    },
+    "modal": {
+      "close": "Chiudi"
+    },
+    "source": {
+      "email": "Tramite invito del negozio",
+      "web": "Tramite visitatore del negozio",
+      "import": "Importata da un’altra app"
+    },
+    "policy": {
+      "link": "Come vengono raccolte le recensioni",
+      "text": "Le recensioni provengono da clienti che invitiamo via email dopo l’ordine (contrassegnati come Acquirente verificato) e da visitatori che usano il modulo di recensione in questa pagina. Alcune recensioni potrebbero essere state importate da un’altra app di recensioni. Le recensioni possono essere controllate prima della pubblicazione."
+    },
+    "filter": {
+      "label": "Filtra per valutazione",
+      "all": "Tutte le valutazioni",
+      "row": "Mostra recensioni a {{ stars }} stelle ({{ count }})",
+      "none": "Nessuna recensione corrisponde a questo filtro."
+    },
+    "sort": {
+      "label": "Ordina recensioni",
+      "recent": "Più recenti",
+      "highest": "Valutazione più alta",
+      "lowest": "Valutazione più bassa",
+      "photos": "Prima quelle con foto",
+      "photos_only": "Solo con foto"
+    },
+    "pages": {
+      "label": "Pagine delle recensioni",
+      "page": "Pagina {{ number }}",
+      "prev": "Pagina precedente",
+      "next": "Pagina successiva"
+    },
+    "carousel": {
+      "prev": "Recensioni precedenti",
+      "next": "Recensioni successive"
+    },
+    "photos": {
+      "heading": "Foto dei clienti",
+      "open": "Apri foto",
+      "close": "Chiudi foto",
+      "prev": "Foto precedente",
+      "next": "Foto successiva"
+    },
+    "form": {
+      "open": "Scrivi una recensione",
+      "rating": "La tua valutazione",
+      "name": "Nome",
+      "email": "Email",
+      "email_hint": "Mai mostrata pubblicamente.",
+      "title": "Titolo della recensione (facoltativo)",
+      "body": "La tua recensione",
+      "photos": "Foto (facoltative, fino a 5)",
+      "add_photo": "Aggiungi foto",
+      "remove_photo": "Rimuovi foto",
+      "submit": "Invia recensione",
+      "next": "Avanti",
+      "back": "Indietro",
+      "step_rating": "Come valuteresti questo prodotto?",
+      "step_rating_lead": "Ci piacerebbe conoscere la tua esperienza.",
+      "scale_low": "Scarso",
+      "scale_high": "Ottimo",
+      "step_review": "Raccontaci di più",
+      "title_placeholder": "Riassumi la tua esperienza",
+      "body_placeholder": "Cosa ti è piaciuto o non ti è piaciuto? Come l’hai usato?",
+      "step_about": "Su di te",
+      "step_about_lead": "La tua email non viene mai mostrata pubblicamente.",
+      "anonymous": "Pubblica la recensione in forma anonima",
+      "anonymous_name": "Anonimo",
+      "step_media": "Condividi una foto",
+      "step_media_lead": "Le foto aiutano gli altri acquirenti. Questo passaggio è facoltativo.",
+      "thanks": "Grazie per la tua recensione!",
+      "published": "Grazie! La tua recensione è ora online.",
+      "pending": "Grazie! La tua recensione apparirà dopo l’approvazione."
+    },
+    "errors": {
+      "rating_required": "Scegli una valutazione.",
+      "name_required": "Inserisci il tuo nome.",
+      "email_invalid": "Inserisci un indirizzo email valido.",
+      "body_required": "Scrivi qualche parola sul prodotto.",
+      "too_long": "Una delle tue risposte è troppo lunga.",
+      "already_reviewed": "Hai già recensito questo prodotto.",
+      "rate_limited": "Hai inviato diverse recensioni di recente. Riprova più tardi.",
+      "generic": "Qualcosa è andato storto. Riprova tra un momento."
+    }
+  }
+}

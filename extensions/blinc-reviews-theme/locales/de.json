@@ -1,0 +1,121 @@
+{
+  "blinc": {
+    "stars": {
+      "aria": "Mit {{ rating }} von 5 bewertet",
+      "option": {
+        "one": "{{ count }} Stern",
+        "other": "{{ count }} Sterne"
+      }
+    },
+    "rating": {
+      "count": {
+        "one": "({{ count }} Bewertung)",
+        "other": "({{ count }} Bewertungen)"
+      },
+      "based_on": {
+        "one": "Basierend auf {{ count }} Bewertung",
+        "other": "Basierend auf {{ count }} Bewertungen"
+      },
+      "none": "Noch keine Bewertungen",
+      "breakdown": "Bewertungsverteilung",
+      "see_all": "Alle Bewertungen ansehen"
+    },
+    "reviews": {
+      "title": "Kundenbewertungen",
+      "empty": "Noch keine Bewertungen. Teile als Erste:r deine Meinung.",
+      "more": "Weitere Bewertungen anzeigen",
+      "verified": "Verifizierter Käufer",
+      "reply": "Antwort von {{ shop }}",
+      "load_error": "Bewertungen konnten nicht geladen werden. Lade die Seite neu, um es erneut zu versuchen.",
+      "read_more": "Mehr",
+      "read_less": "Weniger",
+      "full": "Vollständige Bewertung",
+      "open_review": "Bewertung von {{ name }}, {{ rating }} von 5 Sternen. Bewertung öffnen.",
+      "date_format": "%d.%m.%Y"
+    },
+    "modal": {
+      "close": "Schließen"
+    },
+    "source": {
+      "email": "Über eine Einladung des Shops",
+      "web": "Über einen Shop-Besucher",
+      "import": "Aus einer anderen App importiert"
+    },
+    "policy": {
+      "link": "Wie Bewertungen gesammelt werden",
+      "text": "Bewertungen stammen von Kund:innen, die wir nach ihrer Bestellung per E-Mail einladen (als Verifizierter Käufer gekennzeichnet), und von Besucher:innen, die das Bewertungsformular auf dieser Seite nutzen. Einige Bewertungen wurden möglicherweise aus einer anderen Bewertungs-App importiert. Bewertungen können vor der Veröffentlichung geprüft werden."
+    },
+    "filter": {
+      "label": "Nach Bewertung filtern",
+      "all": "Alle Bewertungen",
+      "row": "{{ stars }}-Sterne-Bewertungen anzeigen ({{ count }})",
+      "none": "Keine Bewertungen entsprechen diesem Filter."
+    },
+    "sort": {
+      "label": "Bewertungen sortieren",
+      "recent": "Neueste zuerst",
+      "highest": "Beste Bewertung",
+      "lowest": "Schlechteste Bewertung",
+      "photos": "Mit Fotos zuerst",
+      "photos_only": "Nur mit Fotos"
+    },
+    "pages": {
+      "label": "Bewertungsseiten",
+      "page": "Seite {{ number }}",
+      "prev": "Vorherige Seite",
+      "next": "Nächste Seite"
+    },
+    "carousel": {
+      "prev": "Vorherige Bewertungen",
+      "next": "Nächste Bewertungen"
+    },
+    "photos": {
+      "heading": "Kundenfotos",
+      "open": "Foto öffnen",
+      "close": "Foto schließen",
+      "prev": "Vorheriges Foto",
+      "next": "Nächstes Foto"
+    },
+    "form": {
+      "open": "Bewertung schreiben",
+      "rating": "Deine Bewertung",
+      "name": "Name",
+      "email": "E-Mail",
+      "email_hint": "Wird nie öffentlich angezeigt.",
+      "title": "Titel der Bewertung (optional)",
+      "body": "Deine Bewertung",
+      "photos": "Fotos (optional, bis zu 5)",
+      "add_photo": "Foto hinzufügen",
+      "remove_photo": "Foto entfernen",
+      "submit": "Bewertung absenden",
+      "next": "Weiter",
+      "back": "Zurück",
+      "step_rating": "Wie würdest du dieses Produkt bewerten?",
+      "step_rating_lead": "Wir würden gerne von deiner Erfahrung hören.",
+      "scale_low": "Schlecht",
+      "scale_high": "Großartig",
+      "step_review": "Erzähl uns mehr",
+      "title_placeholder": "Fasse deine Erfahrung zusammen",
+      "body_placeholder": "Was hat dir gefallen oder nicht gefallen? Wie hast du es verwendet?",
+      "step_about": "Über dich",
+      "step_about_lead": "Deine E-Mail-Adresse wird nie öffentlich angezeigt.",
+      "anonymous": "Bewertung anonym veröffentlichen",
+      "anonymous_name": "Anonym",
+      "step_media": "Teile ein Foto",
+      "step_media_lead": "Fotos helfen anderen Käufer:innen. Dieser Schritt ist optional.",
+      "thanks": "Danke für deine Bewertung!",
+      "published": "Danke! Deine Bewertung ist jetzt online.",
+      "pending": "Danke! Deine Bewertung erscheint, sobald sie freigegeben wurde."
+    },
+    "errors": {
+      "rating_required": "Wähle eine Sternebewertung.",
+      "name_required": "Gib deinen Namen ein.",
+      "email_invalid": "Gib eine gültige E-Mail-Adresse ein.",
+      "body_required": "Schreib ein paar Worte über das Produkt.",
+      "too_long": "Eine deiner Antworten ist zu lang.",
+      "already_reviewed": "Du hast dieses Produkt bereits bewertet.",
+      "rate_limited": "Du hast kürzlich mehrere Bewertungen abgegeben. Versuche es später erneut.",
+      "generic": "Etwas ist schiefgelaufen. Versuche es gleich noch einmal."
+    }
+  }
+}

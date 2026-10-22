@@ -1,0 +1,121 @@
+{
+  "blinc": {
+    "stars": {
+      "aria": "Arvosana {{ rating }}/5",
+      "option": {
+        "one": "{{ count }} tähti",
+        "other": "{{ count }} tähteä"
+      }
+    },
+    "rating": {
+      "count": {
+        "one": "({{ count }} arvostelu)",
+        "other": "({{ count }} arvostelua)"
+      },
+      "based_on": {
+        "one": "Perustuu {{ count }} arvosteluun",
+        "other": "Perustuu {{ count }} arvosteluun"
+      },
+      "none": "Ei vielä arvosteluja",
+      "breakdown": "Arvosanojen jakauma",
+      "see_all": "Näytä kaikki arvostelut"
+    },
+    "reviews": {
+      "title": "Asiakasarvostelut",
+      "empty": "Ei vielä arvosteluja. Kerro mielipiteesi ensimmäisenä.",
+      "more": "Näytä lisää arvosteluja",
+      "verified": "Vahvistettu ostaja",
+      "reply": "Vastaus: {{ shop }}",
+      "load_error": "Arvosteluja ei voitu ladata. Yritä uudelleen päivittämällä sivu.",
+      "read_more": "Lisää",
+      "read_less": "Vähemmän",
+      "full": "Koko arvostelu",
+      "open_review": "Arvostelija {{ name }}, {{ rating }}/5 tähteä. Avaa arvostelu.",
+      "date_format": "%-d.%-m.%Y"
+    },
+    "modal": {
+      "close": "Sulje"
+    },
+    "source": {
+      "email": "Kaupan kutsusta",
+      "web": "Kaupan vierailijalta",
+      "import": "Tuotu toisesta sovelluksesta"
+    },
+    "policy": {
+      "link": "Miten arvostelut kerätään",
+      "text": "Arvostelut tulevat asiakkailta, jotka kutsumme sähköpostitse tilauksen jälkeen (merkitty Vahvistettu ostaja), sekä vierailijoilta, jotka käyttävät tämän sivun arvostelulomaketta. Osa arvosteluista on voitu tuoda toisesta arvostelusovelluksesta. Arvostelut voidaan tarkistaa ennen julkaisua."
+    },
+    "filter": {
+      "label": "Suodata arvosanan mukaan",
+      "all": "Kaikki arvosanat",
+      "row": "Näytä {{ stars }} tähden arvostelut ({{ count }})",
+      "none": "Mikään arvostelu ei vastaa tätä suodatinta."
+    },
+    "sort": {
+      "label": "Lajittele arvostelut",
+      "recent": "Uusimmat",
+      "highest": "Paras arvosana",
+      "lowest": "Heikoin arvosana",
+      "photos": "Kuvalliset ensin",
+      "photos_only": "Vain kuvalliset"
+    },
+    "pages": {
+      "label": "Arvostelusivut",
+      "page": "Sivu {{ number }}",
+      "prev": "Edellinen sivu",
+      "next": "Seuraava sivu"
+    },
+    "carousel": {
+      "prev": "Edelliset arvostelut",
+      "next": "Seuraavat arvostelut"
+    },
+    "photos": {
+      "heading": "Asiakkaiden kuvat",
+      "open": "Avaa kuva",
+      "close": "Sulje kuva",
+      "prev": "Edellinen kuva",
+      "next": "Seuraava kuva"
+    },
+    "form": {
+      "open": "Kirjoita arvostelu",
+      "rating": "Arvosanasi",
+      "name": "Nimi",
+      "email": "Sähköposti",
+      "email_hint": "Ei koskaan näytetä julkisesti.",
+      "title": "Otsikko (valinnainen)",
+      "body": "Arvostelusi",
+      "photos": "Kuvat (valinnainen, enintään 5)",
+      "add_photo": "Lisää kuva",
+      "remove_photo": "Poista kuva",
+      "submit": "Lähetä arvostelu",
+      "next": "Seuraava",
+      "back": "Takaisin",
+      "step_rating": "Minkä arvosanan antaisit tälle tuotteelle?",
+      "step_rating_lead": "Kuulisimme mielellämme kokemuksestasi.",
+      "scale_low": "Huono",
+      "scale_high": "Erinomainen",
+      "step_review": "Kerro lisää",
+      "title_placeholder": "Tiivistä kokemuksesi",
+      "body_placeholder": "Mistä pidit tai et pitänyt? Miten käytit tuotetta?",
+      "step_about": "Tietoja sinusta",
+      "step_about_lead": "Sähköpostiosoitettasi ei koskaan näytetä julkisesti.",
+      "anonymous": "Julkaise arvostelu nimettömänä",
+      "anonymous_name": "Nimetön",
+      "step_media": "Jaa kuva",
+      "step_media_lead": "Kuvat auttavat muita ostajia. Tämä vaihe on valinnainen.",
+      "thanks": "Kiitos arvostelustasi!",
+      "published": "Kiitos! Arvostelusi on nyt julkaistu.",
+      "pending": "Kiitos! Arvostelusi näkyy, kun se on hyväksytty."
+    },
+    "errors": {
+      "rating_required": "Valitse arvosana.",
+      "name_required": "Anna nimesi.",
+      "email_invalid": "Anna kelvollinen sähköpostiosoite.",
+      "body_required": "Kirjoita muutama sana tuotteesta.",
+      "too_long": "Yksi vastauksistasi on liian pitkä.",
+      "already_reviewed": "Olet jo arvostellut tämän tuotteen.",
+      "rate_limited": "Olet lähettänyt useita arvosteluja hiljattain. Yritä myöhemmin uudelleen.",
+      "generic": "Jokin meni vikaan. Yritä hetken kuluttua uudelleen."
+    }
+  }
+}

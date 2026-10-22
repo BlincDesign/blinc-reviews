@@ -1,0 +1,121 @@
+{
+  "blinc": {
+    "stars": {
+      "aria": "5 üzerinden {{ rating }} puan",
+      "option": {
+        "one": "{{ count }} yıldız",
+        "other": "{{ count }} yıldız"
+      }
+    },
+    "rating": {
+      "count": {
+        "one": "({{ count }} değerlendirme)",
+        "other": "({{ count }} değerlendirme)"
+      },
+      "based_on": {
+        "one": "{{ count }} değerlendirmeye göre",
+        "other": "{{ count }} değerlendirmeye göre"
+      },
+      "none": "Henüz değerlendirme yok",
+      "breakdown": "Puan dağılımı",
+      "see_all": "Tüm değerlendirmeleri gör"
+    },
+    "reviews": {
+      "title": "Müşteri değerlendirmeleri",
+      "empty": "Henüz değerlendirme yok. Fikrini ilk paylaşan sen ol.",
+      "more": "Daha fazla değerlendirme göster",
+      "verified": "Doğrulanmış alıcı",
+      "reply": "{{ shop }} yanıtı",
+      "load_error": "Değerlendirmeler yüklenemedi. Tekrar denemek için sayfayı yenileyin.",
+      "read_more": "Daha fazla",
+      "read_less": "Daha az",
+      "full": "Değerlendirmenin tamamı",
+      "open_review": "{{ name }} tarafından değerlendirme, 5 üzerinden {{ rating }} yıldız. Değerlendirmeyi aç.",
+      "date_format": "%d.%m.%Y"
+    },
+    "modal": {
+      "close": "Kapat"
+    },
+    "source": {
+      "email": "Mağaza davetiyle",
+      "web": "Mağaza ziyaretçisinden",
+      "import": "Başka bir uygulamadan aktarıldı"
+    },
+    "policy": {
+      "link": "Değerlendirmeler nasıl toplanır",
+      "text": "Değerlendirmeler, siparişlerinden sonra e-postayla davet ettiğimiz müşterilerden (Doğrulanmış alıcı olarak işaretlenir) ve bu sayfadaki değerlendirme formunu kullanan ziyaretçilerden gelir. Bazı değerlendirmeler başka bir değerlendirme uygulamasından aktarılmış olabilir. Değerlendirmeler yayınlanmadan önce kontrol edilebilir."
+    },
+    "filter": {
+      "label": "Puana göre filtrele",
+      "all": "Tüm puanlar",
+      "row": "{{ stars }} yıldızlı değerlendirmeleri göster ({{ count }})",
+      "none": "Bu filtreyle eşleşen değerlendirme yok."
+    },
+    "sort": {
+      "label": "Değerlendirmeleri sırala",
+      "recent": "En yeni",
+      "highest": "En yüksek puan",
+      "lowest": "En düşük puan",
+      "photos": "Önce fotoğraflı",
+      "photos_only": "Yalnızca fotoğraflı"
+    },
+    "pages": {
+      "label": "Değerlendirme sayfaları",
+      "page": "Sayfa {{ number }}",
+      "prev": "Önceki sayfa",
+      "next": "Sonraki sayfa"
+    },
+    "carousel": {
+      "prev": "Önceki değerlendirmeler",
+      "next": "Sonraki değerlendirmeler"
+    },
+    "photos": {
+      "heading": "Müşteri fotoğrafları",
+      "open": "Fotoğrafı aç",
+      "close": "Fotoğrafı kapat",
+      "prev": "Önceki fotoğraf",
+      "next": "Sonraki fotoğraf"
+    },
+    "form": {
+      "open": "Değerlendirme yaz",
+      "rating": "Puanın",
+      "name": "Ad",
+      "email": "E-posta",
+      "email_hint": "Asla herkese açık gösterilmez.",
+      "title": "Değerlendirme başlığı (isteğe bağlı)",
+      "body": "Değerlendirmen",
+      "photos": "Fotoğraflar (isteğe bağlı, en fazla 5)",
+      "add_photo": "Fotoğraf ekle",
+      "remove_photo": "Fotoğrafı kaldır",
+      "submit": "Değerlendirmeyi gönder",
+      "next": "İleri",
+      "back": "Geri",
+      "step_rating": "Bu ürüne kaç puan verirsin?",
+      "step_rating_lead": "Deneyimini duymayı çok isteriz.",
+      "scale_low": "Kötü",
+      "scale_high": "Harika",
+      "step_review": "Bize daha fazlasını anlat",
+      "title_placeholder": "Deneyimini özetle",
+      "body_placeholder": "Neyi beğendin, neyi beğenmedin? Nasıl kullandın?",
+      "step_about": "Hakkında",
+      "step_about_lead": "E-posta adresin asla herkese açık gösterilmez.",
+      "anonymous": "Değerlendirmeyi anonim olarak yayınla",
+      "anonymous_name": "Anonim",
+      "step_media": "Bir fotoğraf paylaş",
+      "step_media_lead": "Fotoğraflar diğer alışverişçilere yardımcı olur. Bu adım isteğe bağlıdır.",
+      "thanks": "Değerlendirmen için teşekkürler!",
+      "published": "Teşekkürler! Değerlendirmen artık yayında.",
+      "pending": "Teşekkürler! Değerlendirmen onaylandıktan sonra görünecek."
+    },
+    "errors": {
+      "rating_required": "Bir puan seç.",
+      "name_required": "Adını gir.",
+      "email_invalid": "Geçerli bir e-posta adresi gir.",
+      "body_required": "Ürün hakkında birkaç kelime yaz.",
+      "too_long": "Yanıtlarından biri çok uzun.",
+      "already_reviewed": "Bu ürünü zaten değerlendirdin.",
+      "rate_limited": "Son zamanlarda birkaç değerlendirme gönderdin. Daha sonra tekrar dene.",
+      "generic": "Bir sorun oluştu. Birazdan tekrar dene."
+    }
+  }
+}

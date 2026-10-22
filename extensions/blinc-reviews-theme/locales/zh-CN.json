@@ -1,0 +1,121 @@
+{
+  "blinc": {
+    "stars": {
+      "aria": "评分 {{ rating }}/5",
+      "option": {
+        "one": "{{ count }} 星",
+        "other": "{{ count }} 星"
+      }
+    },
+    "rating": {
+      "count": {
+        "one": "（{{ count }} 条评价）",
+        "other": "（{{ count }} 条评价）"
+      },
+      "based_on": {
+        "one": "基于 {{ count }} 条评价",
+        "other": "基于 {{ count }} 条评价"
+      },
+      "none": "暂无评价",
+      "breakdown": "评分分布",
+      "see_all": "查看所有评价"
+    },
+    "reviews": {
+      "title": "顾客评价",
+      "empty": "暂无评价。成为第一个分享看法的人吧。",
+      "more": "显示更多评价",
+      "verified": "已验证买家",
+      "reply": "{{ shop }} 的回复",
+      "load_error": "无法加载评价。请刷新页面后重试。",
+      "read_more": "展开",
+      "read_less": "收起",
+      "full": "完整评价",
+      "open_review": "{{ name }} 的评价，{{ rating }}/5 星。打开评价。",
+      "date_format": "%Y年%-m月%-d日"
+    },
+    "modal": {
+      "close": "关闭"
+    },
+    "source": {
+      "email": "通过店铺邀请",
+      "web": "来自店铺访客",
+      "import": "从其他应用导入"
+    },
+    "policy": {
+      "link": "评价的收集方式",
+      "text": "评价来自我们在顾客下单后通过电子邮件邀请的顾客（标记为“已验证买家”），以及使用本页面评价表单的访客。部分评价可能从其他评价应用导入。评价在发布前可能会经过审核。"
+    },
+    "filter": {
+      "label": "按评分筛选",
+      "all": "全部评分",
+      "row": "显示 {{ stars }} 星评价（{{ count }}）",
+      "none": "没有符合此筛选条件的评价。"
+    },
+    "sort": {
+      "label": "评价排序",
+      "recent": "最新",
+      "highest": "评分最高",
+      "lowest": "评分最低",
+      "photos": "有图优先",
+      "photos_only": "仅看有图"
+    },
+    "pages": {
+      "label": "评价页面",
+      "page": "第 {{ number }} 页",
+      "prev": "上一页",
+      "next": "下一页"
+    },
+    "carousel": {
+      "prev": "上一组评价",
+      "next": "下一组评价"
+    },
+    "photos": {
+      "heading": "顾客照片",
+      "open": "打开照片",
+      "close": "关闭照片",
+      "prev": "上一张照片",
+      "next": "下一张照片"
+    },
+    "form": {
+      "open": "写评价",
+      "rating": "您的评分",
+      "name": "姓名",
+      "email": "电子邮件",
+      "email_hint": "绝不会公开显示。",
+      "title": "评价标题（可选）",
+      "body": "您的评价",
+      "photos": "照片（可选，最多 5 张）",
+      "add_photo": "添加照片",
+      "remove_photo": "删除照片",
+      "submit": "提交评价",
+      "next": "下一步",
+      "back": "返回",
+      "step_rating": "您会如何评价这款产品？",
+      "step_rating_lead": "我们很想了解您的使用体验。",
+      "scale_low": "差",
+      "scale_high": "很棒",
+      "step_review": "告诉我们更多",
+      "title_placeholder": "总结一下您的体验",
+      "body_placeholder": "您喜欢或不喜欢哪些方面？您是如何使用的？",
+      "step_about": "关于您",
+      "step_about_lead": "您的电子邮件绝不会公开显示。",
+      "anonymous": "匿名发布评价",
+      "anonymous_name": "匿名",
+      "step_media": "分享一张照片",
+      "step_media_lead": "照片能帮助其他买家。此步骤为可选。",
+      "thanks": "感谢您的评价！",
+      "published": "谢谢！您的评价已发布。",
+      "pending": "谢谢！您的评价审核通过后即会显示。"
+    },
+    "errors": {
+      "rating_required": "请选择评分。",
+      "name_required": "请输入您的姓名。",
+      "email_invalid": "请输入有效的电子邮件地址。",
+      "body_required": "请简单写几句关于产品的感受。",
+      "too_long": "您的某个回答过长。",
+      "already_reviewed": "您已经评价过这款产品。",
+      "rate_limited": "您最近提交了多条评价，请稍后再试。",
+      "generic": "出现问题，请稍后再试。"
+    }
+  }
+}

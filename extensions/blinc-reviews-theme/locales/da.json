@@ -1,0 +1,121 @@
+{
+  "blinc": {
+    "stars": {
+      "aria": "Bedømt {{ rating }} ud af 5",
+      "option": {
+        "one": "{{ count }} stjerne",
+        "other": "{{ count }} stjerner"
+      }
+    },
+    "rating": {
+      "count": {
+        "one": "({{ count }} anmeldelse)",
+        "other": "({{ count }} anmeldelser)"
+      },
+      "based_on": {
+        "one": "Baseret på {{ count }} anmeldelse",
+        "other": "Baseret på {{ count }} anmeldelser"
+      },
+      "none": "Ingen anmeldelser endnu",
+      "breakdown": "Fordeling af bedømmelser",
+      "see_all": "Se alle anmeldelser"
+    },
+    "reviews": {
+      "title": "Kundeanmeldelser",
+      "empty": "Ingen anmeldelser endnu. Vær den første til at dele din mening.",
+      "more": "Vis flere anmeldelser",
+      "verified": "Verificeret køber",
+      "reply": "Svar fra {{ shop }}",
+      "load_error": "Anmeldelserne kunne ikke indlæses. Opdater siden for at prøve igen.",
+      "read_more": "Mere",
+      "read_less": "Mindre",
+      "full": "Hele anmeldelsen",
+      "open_review": "Anmeldelse fra {{ name }}, {{ rating }} ud af 5 stjerner. Åbn anmeldelsen.",
+      "date_format": "%d.%m.%Y"
+    },
+    "modal": {
+      "close": "Luk"
+    },
+    "source": {
+      "email": "Via invitation fra butikken",
+      "web": "Via besøgende i butikken",
+      "import": "Importeret fra en anden app"
+    },
+    "policy": {
+      "link": "Sådan indsamles anmeldelser",
+      "text": "Anmeldelserne kommer fra kunder, som vi inviterer via e-mail efter deres ordre (markeret som Verificeret køber), og fra besøgende, der bruger anmeldelsesformularen på denne side. Nogle anmeldelser kan være importeret fra en anden anmeldelsesapp. Anmeldelser kan blive gennemgået, før de offentliggøres."
+    },
+    "filter": {
+      "label": "Filtrer efter bedømmelse",
+      "all": "Alle bedømmelser",
+      "row": "Vis anmeldelser med {{ stars }} stjerner ({{ count }})",
+      "none": "Ingen anmeldelser matcher dette filter."
+    },
+    "sort": {
+      "label": "Sorter anmeldelser",
+      "recent": "Nyeste",
+      "highest": "Højeste bedømmelse",
+      "lowest": "Laveste bedømmelse",
+      "photos": "Med billeder først",
+      "photos_only": "Kun med billeder"
+    },
+    "pages": {
+      "label": "Anmeldelsessider",
+      "page": "Side {{ number }}",
+      "prev": "Forrige side",
+      "next": "Næste side"
+    },
+    "carousel": {
+      "prev": "Forrige anmeldelser",
+      "next": "Næste anmeldelser"
+    },
+    "photos": {
+      "heading": "Kundebilleder",
+      "open": "Åbn billede",
+      "close": "Luk billede",
+      "prev": "Forrige billede",
+      "next": "Næste billede"
+    },
+    "form": {
+      "open": "Skriv en anmeldelse",
+      "rating": "Din bedømmelse",
+      "name": "Navn",
+      "email": "E-mail",
+      "email_hint": "Vises aldrig offentligt.",
+      "title": "Overskrift (valgfri)",
+      "body": "Din anmeldelse",
+      "photos": "Billeder (valgfrit, op til 5)",
+      "add_photo": "Tilføj billede",
+      "remove_photo": "Fjern billede",
+      "submit": "Send anmeldelse",
+      "next": "Næste",
+      "back": "Tilbage",
+      "step_rating": "Hvordan vil du bedømme dette produkt?",
+      "step_rating_lead": "Vi vil meget gerne høre om din oplevelse.",
+      "scale_low": "Dårlig",
+      "scale_high": "Fantastisk",
+      "step_review": "Fortæl os mere",
+      "title_placeholder": "Opsummer din oplevelse",
+      "body_placeholder": "Hvad kunne du lide eller ikke lide? Hvordan brugte du det?",
+      "step_about": "Om dig",
+      "step_about_lead": "Din e-mail vises aldrig offentligt.",
+      "anonymous": "Offentliggør anmeldelsen anonymt",
+      "anonymous_name": "Anonym",
+      "step_media": "Del et billede",
+      "step_media_lead": "Billeder hjælper andre kunder. Dette trin er valgfrit.",
+      "thanks": "Tak for din anmeldelse!",
+      "published": "Tak! Din anmeldelse er nu offentliggjort.",
+      "pending": "Tak! Din anmeldelse vises, når den er godkendt."
+    },
+    "errors": {
+      "rating_required": "Vælg en bedømmelse.",
+      "name_required": "Angiv dit navn.",
+      "email_invalid": "Angiv en gyldig e-mailadresse.",
+      "body_required": "Skriv et par ord om produktet.",
+      "too_long": "Et af dine svar er for langt.",
+      "already_reviewed": "Du har allerede anmeldt dette produkt.",
+      "rate_limited": "Du har sendt flere anmeldelser for nylig. Prøv igen senere.",
+      "generic": "Noget gik galt. Prøv igen om et øjeblik."
+    }
+  }
+}

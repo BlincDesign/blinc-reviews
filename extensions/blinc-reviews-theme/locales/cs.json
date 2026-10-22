@@ -1,0 +1,127 @@
+{
+  "blinc": {
+    "stars": {
+      "aria": "Hodnocení {{ rating }} z 5",
+      "option": {
+        "one": "{{ count }} hvězdička",
+        "other": "{{ count }} hvězdiček",
+        "few": "{{ count }} hvězdičky",
+        "many": "{{ count }} hvězdičky"
+      }
+    },
+    "rating": {
+      "count": {
+        "one": "({{ count }} recenze)",
+        "other": "({{ count }} recenzí)",
+        "few": "({{ count }} recenze)",
+        "many": "({{ count }} recenze)"
+      },
+      "based_on": {
+        "one": "Na základě {{ count }} recenze",
+        "other": "Na základě {{ count }} recenzí",
+        "few": "Na základě {{ count }} recenzí",
+        "many": "Na základě {{ count }} recenze"
+      },
+      "none": "Zatím žádné recenze",
+      "breakdown": "Rozložení hodnocení",
+      "see_all": "Zobrazit všechny recenze"
+    },
+    "reviews": {
+      "title": "Recenze zákazníků",
+      "empty": "Zatím žádné recenze. Podělte se o svůj názor jako první.",
+      "more": "Zobrazit další recenze",
+      "verified": "Ověřený kupující",
+      "reply": "Odpověď od {{ shop }}",
+      "load_error": "Recenze se nepodařilo načíst. Obnovte stránku a zkuste to znovu.",
+      "read_more": "Více",
+      "read_less": "Méně",
+      "full": "Celá recenze",
+      "open_review": "Recenze od {{ name }}, {{ rating }} z 5 hvězdiček. Otevřít recenzi.",
+      "date_format": "%-d. %-m. %Y"
+    },
+    "modal": {
+      "close": "Zavřít"
+    },
+    "source": {
+      "email": "Na pozvání obchodu",
+      "web": "Od návštěvníka obchodu",
+      "import": "Importováno z jiné aplikace"
+    },
+    "policy": {
+      "link": "Jak sbíráme recenze",
+      "text": "Recenze pocházejí od zákazníků, které po objednávce pozveme e-mailem (označeni jako Ověřený kupující), a od návštěvníků, kteří použijí formulář pro recenze na této stránce. Některé recenze mohly být importovány z jiné aplikace pro recenze. Recenze mohou být před zveřejněním zkontrolovány."
+    },
+    "filter": {
+      "label": "Filtrovat podle hodnocení",
+      "all": "Všechna hodnocení",
+      "row": "Zobrazit recenze s {{ stars }} hvězdičkami ({{ count }})",
+      "none": "Tomuto filtru neodpovídají žádné recenze."
+    },
+    "sort": {
+      "label": "Seřadit recenze",
+      "recent": "Nejnovější",
+      "highest": "Nejvyšší hodnocení",
+      "lowest": "Nejnižší hodnocení",
+      "photos": "Nejdřív s fotkami",
+      "photos_only": "Pouze s fotkami"
+    },
+    "pages": {
+      "label": "Stránky recenzí",
+      "page": "Stránka {{ number }}",
+      "prev": "Předchozí stránka",
+      "next": "Další stránka"
+    },
+    "carousel": {
+      "prev": "Předchozí recenze",
+      "next": "Další recenze"
+    },
+    "photos": {
+      "heading": "Fotky zákazníků",
+      "open": "Otevřít fotku",
+      "close": "Zavřít fotku",
+      "prev": "Předchozí fotka",
+      "next": "Další fotka"
+    },
+    "form": {
+      "open": "Napsat recenzi",
+      "rating": "Vaše hodnocení",
+      "name": "Jméno",
+      "email": "E-mail",
+      "email_hint": "Nikdy se nezobrazuje veřejně.",
+      "title": "Název recenze (nepovinné)",
+      "body": "Vaše recenze",
+      "photos": "Fotky (nepovinné, až 5)",
+      "add_photo": "Přidat fotku",
+      "remove_photo": "Odebrat fotku",
+      "submit": "Odeslat recenzi",
+      "next": "Další",
+      "back": "Zpět",
+      "step_rating": "Jak byste tento produkt ohodnotili?",
+      "step_rating_lead": "Rádi se dozvíme, jaká je vaše zkušenost.",
+      "scale_low": "Špatné",
+      "scale_high": "Skvělé",
+      "step_review": "Řekněte nám víc",
+      "title_placeholder": "Shrňte svou zkušenost",
+      "body_placeholder": "Co se vám líbilo a co ne? Jak jste produkt používali?",
+      "step_about": "O vás",
+      "step_about_lead": "Váš e-mail se nikdy nezobrazuje veřejně.",
+      "anonymous": "Zveřejnit recenzi anonymně",
+      "anonymous_name": "Anonym",
+      "step_media": "Sdílejte fotku",
+      "step_media_lead": "Fotky pomáhají ostatním zákazníkům. Tento krok je nepovinný.",
+      "thanks": "Děkujeme za recenzi!",
+      "published": "Děkujeme! Vaše recenze je nyní zveřejněna.",
+      "pending": "Děkujeme! Vaše recenze se zobrazí po schválení."
+    },
+    "errors": {
+      "rating_required": "Vyberte hodnocení.",
+      "name_required": "Zadejte své jméno.",
+      "email_invalid": "Zadejte platnou e-mailovou adresu.",
+      "body_required": "Napište pár slov o produktu.",
+      "too_long": "Jedna z vašich odpovědí je příliš dlouhá.",
+      "already_reviewed": "Tento produkt jste už hodnotili.",
+      "rate_limited": "Nedávno jste odeslali několik recenzí. Zkuste to později.",
+      "generic": "Něco se pokazilo. Zkuste to za chvíli znovu."
+    }
+  }
+}

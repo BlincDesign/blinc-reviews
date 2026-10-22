@@ -1,0 +1,121 @@
+{
+  "blinc": {
+    "stars": {
+      "aria": "Betyg {{ rating }} av 5",
+      "option": {
+        "one": "{{ count }} stjärna",
+        "other": "{{ count }} stjärnor"
+      }
+    },
+    "rating": {
+      "count": {
+        "one": "({{ count }} recension)",
+        "other": "({{ count }} recensioner)"
+      },
+      "based_on": {
+        "one": "Baserat på {{ count }} recension",
+        "other": "Baserat på {{ count }} recensioner"
+      },
+      "none": "Inga recensioner ännu",
+      "breakdown": "Betygsfördelning",
+      "see_all": "Visa alla recensioner"
+    },
+    "reviews": {
+      "title": "Kundrecensioner",
+      "empty": "Inga recensioner ännu. Bli först med att dela din åsikt.",
+      "more": "Visa fler recensioner",
+      "verified": "Verifierad köpare",
+      "reply": "Svar från {{ shop }}",
+      "load_error": "Det gick inte att läsa in recensionerna. Uppdatera sidan för att försöka igen.",
+      "read_more": "Mer",
+      "read_less": "Mindre",
+      "full": "Hela recensionen",
+      "open_review": "Recension av {{ name }}, {{ rating }} av 5 stjärnor. Öppna recensionen.",
+      "date_format": "%Y-%m-%d"
+    },
+    "modal": {
+      "close": "Stäng"
+    },
+    "source": {
+      "email": "Via inbjudan från butiken",
+      "web": "Via butiksbesökare",
+      "import": "Importerad från en annan app"
+    },
+    "policy": {
+      "link": "Så samlas recensioner in",
+      "text": "Recensionerna kommer från kunder som vi bjuder in via e-post efter deras beställning (markerade som Verifierad köpare) och från besökare som använder recensionsformuläret på den här sidan. Vissa recensioner kan ha importerats från en annan recensionsapp. Recensioner kan granskas innan de publiceras."
+    },
+    "filter": {
+      "label": "Filtrera efter betyg",
+      "all": "Alla betyg",
+      "row": "Visa recensioner med {{ stars }} stjärnor ({{ count }})",
+      "none": "Inga recensioner matchar det här filtret."
+    },
+    "sort": {
+      "label": "Sortera recensioner",
+      "recent": "Senaste",
+      "highest": "Högsta betyg",
+      "lowest": "Lägsta betyg",
+      "photos": "Med foton först",
+      "photos_only": "Endast med foton"
+    },
+    "pages": {
+      "label": "Recensionssidor",
+      "page": "Sida {{ number }}",
+      "prev": "Föregående sida",
+      "next": "Nästa sida"
+    },
+    "carousel": {
+      "prev": "Föregående recensioner",
+      "next": "Nästa recensioner"
+    },
+    "photos": {
+      "heading": "Kundfoton",
+      "open": "Öppna foto",
+      "close": "Stäng foto",
+      "prev": "Föregående foto",
+      "next": "Nästa foto"
+    },
+    "form": {
+      "open": "Skriv en recension",
+      "rating": "Ditt betyg",
+      "name": "Namn",
+      "email": "E-post",
+      "email_hint": "Visas aldrig offentligt.",
+      "title": "Rubrik (valfritt)",
+      "body": "Din recension",
+      "photos": "Foton (valfritt, upp till 5)",
+      "add_photo": "Lägg till foto",
+      "remove_photo": "Ta bort foto",
+      "submit": "Skicka recension",
+      "next": "Nästa",
+      "back": "Tillbaka",
+      "step_rating": "Vilket betyg ger du den här produkten?",
+      "step_rating_lead": "Vi vill gärna höra om din upplevelse.",
+      "scale_low": "Dålig",
+      "scale_high": "Utmärkt",
+      "step_review": "Berätta mer",
+      "title_placeholder": "Sammanfatta din upplevelse",
+      "body_placeholder": "Vad gillade du eller ogillade du? Hur använde du den?",
+      "step_about": "Om dig",
+      "step_about_lead": "Din e-postadress visas aldrig offentligt.",
+      "anonymous": "Publicera recensionen anonymt",
+      "anonymous_name": "Anonym",
+      "step_media": "Dela ett foto",
+      "step_media_lead": "Foton hjälper andra kunder. Det här steget är valfritt.",
+      "thanks": "Tack för din recension!",
+      "published": "Tack! Din recension är nu publicerad.",
+      "pending": "Tack! Din recension visas när den har godkänts."
+    },
+    "errors": {
+      "rating_required": "Välj ett betyg.",
+      "name_required": "Ange ditt namn.",
+      "email_invalid": "Ange en giltig e-postadress.",
+      "body_required": "Skriv några ord om produkten.",
+      "too_long": "Ett av dina svar är för långt.",
+      "already_reviewed": "Du har redan recenserat den här produkten.",
+      "rate_limited": "Du har skickat flera recensioner nyligen. Försök igen senare.",
+      "generic": "Något gick fel. Försök igen om en stund."
+    }
+  }
+}

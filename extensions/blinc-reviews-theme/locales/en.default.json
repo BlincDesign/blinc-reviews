@@ -30,7 +30,8 @@
       "read_more": "More",
       "read_less": "Less",
       "full": "Full review",
-      "open_review": "Review by {{ name }}, {{ rating }} out of 5 stars. Open review."
+      "open_review": "Review by {{ name }}, {{ rating }} out of 5 stars. Open review.",
+      "date_format": "%b %-d, %Y"
     },
     "modal": {
       "close": "Close"

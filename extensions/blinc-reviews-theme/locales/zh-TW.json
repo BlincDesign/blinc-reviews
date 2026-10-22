@@ -1,0 +1,121 @@
+{
+  "blinc": {
+    "stars": {
+      "aria": "評分 {{ rating }}/5",
+      "option": {
+        "one": "{{ count }} 顆星",
+        "other": "{{ count }} 顆星"
+      }
+    },
+    "rating": {
+      "count": {
+        "one": "（{{ count }} 則評論）",
+        "other": "（{{ count }} 則評論）"
+      },
+      "based_on": {
+        "one": "根據 {{ count }} 則評論",
+        "other": "根據 {{ count }} 則評論"
+      },
+      "none": "尚無評論",
+      "breakdown": "評分分布",
+      "see_all": "查看所有評論"
+    },
+    "reviews": {
+      "title": "顧客評論",
+      "empty": "尚無評論。成為第一位分享看法的人吧。",
+      "more": "顯示更多評論",
+      "verified": "已驗證買家",
+      "reply": "{{ shop }} 的回覆",
+      "load_error": "無法載入評論。請重新整理頁面後再試一次。",
+      "read_more": "展開",
+      "read_less": "收合",
+      "full": "完整評論",
+      "open_review": "{{ name }} 的評論，{{ rating }}/5 顆星。開啟評論。",
+      "date_format": "%Y年%-m月%-d日"
+    },
+    "modal": {
+      "close": "關閉"
+    },
+    "source": {
+      "email": "透過商店邀請",
+      "web": "來自商店訪客",
+      "import": "從其他應用程式匯入"
+    },
+    "policy": {
+      "link": "評論的收集方式",
+      "text": "評論來自我們在顧客下單後透過電子郵件邀請的顧客（標示為「已驗證買家」），以及使用本頁面評論表單的訪客。部分評論可能是從其他評論應用程式匯入。評論在發布前可能會經過審核。"
+    },
+    "filter": {
+      "label": "依評分篩選",
+      "all": "所有評分",
+      "row": "顯示 {{ stars }} 顆星評論（{{ count }}）",
+      "none": "沒有符合此篩選條件的評論。"
+    },
+    "sort": {
+      "label": "評論排序",
+      "recent": "最新",
+      "highest": "評分最高",
+      "lowest": "評分最低",
+      "photos": "有照片優先",
+      "photos_only": "僅限有照片"
+    },
+    "pages": {
+      "label": "評論頁面",
+      "page": "第 {{ number }} 頁",
+      "prev": "上一頁",
+      "next": "下一頁"
+    },
+    "carousel": {
+      "prev": "上一組評論",
+      "next": "下一組評論"
+    },
+    "photos": {
+      "heading": "顧客照片",
+      "open": "開啟照片",
+      "close": "關閉照片",
+      "prev": "上一張照片",
+      "next": "下一張照片"
+    },
+    "form": {
+      "open": "撰寫評論",
+      "rating": "你的評分",
+      "name": "姓名",
+      "email": "電子郵件",
+      "email_hint": "絕不會公開顯示。",
+      "title": "評論標題（選填）",
+      "body": "你的評論",
+      "photos": "照片（選填，最多 5 張）",
+      "add_photo": "新增照片",
+      "remove_photo": "移除照片",
+      "submit": "送出評論",
+      "next": "下一步",
+      "back": "返回",
+      "step_rating": "你會如何評價這項產品？",
+      "step_rating_lead": "我們很想聽聽你的使用經驗。",
+      "scale_low": "很差",
+      "scale_high": "很棒",
+      "step_review": "告訴我們更多",
+      "title_placeholder": "總結你的使用經驗",
+      "body_placeholder": "你喜歡或不喜歡哪些地方？你是怎麼使用的？",
+      "step_about": "關於你",
+      "step_about_lead": "你的電子郵件絕不會公開顯示。",
+      "anonymous": "以匿名方式發布評論",
+      "anonymous_name": "匿名",
+      "step_media": "分享一張照片",
+      "step_media_lead": "照片能幫助其他買家。此步驟為選填。",
+      "thanks": "感謝你的評論！",
+      "published": "謝謝！你的評論已發布。",
+      "pending": "謝謝！你的評論通過審核後就會顯示。"
+    },
+    "errors": {
+      "rating_required": "請選擇評分。",
+      "name_required": "請輸入你的姓名。",
+      "email_invalid": "請輸入有效的電子郵件地址。",
+      "body_required": "請簡單寫幾句關於產品的感想。",
+      "too_long": "你的其中一個回答太長了。",
+      "already_reviewed": "你已經評論過這項產品。",
+      "rate_limited": "你最近送出了多則評論，請稍後再試。",
+      "generic": "發生問題，請稍後再試。"
+    }
+  }
+}
