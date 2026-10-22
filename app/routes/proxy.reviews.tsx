@@ -55,7 +55,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   if (form.get("_format") === "html") {
     if (result.ok) {
       return redirect(
-        `/apps/blinc-reviews/thanks?s=${result.published ? "published" : "pending"}`,
+        `/apps/blinc-reviews/thanks?s=${result.published ? "published" : "pending"}&l=${encodeURIComponent(String(form.get("language") ?? ""))}`,
       );
     }
     const code =

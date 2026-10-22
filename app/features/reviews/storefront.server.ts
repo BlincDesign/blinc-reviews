@@ -302,7 +302,7 @@ export async function submitReview({
     : moderationFlags(`${title}\n${body}`, rules);
   const minRating = shop.settings?.autoPublishMinRating ?? 0;
   const published = flags.length === 0 && minRating > 0 && rating >= minRating;
-  const language = text(form, "language").slice(0, 2).toLowerCase() || null;
+  const language = text(form, "language").slice(0, 10) || null;
 
   const review = await db.review.create({
     data: {

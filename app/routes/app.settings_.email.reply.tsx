@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import type {
   ActionFunctionArgs,
   HeadersFunction,
@@ -38,12 +38,14 @@ export default function ReplyEmail() {
   const { settings, live, formProps } = useEmailForm(saved, {
     checkboxes: ["reply.enabled"],
   });
+  const [lang, setLang] = useState("en");
   const copy = saved.reply;
 
   const email = useMemo(
     () =>
       renderReplyEmail({
         shopName,
+        lang,
         design,
         settings,
         contactEmail: contactEmail ?? "support@example.com",
@@ -55,7 +57,7 @@ export default function ReplyEmail() {
         reviewBody: "Great quality and fast shipping. Would buy again.",
         reply: "Thank you so much, Alex! We're glad you love it.",
       }),
-    [shopName, design, settings, contactEmail, products],
+    [shopName, design, settings, contactEmail, products, lang],
   );
 
   const form = (
@@ -128,6 +130,8 @@ export default function ReplyEmail() {
       form={form}
       dryRun={dryRun}
       preview={{
+        lang,
+        onLang: setLang,
         subject: email.subject,
         html: email.html,
         sampleKind: "reply",

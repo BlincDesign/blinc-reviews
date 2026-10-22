@@ -7,20 +7,18 @@ import {
   findRequestByToken,
   markClicked,
 } from "../features/requests/requests.server";
+import { emailStrings, resolveLang } from "../features/i18n/i18n";
+import { storefrontStrings } from "../features/i18n/storefront.server";
 
 // /apps/blinc-reviews/write?t=<token>&p=<product id>&r=<rating>
 // Opened from the star buttons in a review request email. Rendered as Liquid inside
 // the store's theme, with the clicked rating preselected. Plain HTML form, no JS.
+// In the order's language (customer_locale).
 
-const ERRORS: Record<string, string> = {
-  rating_required: "Choose a star rating.",
-  name_required: "Enter your name.",
-  body_required: "Write a few words about the product.",
-  too_long: "One of your answers is too long.",
-  already_reviewed: "You've already reviewed this product. Thank you!",
-  rate_limited: "You've submitted several reviews recently. Try again later.",
-  unavailable: "Something went wrong. Try again in a moment.",
-};
+function errorMessage(code: string, lang: string | null) {
+  const errors = storefrontStrings(lang).errors as Record<string, string>;
+  return errors[code] ?? errors.generic;
+}
 
 /** Escapes HTML and Liquid delimiters, since the response is parsed as Liquid. */
 function safe(value: string) {
@@ -53,11 +51,16 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     !reviewRequest ||
     reviewRequest.shop.domain !== session.shop
   ) {
+    const page = emailStrings(reviewRequest?.locale).page;
     return liquid(`<div style="max-width:560px;margin:60px auto;padding:0 16px;">
-      <h1>This review link isn't valid</h1>
-      <p>It may have expired. You can still leave a review on the product page.</p></div>`);
+      <h1>${safe(page.invalidTitle)}</h1>
+      <p>${safe(page.invalidText)}</p></div>`);
   }
   await markClicked(token);
+  const lang = resolveLang(reviewRequest.locale);
+  const page = emailStrings(lang).page;
+  const form = storefrontStrings(lang).form;
+  const outOf5 = emailStrings(lang).outOf5;
 
   const items = reviewRequest.items as unknown as RequestItem[];
   const current =
@@ -100,7 +103,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
       (
         r,
       ) => `<input type="radio" id="br${r}" name="rating" value="${r}" ${r === rating ? "checked" : ""} required>
-        <label for="br${r}" title="${r} out of 5">★</label>`,
+        <label for="br${r}" title="${safe(outOf5.replace("{rating}", String(r)))}">★</label>`,
     )
     .join("");
 
@@ -123,35 +126,36 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   .bw-others { margin-top: 32px; }
 </style>
 <div class="bw">
-  <h1>Review your purchase</h1>
+  <h1>${safe(page.heading)}</h1>
   <div class="bw-product">
     ${image ? `<img src="${safe(image)}" alt="">` : ""}
     <strong>${safe(product?.title ?? current.title)}</strong>
   </div>
-  ${errorCode && ERRORS[errorCode] ? `<p class="bw-error" role="alert">${ERRORS[errorCode]}</p>` : ""}
+  ${errorCode ? `<p class="bw-error" role="alert">${safe(errorMessage(errorCode, lang))}</p>` : ""}
   <form method="post" action="/apps/blinc-reviews/reviews" enctype="multipart/form-data">
     <input type="hidden" name="_format" value="html">
     <input type="hidden" name="request_token" value="${safe(token)}">
     <input type="hidden" name="product_id" value="${numericId}">
     <input type="hidden" name="started_at" value="${Date.now()}">
+    <input type="hidden" name="language" value="${safe(lang)}">
     <div class="bw-hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
     <fieldset style="border:0;padding:0;margin:0;">
-      <legend>Your rating</legend>
+      <legend>${safe(form.rating)}</legend>
       <div class="bw-stars">${stars}</div>
     </fieldset>
-    <label class="bw-field"><span>Name</span>
+    <label class="bw-field"><span>${safe(form.name)}</span>
       <input type="text" name="name" maxlength="60" required value="${safe(reviewRequest.customerName ?? "")}"></label>
-    <label class="bw-field"><span>Review title (optional)</span>
+    <label class="bw-field"><span>${safe(form.title)}</span>
       <input type="text" name="title" maxlength="120"></label>
-    <label class="bw-field"><span>Your review</span>
+    <label class="bw-field"><span>${safe(form.body)}</span>
       <textarea name="body" rows="5" maxlength="5000" required></textarea></label>
-    <label class="bw-field"><span>Add photos (optional, up to 5)</span>
+    <label class="bw-field"><span>${safe(form.photos)}</span>
       <input type="file" name="photos" accept="image/*" multiple></label>
-    <button type="submit">Submit review</button>
+    <button type="submit">${safe(form.submit)}</button>
   </form>
   ${
     others.length
-      ? `<div class="bw-others"><p>Also in your order:</p><ul>${others
+      ? `<div class="bw-others"><p>${safe(page.alsoInOrder)}</p><ul>${others
           .map(
             (o) => `<li><a href="${writeLink(o.id)}">${safe(o.title)}</a></li>`,
           )

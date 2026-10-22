@@ -49,11 +49,13 @@ export default function EmailStyling() {
     checkboxes: ["showImages", "showContact"],
     numbers: ["logoWidth"],
   });
+  const [lang, setLang] = useState("en");
   const [tab, setTab] = useState<"initial" | "reply">("initial");
 
   const email = useMemo(() => {
     const common = {
       shopName,
+      lang,
       design,
       settings,
       contactEmail: contactEmail ?? "support@example.com",
@@ -78,7 +80,7 @@ export default function EmailStyling() {
           writeUrl: () => "#",
           openPixelUrl: "data:,",
         });
-  }, [tab, shopName, design, settings, contactEmail, products]);
+  }, [tab, lang, shopName, design, settings, contactEmail, products]);
 
   const form = (
     <form {...formProps}>
@@ -181,6 +183,8 @@ export default function EmailStyling() {
       form={form}
       dryRun={dryRun}
       preview={{
+        lang,
+        onLang: setLang,
         tabs: TABS,
         tab,
         onTab: (id) => setTab(id as "initial" | "reply"),

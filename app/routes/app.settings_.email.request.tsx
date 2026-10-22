@@ -101,6 +101,7 @@ export default function RequestEmail() {
   const { settings, live, formProps } = useEmailForm(saved, {
     checkboxes: ["showStars", "showHelpText"],
   });
+  const [lang, setLang] = useState("en");
   const [kind, setKind] = useState<Kind>("initial");
 
   const email = useMemo(
@@ -108,6 +109,7 @@ export default function RequestEmail() {
       renderRequestEmail({
         kind,
         shopName,
+        lang,
         customerName: "Alex Morgan",
         orderName: "#1042",
         products,
@@ -118,7 +120,7 @@ export default function RequestEmail() {
         openPixelUrl: "data:,",
         unsubscribeUrl: "#",
       }),
-    [kind, shopName, products, design, settings, contactEmail],
+    [kind, shopName, products, design, settings, contactEmail, lang],
   );
 
   const form = (
@@ -173,7 +175,9 @@ export default function RequestEmail() {
         >
           <s-stack gap="base">
             <s-text color="subdued">
-              Personalize with {REQUEST_VARIABLES.join(", ")}.
+              Personalize with {REQUEST_VARIABLES.join(", ")}. Customers get the
+              default text in their own language (18 languages); text you change
+              is sent exactly as written.
             </s-text>
             {/* Both stay in the form, so switching tabs never loses text. */}
             <div hidden={kind !== "initial"}>
@@ -194,6 +198,8 @@ export default function RequestEmail() {
       form={form}
       dryRun={dryRun}
       preview={{
+        lang,
+        onLang: setLang,
         tabs: TABS,
         tab: kind,
         onTab: (id) => setKind(id as Kind),

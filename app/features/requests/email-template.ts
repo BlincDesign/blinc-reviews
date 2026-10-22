@@ -1,5 +1,7 @@
 import type { Design } from "../appearance/design";
 import { fillVariables, type EmailSettings } from "./email-settings";
+import { emailStrings, localizeSettings } from "../i18n/i18n";
+import type { EmailStrings } from "../i18n/email-strings";
 
 // Customer emails. Pure functions shared by the senders and the editors' live
 // previews, so a preview is exactly what customers get. Table layout and inline
@@ -18,6 +20,8 @@ type Common = {
   /** Target of the "Reach out to us" link. */
   contactEmail: string | null;
   unsubscribeUrl: string;
+  /** Customer's language (Shopify locale); English when unknown. */
+  lang?: string | null;
 };
 
 export type RequestEmailInput = Common & {
@@ -91,8 +95,17 @@ function quote(inner: string) {
 }
 
 /** Card with header, the email's rows, contact line and sign-off; footer outside the card. */
+/** The customer's language strings, and the settings with untouched defaults translated. */
+function localized(input: Common) {
+  return {
+    s: emailStrings(input.lang),
+    settings: localizeSettings(input.settings, input.lang),
+  };
+}
+
 function layout(
   input: Common & {
+    strings: EmailStrings;
     subject: string;
     preheader: string;
     heading: string;
@@ -113,7 +126,7 @@ function layout(
 
   const contact =
     settings.showContact && input.contactEmail
-      ? `<tr><td align="center" style="padding-top:12px;font-size:12px;line-height:1.6;color:#374151;">If there were issues with your purchase, let us know — we're here to help.<br><a href="mailto:${escapeHtml(input.contactEmail)}" style="color:#374151;">Reach out to us.</a></td></tr>`
+      ? `<tr><td align="center" style="padding-top:12px;font-size:12px;line-height:1.6;color:#374151;">${escapeHtml(input.strings.contactLine)}<br><a href="mailto:${escapeHtml(input.contactEmail)}" style="color:#374151;">${escapeHtml(input.strings.contactLink)}</a></td></tr>`
       : "";
   const signOff = settings.signOff
     ? `<tr><td align="center" style="padding-top:32px;font-size:16px;color:#374151;">${escapeHtml(input.fill(settings.signOff))}</td></tr>`
@@ -147,15 +160,20 @@ function layout(
 }
 
 export function renderRequestEmail(input: RequestEmailInput) {
-  const { products, settings } = input;
+  const { products } = input;
+  const { s, settings } = localized(input);
   const copy = settings[input.kind];
-  const t = theme(input);
+  const t = theme({ ...input, settings });
   const fill = (template: string) =>
-    fillVariables(template, {
-      first_name: firstName(input.customerName),
-      shop_name: input.shopName,
-      order_name: input.orderName,
-    });
+    fillVariables(
+      template,
+      {
+        first_name: firstName(input.customerName),
+        shop_name: input.shopName,
+        order_name: input.orderName,
+      },
+      s.friend,
+    );
 
   const subject = fill(copy.subject);
   const heading = fill(copy.heading);
@@ -172,11 +190,11 @@ export function renderRequestEmail(input: RequestEmailInput) {
         ? `<div>${[1, 2, 3, 4, 5]
             .map(
               (r) =>
-                `<a href="${escapeHtml(input.writeUrl(p.productId, r))}" style="color:${t.starColor};text-decoration:none;font-size:36px;line-height:1;padding:0 3px;" aria-label="${r} out of 5">${t.star}</a>`,
+                `<a href="${escapeHtml(input.writeUrl(p.productId, r))}" style="color:${t.starColor};text-decoration:none;font-size:36px;line-height:1;padding:0 3px;" aria-label="${escapeHtml(s.outOf5.replace("{rating}", String(r)))}">${t.star}</a>`,
             )
             .join("")}</div>${
             settings.showHelpText
-              ? `<div style="font-size:13px;color:#374151;padding-top:6px;">Click a star to leave a review</div>`
+              ? `<div style="font-size:13px;color:#374151;padding-top:6px;">${escapeHtml(s.clickStar)}</div>`
               : ""
           }`
         : `<a href="${escapeHtml(input.writeUrl(p.productId, 5))}" style="display:inline-block;background:${t.accent};color:${t.buttonText};text-decoration:none;padding:12px 28px;border-radius:${t.radius};font-size:15px;font-weight:600;">${escapeHtml(button)}</a>`;
@@ -189,13 +207,15 @@ export function renderRequestEmail(input: RequestEmailInput) {
 
   const html = layout({
     ...input,
+    settings,
+    strings: s,
     subject,
     preheader: fill(copy.preheader),
     heading,
     fill,
     rows: `<tr><td align="center" style="font-size:15px;line-height:1.6;color:#374151;">${paragraphs(body)}</td></tr>${productRows}`,
-    footerNote: `You received this because you ordered from ${input.shopName}.`,
-    unsubscribeLabel: "Unsubscribe from review request emails",
+    footerNote: fill(s.footerOrdered),
+    unsubscribeLabel: s.unsubscribeRequests,
   });
 
   const text = [
@@ -207,21 +227,26 @@ export function renderRequestEmail(input: RequestEmailInput) {
     "",
     ...(settings.signOff ? [fill(settings.signOff), ""] : []),
     ...(settings.footer ? [fill(settings.footer), ""] : []),
-    `Unsubscribe: ${input.unsubscribeUrl}`,
+    `${s.unsubscribeRequests}: ${input.unsubscribeUrl}`,
   ].join("\n");
 
   return { subject, html, text };
 }
 
 export function renderReplyEmail(input: ReplyEmailInput) {
-  const copy = input.settings.reply;
-  const t = theme(input);
+  const { s, settings } = localized(input);
+  const copy = settings.reply;
+  const t = theme({ ...input, settings });
   const fill = (template: string) =>
-    fillVariables(template, {
-      first_name: firstName(input.reviewerName),
-      shop_name: input.shopName,
-      product_title: input.productTitle,
-    });
+    fillVariables(
+      template,
+      {
+        first_name: firstName(input.reviewerName),
+        shop_name: input.shopName,
+        product_title: input.productTitle,
+      },
+      s.friend,
+    );
 
   const subject = fill(copy.subject);
   const heading = fill(copy.heading);
@@ -235,6 +260,8 @@ export function renderReplyEmail(input: ReplyEmailInput) {
 
   const html = layout({
     ...input,
+    settings,
+    strings: s,
     subject,
     preheader: fill(copy.preheader),
     heading,
@@ -243,8 +270,8 @@ export function renderReplyEmail(input: ReplyEmailInput) {
       ${quote(`${stars}${reviewTitle}${reviewBody}`)}
       <tr><td align="center" style="font-size:15px;line-height:1.6;color:#374151;padding-top:8px;">${escapeHtml(replyLabel)}</td></tr>
       ${quote(paragraphs(input.reply))}`,
-    footerNote: `You received this because you reviewed a product from ${input.shopName}.`,
-    unsubscribeLabel: "Unsubscribe from these emails",
+    footerNote: fill(s.footerReviewed),
+    unsubscribeLabel: s.unsubscribeOther,
   });
 
   const text = [
@@ -257,22 +284,27 @@ export function renderReplyEmail(input: ReplyEmailInput) {
     replyLabel,
     input.reply,
     "",
-    ...(input.settings.signOff ? [fill(input.settings.signOff), ""] : []),
-    `Unsubscribe: ${input.unsubscribeUrl}`,
+    ...(settings.signOff ? [fill(settings.signOff), ""] : []),
+    `${s.unsubscribeOther}: ${input.unsubscribeUrl}`,
   ].join("\n");
 
   return { subject, html, text };
 }
 
 export function renderConfirmEmail(input: ConfirmEmailInput) {
-  const copy = input.settings.confirm;
-  const t = theme(input);
+  const { s, settings } = localized(input);
+  const copy = settings.confirm;
+  const t = theme({ ...input, settings });
   const fill = (template: string) =>
-    fillVariables(template, {
-      first_name: firstName(input.reviewerName),
-      shop_name: input.shopName,
-      product_title: input.productTitle,
-    });
+    fillVariables(
+      template,
+      {
+        first_name: firstName(input.reviewerName),
+        shop_name: input.shopName,
+        product_title: input.productTitle,
+      },
+      s.friend,
+    );
 
   const subject = fill(copy.subject);
   const heading = fill(copy.heading);
@@ -286,6 +318,8 @@ export function renderConfirmEmail(input: ConfirmEmailInput) {
 
   const html = layout({
     ...input,
+    settings,
+    strings: s,
     subject,
     preheader: fill(copy.preheader),
     heading,
@@ -293,8 +327,8 @@ export function renderConfirmEmail(input: ConfirmEmailInput) {
     rows: `<tr><td align="center" style="font-size:15px;line-height:1.6;color:#374151;padding-bottom:16px;">${paragraphs(body)}</td></tr>
       ${quote(`${stars}${reviewTitle}${reviewBody}`)}
       <tr><td align="center" style="padding-top:16px;"><a href="${escapeHtml(input.confirmUrl)}" style="display:inline-block;background:${t.accent};color:${t.buttonText};text-decoration:none;padding:14px 32px;border-radius:${t.radius};font-size:16px;font-weight:600;">${escapeHtml(button)}</a></td></tr>`,
-    footerNote: `You received this because you left a review on ${input.shopName}.`,
-    unsubscribeLabel: "Unsubscribe from these emails",
+    footerNote: fill(s.footerReviewLeft),
+    unsubscribeLabel: s.unsubscribeOther,
   });
 
   const text = [
@@ -306,7 +340,7 @@ export function renderConfirmEmail(input: ConfirmEmailInput) {
     "",
     `${button}: ${input.confirmUrl}`,
     "",
-    `Unsubscribe: ${input.unsubscribeUrl}`,
+    `${s.unsubscribeOther}: ${input.unsubscribeUrl}`,
   ].join("\n");
 
   return { subject, html, text };

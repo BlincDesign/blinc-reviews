@@ -42,6 +42,8 @@ type ReviewEmailTarget = {
   reviewBody: string | null;
   senderName: string | null;
   replyToEmail: string | null;
+  /** Review language (from the storefront locale). */
+  lang?: string | null;
 };
 
 type Rendered = { subject: string; html: string; text: string };
@@ -55,6 +57,7 @@ type RenderContext = {
     settings: EmailSettings;
     contactEmail: string | null;
     unsubscribeUrl: string;
+    lang?: string | null;
   };
 };
 
@@ -87,6 +90,7 @@ async function sendAboutReview(
       settings,
       contactEmail: target.replyToEmail || data?.shop?.contactEmail || null,
       unsubscribeUrl,
+      lang: target.lang,
     },
   });
   if (!email) return false;
@@ -125,6 +129,7 @@ async function loadReview(reviewId: string) {
     reviewBody: review.body,
     senderName: review.shop.settings?.senderName ?? null,
     replyToEmail: review.shop.settings?.replyToEmail ?? null,
+    lang: review.language,
   };
   return { review, target };
 }

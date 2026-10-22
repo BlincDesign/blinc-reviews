@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import type {
   ActionFunctionArgs,
   HeadersFunction,
@@ -38,12 +38,14 @@ export default function ConfirmEmail() {
   const { settings, live, formProps } = useEmailForm(saved, {
     checkboxes: ["confirm.enabled"],
   });
+  const [lang, setLang] = useState("en");
   const copy = saved.confirm;
 
   const email = useMemo(
     () =>
       renderConfirmEmail({
         shopName,
+        lang,
         design,
         settings,
         contactEmail: contactEmail ?? "support@example.com",
@@ -55,7 +57,7 @@ export default function ConfirmEmail() {
         reviewBody: "Great quality and fast shipping. Would buy again.",
         confirmUrl: "#",
       }),
-    [shopName, design, settings, contactEmail, products],
+    [shopName, design, settings, contactEmail, products, lang],
   );
 
   const form = (
@@ -133,6 +135,8 @@ export default function ConfirmEmail() {
       form={form}
       dryRun={dryRun}
       preview={{
+        lang,
+        onLang: setLang,
         subject: email.subject,
         html: email.html,
         sampleKind: "confirm",

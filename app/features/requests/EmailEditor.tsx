@@ -18,6 +18,7 @@ import {
   type EmailKind,
   type EmailSettings,
 } from "./email-settings";
+import { LANGUAGES } from "../i18n/i18n";
 
 // Shared by the email editor pages: a settings form on the left that drives a live
 // preview on the right, Judge.me style.
@@ -114,6 +115,12 @@ export function useEmailForm(
   };
 }
 
+const names =
+  typeof Intl.DisplayNames === "function"
+    ? new Intl.DisplayNames(["en"], { type: "language" })
+    : null;
+const languageName = (code: string) => names?.of(code) ?? code;
+
 const EDITOR_CSS = `
 .be-editor { display: grid; gap: 16px; align-items: start; grid-template-columns: minmax(300px, 380px) minmax(0, 1fr); }
 .be-preview { position: sticky; top: 16px; border-radius: 12px; overflow: hidden; background: #fff; box-shadow: 0 1px 0 rgba(26,26,26,.07), 0 0 0 1px rgba(26,26,26,.08); }
@@ -121,6 +128,7 @@ const EDITOR_CSS = `
 .be-tabs { display: flex; gap: 4px; margin-inline-end: auto; overflow-x: auto; }
 .be-tab { appearance: none; border: 0; background: none; font: inherit; font-size: 13px; padding: 8px 12px; color: #616161; cursor: pointer; border-bottom: 2px solid transparent; }
 .be-tab[aria-selected="true"] { color: #303030; font-weight: 600; border-bottom-color: #303030; }
+.be-lang { font: inherit; font-size: 13px; padding: 5px 8px; border: 1px solid #c9c9c9; border-radius: 8px; background: #fff; max-width: 170px; }
 .be-subject { padding: 8px 16px; font-size: 13px; color: #303030; border-bottom: 1px solid #e3e3e3; overflow-wrap: anywhere; }
 .be-stage { background: #e5e5e5; padding: 0; }
 .be-frame { display: block; width: 100%; height: 820px; border: 0; margin: 0 auto; transition: max-width .2s; }
@@ -147,6 +155,9 @@ export function EmailEditorLayout({
     subject: string;
     html: string;
     sampleKind: EmailKind;
+    /** Preview language; customers get the email in their order's language. */
+    lang?: string;
+    onLang?: (lang: string) => void;
   };
   dryRun: boolean;
 }) {
@@ -209,6 +220,20 @@ export function EmailEditorLayout({
                   onClick={() => setDevice("mobile")}
                 />
               </s-button-group>
+              {preview.onLang ? (
+                <select
+                  className="be-lang"
+                  aria-label="Preview language"
+                  value={preview.lang ?? "en"}
+                  onChange={(event) => preview.onLang?.(event.target.value)}
+                >
+                  {LANGUAGES.map((code) => (
+                    <option key={code} value={code}>
+                      {languageName(code)}
+                    </option>
+                  ))}
+                </select>
+              ) : null}
               <s-button commandFor="email-sample" command="--show">
                 Send sample email
               </s-button>

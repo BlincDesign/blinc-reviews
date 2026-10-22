@@ -1,3 +1,5 @@
+import { WESTERN } from "../i18n/email-strings";
+
 // Email template settings. Shared by the editors (client) and the senders (server).
 // Stored as JSON in an app-installation metafield (blinc.email).
 
@@ -76,6 +78,10 @@ export const COPY_LIMITS = {
   footer: 300,
 };
 
+// The English strings are the defaults; customers in other languages get the
+// translated default for any text the merchant hasn't changed (i18n.ts).
+const EN = WESTERN.en;
+
 export const DEFAULT_EMAIL_SETTINGS: EmailSettings = {
   logoUrl: "",
   logoWidth: 120,
@@ -85,38 +91,12 @@ export const DEFAULT_EMAIL_SETTINGS: EmailSettings = {
   showHelpText: true,
   showImages: true,
   showContact: true,
-  signOff: "Thanks! — The {shop_name} team",
+  signOff: EN.signOff,
   footer: "",
-  initial: {
-    subject: "{first_name}, how was your order {order_name}?",
-    preheader: "We'd love your feedback on your recent order",
-    heading: "Let us know what you think",
-    body: "Hi {first_name},\n\nWe hope you're enjoying your order from {shop_name}. If you have any thoughts on your purchase, we'd love to hear them. Your feedback helps us and future shoppers. It only takes a minute!",
-    button: "Write a review",
-  },
-  reminder: {
-    subject: "{first_name}, just a quick reminder",
-    preheader: "We'd appreciate your feedback on your recent order",
-    heading: "A quick review helps us and other shoppers",
-    body: "Hi {first_name},\n\nJust checking in to see how things are going with your purchase from {shop_name}. If you'd like to share your thoughts, we'd love your review. It helps others and only takes a minute!",
-    button: "Write a review",
-  },
-  reply: {
-    enabled: true,
-    subject: "{first_name}, your review just got a reply",
-    preheader: "{shop_name} replied to your recent review.",
-    heading: "Your review got a reply!",
-    body: "Hi {first_name},\n\nThanks for leaving a review for {product_title}. Your review:",
-    replyLabel: "Here's the reply from {shop_name}:",
-  },
-  confirm: {
-    enabled: true,
-    subject: "{first_name}, please confirm your review",
-    preheader: "Confirm it was you who wrote the review.",
-    heading: "Please confirm your review",
-    body: "Hi {first_name},\n\nThanks for submitting your review for {product_title}. To help keep our reviews authentic and useful for other shoppers, please confirm that it was you who wrote it.\n\nYour review:",
-    button: "Confirm my review",
-  },
+  initial: { ...EN.initial },
+  reminder: { ...EN.reminder },
+  reply: { enabled: true, ...EN.reply },
+  confirm: { enabled: true, ...EN.confirm },
 };
 
 const HEX = /^#[0-9a-f]{6}$/i;
@@ -217,19 +197,35 @@ export function normalizeEmailSettings(input: unknown): EmailSettings {
   };
 }
 
-/** Replaces {variables}; {first_name} falls back to "there". Tidies gaps left by empty ones. */
+/**
+ * Replaces {variables}. Without a first name, a leading "{first_name}, " (subject
+ * style) is dropped and other uses get `friend` ("there"; "" in many languages).
+ * Tidies only the gaps left by empty values ("Hi ," → "Hi,", "Olá, !" → "Olá!"),
+ * so spacing a language needs (French " ?") is kept.
+ */
 export function fillVariables(
   template: string,
   values: Record<string, string | null | undefined>,
+  friend = "there",
 ) {
-  return template
+  const GAP = "\u0000";
+  let text = template;
+  const unnamed = "first_name" in values && !values.first_name;
+  const leading = /^\{first_name\}\s*[,，、]\s*/;
+  const dropLeading = unnamed && leading.test(text);
+  if (dropLeading) text = text.replace(leading, "");
+  text = text
     .replace(/\{(\w+)\}/g, (match, name: string) =>
       name in values
-        ? values[name] || (name === "first_name" ? "there" : "")
+        ? values[name] || (name === "first_name" ? friend : "") || GAP
         : match,
     )
-    .replace(/ +([.,!?])/g, "$1")
+    // An empty value before punctuation takes its space and a comma with it.
+    .replace(/[,，]?[  ]*\u0000(?=[.,!?:])/g, "")
+    .replace(/ ?\u0000 ?/g, " ")
     .replace(/ {2,}/g, " ");
+  // "¿qué tal…" → "¿Qué tal…": capitalize the first letter, after any opening mark.
+  return dropLeading ? text.replace(/\p{L}/u, (c) => c.toUpperCase()) : text;
 }
 
 /** Email branding (logo and colors) is a paid feature: Free sends the defaults. */

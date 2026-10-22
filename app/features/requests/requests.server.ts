@@ -30,6 +30,7 @@ type OrderWebhookPayload = {
   name?: string;
   email?: string | null;
   contact_email?: string | null;
+  customer_locale?: string | null;
   customer?: {
     id?: number;
     first_name?: string | null;
@@ -106,6 +107,7 @@ export async function scheduleFromOrder(
         : null,
       customerEmail: email,
       customerName: customerName || null,
+      locale: order.customer_locale || null,
       items: items as unknown as Prisma.InputJsonValue,
       token: newToken(),
       channel: shop.settings?.requestChannel ?? "APP",
@@ -208,6 +210,7 @@ export async function buildRequestEmail(
     kind,
     shopName,
     customerName: request.customerName,
+    lang: request.locale,
     orderName: request.orderName,
     products,
     design,

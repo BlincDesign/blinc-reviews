@@ -182,6 +182,8 @@ model ReviewRequest {
   customerId     String?
   customerEmail  String
   customerName   String?
+  // Order's customer_locale (e.g. "fr", "pt-BR"): language of the emails.
+  locale         String?
   // [{ productId, variantId, title }] - products to ask about, deduplicated
   items          Json
   // Secret for the review link, open pixel and unsubscribe link
