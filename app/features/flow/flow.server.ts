@@ -130,3 +130,28 @@ export async function fireRequestDue(input: {
     Reminder: input.reminder,
   });
 }
+
+/** "Question asked" (Q&A). Same gates as the review triggers: Flow on, Business plan. */
+export async function fireQuestionAsked(questionId: string) {
+  const question = await db.question.findUnique({
+    where: { id: questionId },
+    include: {
+      shop: {
+        select: { domain: true, settings: { select: { flowEnabled: true } } },
+      },
+    },
+  });
+  if (!question || question.shop.settings?.flowEnabled === false) return;
+  if (!(await featuresForShop(question.shopId)).flow) return;
+
+  const { admin } = await unauthenticated.admin(question.shop.domain);
+  const store = question.shop.domain.replace(".myshopify.com", "");
+  await fire(admin, "question-asked", {
+    product_id: numericId(question.productId),
+    "Question ID": question.id,
+    Question: question.body.slice(0, 1000),
+    "Asker name": question.askerName,
+    "Asker email": question.askerEmail,
+    "Admin link": `https://admin.shopify.com/store/${store}/apps/${process.env.SHOPIFY_API_KEY}/app/questions`,
+  });
+}

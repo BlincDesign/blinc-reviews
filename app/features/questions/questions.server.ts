@@ -12,6 +12,7 @@ import {
   notifyAnswer,
   notifyMerchantQuestion,
 } from "../requests/notifications.server";
+import { fireQuestionAsked } from "../flow/flow.server";
 
 // Product Q&A. Customers ask on the product page (app proxy); the merchant answers
 // in the admin. Answered, published questions are written to the product's
@@ -109,6 +110,9 @@ export async function submitQuestion({
   if (!blocked) {
     notifyMerchantQuestion(question.id).catch((error) =>
       console.error("[questions] merchant alert failed", error),
+    );
+    fireQuestionAsked(question.id).catch((error) =>
+      console.error("[questions] flow trigger failed", error),
     );
   }
   return { ok: true };

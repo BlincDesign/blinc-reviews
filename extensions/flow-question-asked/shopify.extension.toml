@@ -1,0 +1,30 @@
+[[extensions]]
+name = "Question asked"
+type = "flow_trigger"
+handle = "question-asked"
+description = "A customer asked a question about a product. Alert your team or create a task to answer it (Business plan)"
+
+[settings]
+[[settings.fields]]
+type = "product_reference"
+
+[[settings.fields]]
+type = "single_line_text_field"
+key = "Question ID"
+
+[[settings.fields]]
+type = "single_line_text_field"
+key = "Question"
+
+[[settings.fields]]
+type = "single_line_text_field"
+key = "Asker name"
+
+[[settings.fields]]
+type = "email"
+key = "Asker email"
+
+[[settings.fields]]
+type = "url"
+key = "Admin link"
+description = "Opens Questions in Blinc Reviews"

@@ -3,7 +3,7 @@ name = "Review submitted"
 type = "flow_trigger"
 handle = "review-submitted"
 uid = "a2162ded-65a7-8c14-1b31-4ebae46673e1d57f1e52"
-description = "A customer submitted a product review in Blinc Reviews. Use Rating and Review status to act on negative or pending reviews."
+description = "A customer submitted a product review. Use Rating and Review status to act on negative or pending reviews (Business plan)"
 
 [settings]
 

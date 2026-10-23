@@ -3,7 +3,7 @@ name = "Customer review submitted"
 type = "flow_trigger"
 handle = "customer-review-submitted"
 uid = "4c56be58-e5e3-3ee9-bc97-846e544cc5169bcb4f44"
-description = "A known customer (logged in or from a review request) submitted a review. Use it to tag customers or send rewards."
+description = "A known customer (logged in or from a review request) submitted a review. Tag customers or send rewards (Business plan)"
 
 [settings]
 [[settings.fields]]

@@ -3,7 +3,7 @@ name = "Review request due"
 type = "flow_trigger"
 handle = "review-request-due"
 uid = "65663576-8fb4-3bfe-262b-c7a381913dcdf0db9bd3"
-description = "A review request is due for a fulfilled order. Send it with any app when review requests are set to Shopify Flow."
+description = "A review request is due for a fulfilled order. Send it with any app when requests are set to Shopify Flow (Business plan)"
 
 [settings]
 [[settings.fields]]

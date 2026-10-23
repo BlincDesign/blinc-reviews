@@ -3,7 +3,7 @@ name = "Review published"
 type = "flow_trigger"
 handle = "review-published"
 uid = "8a14ee33-2d0b-6986-0564-f669843b9eb28287ea6f"
-description = "A product review became visible on the store, automatically or when you approved it."
+description = "A product review went live on the store, automatically or after you approved it (Business plan)"
 
 [settings]
 
