@@ -42,6 +42,12 @@ React Router 7 app, Polaris web components (`s-*`), Prisma + Postgres (Railway),
 - Dev preview extension IDs change when the preview is recreated: blocks show "not found" until removed and re-added in the theme editor.
 - Don't deploy to Railway or push to GitHub unless asked.
 
+## Production (Railway)
+
+- Service `blinc-reviews-app` (project blinc-reviews), deploys from GitHub `BlincDesign/blinc-reviews` main; URL https://blinc-reviews-app-production.up.railway.app.
+- Bucket credentials are reference variables (`${{review-media.SECRET_ACCESS_KEY}}` etc.) so Railway credential rotation can't break photos; local `.env` must be refreshed with `railway bucket credentials --bucket review-media` if photos 403 locally (SignatureDoesNotMatch).
+- Release Shopify config/extensions with `shopify app deploy --allow-updates`.
+
 ## Billing
 
 - Shopify App Pricing (Billing API is legacy): plans/prices/trials live in the Partner Dashboard; plan handles must contain `pro` / `business`. Limits and features are in `app/features/billing/plans.ts`.
